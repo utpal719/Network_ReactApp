@@ -12,11 +12,11 @@ const SearchContent = ({ response, search }) => {
     let dispatch = useDispatch();
     let history = useHistory();
 
-    let handleClick = ({ busId, midId }) => {
+    let handleClick = ({ busId, midId, startTime, endtime, seatCapacity, fare }) => {
         dispatch({
             type: Constants.BUS_SELECT,
             payload: {
-                busId, midId
+                busId, midId, startTime, endtime, seatCapacity, fare
             }
         });
         /**redirect to seat selection page */

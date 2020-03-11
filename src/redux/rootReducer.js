@@ -6,9 +6,12 @@ let initialState = {
         from: "",
         date: ""
     },
-    seatSelection: {
+    bus: {
         busId: "",
         midId: "",
+        startTime: "",
+        endtime: "",
+        seats: ""
     }
 }
 
@@ -26,7 +29,16 @@ export default function (state = initialState, action) {
         case Constants.RESET_SEARCH:
             return { ...initialState }
         case Constants.BUS_SELECT:
-            return { ...state, seatSelection: { busId: payload.busId, midId: payload.midId } }
+            return {
+                ...state, bus: {
+                    busId: payload.busId,
+                    midId: payload.midId,
+                    startTime: payload.startTime,
+                    endtime: payload.endtime,
+                    seatCapacity: payload.seatCapacity,
+                    fare: payload.fare
+                }
+            }
         default:
             return state
     }

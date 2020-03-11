@@ -5,7 +5,7 @@ import { Styles } from "./Styles";
 import { DirectionsBus, AccessTime } from "@material-ui/icons";
 
 const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
-
+    console.log({ bus })
     return (
         <Paper variant="outlined" className={classes.busPaper}>
             <Grid container spacing={2}>
@@ -49,7 +49,14 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
                     <Typography variant="h4">&#8377;{bus.fare}</Typography>
                 </Grid>
                 <Grid item xs={12} md={2}>
-                    <Button variant="contained" onClick={() => handleClick({ busId: bus.busId, midId: midId })} color="primary">Select Seat</Button>
+                    <Button variant="contained" onClick={() => handleClick({
+                        busId: bus.busId,
+                        midId: midId,
+                        startTime: bus.startTime,
+                        endtime: bus.endtime,
+                        seatCapacity: bus.seatCapacity,
+                        fare: bus.fare
+                    })} color="primary">Select Seat</Button>
                 </Grid>
             </Grid>
         </Paper >
