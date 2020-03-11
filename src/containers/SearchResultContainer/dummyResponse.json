@@ -1,0 +1,112 @@
+[
+  {
+    "bus": {
+      "busId": 10,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "04:00 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "10h:30m",
+      "boardingPoints": null,
+      "busType": "NON AC (2X1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": null,
+    "midId": 125
+  },
+  {
+    "bus": {
+      "busId": 16,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "04:30 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "10h:30m",
+      "boardingPoints": null,
+      "busType": "NON AC (2X1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": null,
+    "midId": 135
+  },
+  {
+    "bus": {
+      "busId": 167,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "05:00 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "10h:30m",
+      "boardingPoints": null,
+      "busType": "NON AC (2x1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": null,
+    "midId": 498
+  },
+  {
+    "bus": {
+      "busId": 148,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "05:15 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "10h:30m",
+      "boardingPoints": null,
+      "busType": "NON AC (2X1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": null,
+    "midId": 453
+  },
+  {
+    "bus": {
+      "busId": 18,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "06:30 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "10h:30m",
+      "boardingPoints": null,
+      "busType": "AC (2X1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": null,
+    "midId": 139
+  },
+  {
+    "bus": {
+      "busId": 22,
+      "fromCity": "GUWAHATI",
+      "toCity": "TINSUKIA",
+      "startTime": "09:00 PM",
+      "endtime": "05:30 AM",
+      "seatCapacity": 31,
+      "fare": 660,
+      "travelTime": "16h:30m",
+      "boardingPoints": null,
+      "busType": "NON AC (2X1)",
+      "oldFare": 0,
+      "sleeperFare": 0
+    },
+    "stopovers": [
+      "Khanapara"
+    ],
+    "midId": 0
+  }
+]

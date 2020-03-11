@@ -1,0 +1,5 @@
+export default {
+    SET_SEARCH: "SET_SEARCH",
+    RESET_SEARCH: "RESET_SEARCH",
+    BUS_SELECT: "BUS_SELECT"
+}
