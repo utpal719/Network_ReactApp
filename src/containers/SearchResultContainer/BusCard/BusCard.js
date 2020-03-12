@@ -64,7 +64,11 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
                 fare: bus.fare
               })
             }
-            color="primary"
+            style={{
+              backgroundColor: "#edd31c",
+              color: "black",
+              fontWeight: "600"
+            }}
           >
             Select Seat
           </Button>
