@@ -7,7 +7,7 @@ import luxury from './../../../images/70-1.png'
 import essence from './../../../images/70-2.png'
 import trans from './../../../images/70-3.png'
 const CarouselBanner = (props) => {
-	const {classes}=props;
+	const {classes}=props;  
 	return (
 		<div className={classes.bg}>
 			<Grid container direction="row" spacing={2} className={classes.gridStyles} >
