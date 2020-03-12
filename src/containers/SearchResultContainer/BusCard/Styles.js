@@ -15,5 +15,9 @@ export const Styles = () => ({
   },
   textAlignCenter: {
     textAlign: "center"
+  },
+  bgNWT: {
+    backgroundColor: "#edd31c",
+    color: "black"
   }
 });

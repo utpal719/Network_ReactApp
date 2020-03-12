@@ -2,6 +2,8 @@ import React from "react";
 import { Grid, withStyles } from "@material-ui/core";
 import { Styles } from "./Styles";
 
+import { formatDate } from "./../../../utilities/Functions";
+
 function BookingTitle(props) {
   let {
     classes,
@@ -16,8 +18,8 @@ function BookingTitle(props) {
         style={{ textAlign: "center", height: "50px" }}
       >
         <Grid item xs={11} className={classes.bookingTitle}>
-          <p>
-            {noOfBuses} Buses from {from} to {to} on {date}
+          <p style={{ fontSize: 22 }}>
+            {noOfBuses} buses from {from} to {to} on {formatDate(date)}
           </p>
         </Grid>
       </Grid>

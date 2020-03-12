@@ -10,6 +10,13 @@ import dummyResponse from "./dummyResponse";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 
+/**
+ * @author: Samudra Deka
+ * @param:
+ * @description:this function is used to display bus search results
+ *
+ */
+
 function SearchResult(props) {
   let { classes } = props;
   let data = {
@@ -37,7 +44,6 @@ function SearchResult(props) {
     <div className={classes.gridstyle}>
       <NavBar />
       <BookingTitle data={data} />
-      {/* <Form data={data} /> */}
       <ContentArea response={response} data={data} />
       <Footer />
     </div>
