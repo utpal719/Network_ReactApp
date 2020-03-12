@@ -4,6 +4,7 @@ export const Styles = () => ({
     gridstyle:{
         display:"flex",
         width:"70%",
+        height:"auto",
         color:"white",
         background:"transparent",
         paddingLeft:"40px",
@@ -23,12 +24,25 @@ export const Styles = () => ({
     inputbox:{
         backgroundColor:"white",
         width:"100%",
-        height:"20%",
+        height:"100%",
         color:"grey",
-        borderRadius:"2px"
+        borderStyle:"rounded",
+        borderRadius:"1px",
+        borderColor:"grey",
+        borderWidth:"1px"
+    },
+    inputdate:{
+        backgroundColor:"white",
+        width:"100%",
+        height:"40px",
+        color:"grey",
+        borderStyle:"rounded",
+        borderRadius:"1px",
+        borderColor:"grey",
+        borderWidth:"1px"
     },
     bg:{
-        backgroundImage:`linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(${image})`,
+        backgroundImage:`linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
         padding:"140px"
     },
     button:{
@@ -36,7 +50,7 @@ export const Styles = () => ({
         backgroundColor: "#d9534f"
     },
     imgstyle:{
-        width:"5%",
-        height:"5%"
+        width:"10%",
+        height:"10%"
     }
 });
