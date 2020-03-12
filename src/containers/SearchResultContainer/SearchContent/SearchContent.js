@@ -8,32 +8,41 @@ import { useDispatch } from "react-redux";
 import Constants from "../../../redux/actionConstants";
 
 const SearchContent = ({ response, search }) => {
+  let dispatch = useDispatch();
+  let history = useHistory();
 
-    let dispatch = useDispatch();
-    let history = useHistory();
+  let handleClick = ({
+    busId,
+    midId,
+    startTime,
+    endtime,
+    seatCapacity,
+    fare
+  }) => {
+    dispatch({
+      type: Constants.BUS_SELECT,
+      payload: {
+        busId,
+        midId,
+        startTime,
+        endtime,
+        seatCapacity,
+        fare
+      }
+    });
+    /**redirect to seat selection page */
+    history.push("/seatSelection");
+  };
 
-    let handleClick = ({ busId, midId, startTime, endtime, seatCapacity, fare }) => {
-        dispatch({
-            type: Constants.BUS_SELECT,
-            payload: {
-                busId, midId, startTime, endtime, seatCapacity, fare
-            }
-        });
-        /**redirect to seat selection page */
-        history.push("/seatSelection")
-    }
-
-    return (
-        <Grid item xs={12} md={10}>
-            <Grid container direction="column">
-                <SortMenu />
-                {
-                    response.map((data, index) => <BusCard key={index} data={data} handleClick={handleClick} />)
-                }
-                <SearchModal />
-            </Grid>
-        </Grid>
-    )
-}
+  return (
+    <Grid item xs={12} md={10}>
+      <Grid container direction="column">
+        {response.map((data, index) => (
+          <BusCard key={index} data={data} handleClick={handleClick} />
+        ))}
+      </Grid>
+    </Grid>
+  );
+};
 
 export default SearchContent;
