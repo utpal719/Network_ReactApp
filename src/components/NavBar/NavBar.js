@@ -41,6 +41,12 @@ const NavBar = props => {
           </Button>
         </NavLink>
 
+        <NavLink to="/reports" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            REPORTS
+          </Button>
+        </NavLink>
+
         <NavLink to="/login" style={{ textDecoration: "none" }}>
           <Button color="inherit" className={classes.button}>
             LOGIN
