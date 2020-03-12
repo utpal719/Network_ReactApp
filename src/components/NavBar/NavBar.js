@@ -26,6 +26,7 @@ const NavBar = props => {
           color="inherit"
           onClick={handleClick}
           className={classes.button}
+          style={{ marginLeft: "50px" }}
         >
           HOME
         </Button>
