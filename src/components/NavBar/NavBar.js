@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles'
 import { Styles } from './Styles';
-import logo from './logo.jpg'
+import logo from './../../images/logo.jpg'
 import HomePage from './../../containers/HomePageContainer/HomePage'
 import TourismPage from './../../containers/TourismPageContainer/TourismPage'
 import CancellationPage from './../../containers/CancellationPageContainer/CancellationPage'

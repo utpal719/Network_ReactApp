@@ -8,7 +8,8 @@ export const Styles = () => ({
         color: "grey",
         alignItems: 'center',
         fontFamily: "Roboto, arial, helvetica, sans-serif",
-        spacing: '2px'
+        spacing: '2px',
+        borderBottom: "2px solid #ed8323"
 
     },
     button: {

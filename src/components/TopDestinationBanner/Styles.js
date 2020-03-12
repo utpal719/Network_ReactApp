@@ -4,7 +4,7 @@ export const Styles = () => ({
         width: "100%",
         display :"flex",
         background: "white",
-        justifyContent:"space-evenly",
+        justifyContent:"space-between",
         alignItems:"center",
         color: "grey",
         alignItems: 'center',
@@ -16,7 +16,13 @@ export const Styles = () => ({
     gitem:{
         display: "flex",
         flexDirection: "column",
-        alignItems:"center"
-
+        alignItems:"center",
+        justifyContent:"space-between"
+    },
+    header:{
+        textAlign:"center"
+    },
+    imageStyle:{
+        width:"100%"
     }
 });
