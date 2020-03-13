@@ -1,18 +1,18 @@
 export const Styles = () => ({
     navbar: {
         minHeight: 88,
-        display :"flex",
-        background: "white",
+        display: "flex",
+        background: "#edd31c",
         color: "grey",
-        alignItems: 'center',
+        alignItems: "center",
         fontFamily: "Roboto, arial, helvetica, sans-serif",
-        spacing: '2px',
-        borderBottom: "2px solid #ed8323"
-
-    },
-    button: {
-        fontSize:"15px",
+        spacing: "2px"
+      },
+      button: {
+        fontSize: "15px",
         size: "lg",
-        padding: 20
-    }
+        padding: 20,
+        fontWeight: "600",
+        color: "black"
+      }
 });
