@@ -1,5 +1,3 @@
-
-
 export const Styles = () => ({
     navbar: {
         minHeight: 88,

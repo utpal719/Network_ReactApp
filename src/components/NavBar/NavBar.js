@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Button } from '@material-ui/core';
+import React, { useState } from 'react'
+import { AppBar, Toolbar, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Styles } from './Styles';
+import { Styles } from './Styles'
+import {NavLink} from 'react-router-dom'
 import logo from './../../images/logo.jpg'
 import HomePage from './../../containers/HomePageContainer/HomePage'
 import TourismPage from './../../containers/TourismPageContainer/TourismPage'
@@ -10,34 +11,55 @@ import PrintTicketPage from './../../containers/PrintTicketContainer/PrintTicket
 import ContactPage from './../../containers/ContactPageContainer/ContactPage'
 import Login from './../../containers/LoginContainer/Login'
 
-const NavBar = (props) => {
-	
-	const [showComponent, setShowComponent] = useState(false);
-	const { classes } = props;
+const NavBar = props => {
+  const { classes } = props;
+  return (
+    <AppBar>
+      <Toolbar className={classes.navbar}>
+        <img src={logo} alt="NETWORK" />
+        <NavLink to="/home" style={{ textDecoration: "none", marginLeft: 50 }}>
+          <Button color="inherit" className={classes.button}>
+            HOME
+          </Button>
+        </NavLink>
 
-	const handleClick = () => {
-		setShowComponent(true);
-	}
+        <NavLink to="/tourism" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            TOURISM
+          </Button>
+        </NavLink>
 
-	return (
-		
-			<AppBar>
-				<Toolbar className={classes.navbar}>
-					<img src={logo} alt="not found" />
-					<Button color="inherit" onClick={handleClick} className={classes.button}>HOME</Button>
-					{showComponent ? <HomePage /> : null}
-					<Button color="inherit" onClick={handleClick} className={classes.button}>TOURISM</Button>
-					{showComponent ? <TourismPage /> : null}
-					<Button color="inherit" onClick={handleClick} className={classes.button}>CANCELLATION</Button>
-					{showComponent ? <CancellationPage /> : null}
-					<Button color="inherit" onClick={handleClick} className={classes.button}>PRINT/SMS TICKET</Button>
-					{showComponent ? <PrintTicketPage /> : null}
-					<Button color="inherit" onClick={handleClick} className={classes.button}>CONTACT US</Button>
-					{showComponent ? <ContactPage /> : null}
-					<Button color="inherit" onClick={handleClick} className={classes.button}>LOGIN</Button>
-					{showComponent ? <Login /> : null}
-				</Toolbar>
-			</AppBar>
-	);
-	}
+        <NavLink to="/cancellation" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            CANCELLATION
+          </Button>
+        </NavLink>
+
+        <NavLink to="/printticket" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            PRINT/SMS TICKET
+          </Button>
+        </NavLink>
+
+        <NavLink to="/contact" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            CONTACT US
+          </Button>
+        </NavLink>
+
+        <NavLink to="/reports" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            REPORTS
+          </Button>
+        </NavLink>
+
+        <NavLink to="/login" style={{ textDecoration: "none" }}>
+          <Button color="inherit" className={classes.button}>
+            LOGIN
+          </Button>
+        </NavLink>
+      </Toolbar>
+    </AppBar>
+  );
+};
 export default withStyles(Styles)(NavBar);
