@@ -10,7 +10,6 @@ const SelectionHeader = ({ classes }) => {
   let { startTime, endtime, seatCapacity, fare } = useSelector(
     state => state.bus
   );
-  console.log(useStore().getState());
 
   return (
     <div>

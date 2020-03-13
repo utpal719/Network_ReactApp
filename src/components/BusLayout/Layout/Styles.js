@@ -6,7 +6,9 @@ export const Styles = () => ({
     padding: "20px 5px",
     background: "aliceblue",
     borderRadius: "5px",
-    boxShadow: "2px 2px 8px aliceblue"
+    boxShadow: "2px 2px 8px aliceblue",
+    textAlign: "center",
+    fontSize: "small"
   },
   steeringContainer: {
     display: "inline-block",
@@ -51,5 +53,8 @@ export const Styles = () => ({
     width: "20px",
     height: "20px",
     display: "block"
+  },
+  blank: {
+    display: "inline-block"
   }
 });
