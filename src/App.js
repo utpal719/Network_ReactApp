@@ -6,6 +6,7 @@ import SeatSelection from "./containers/SeatSelection/SeatSelection";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
+import Booking from "./containers/Booking/Booking";
 
 let store = createStore(rootReducer);
 
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/searchresult" component={SearchResult} />
             <Route exact path="/seatselection" component={SeatSelection} />
+            <Route exact path="/booking" component={Booking} />
           </Switch>
         </Router>
       </div>
