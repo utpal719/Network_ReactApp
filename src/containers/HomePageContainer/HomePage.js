@@ -16,6 +16,7 @@ const HomePage = (props)=>{
              <Form/> 
              <FloatingBanner/>
              <CaraouselBanner/>
+             <TopDestinationBanner/>
              <Footer/> 
         </div>
 
