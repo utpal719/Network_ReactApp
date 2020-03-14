@@ -9,7 +9,7 @@ import SelectionContainer from "./SelectionContainer/SelectionContainer";
 
 const SeatSelection = ({ classes }) => {
   let { fare } = useSelector(state => state.bus);
-  let [selectedSeats, setSelected] = useState(0);
+  let [selectedSeats, setSelected] = useState([]);
   let [boardingPoint, setBoardingPoint] = useState("");
   let totalFare = selectedSeats.length * fare;
 

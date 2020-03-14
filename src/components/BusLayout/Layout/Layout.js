@@ -6,10 +6,12 @@ import { Config as LayoutConfig } from "./Layout.config";
 const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
   let [seatArragement, setSeatArrangement] = useState([]);
   let [selectedSeats, setSelected] = useState([]);
+  let [sleeperSeats, setSleeperSeatArrangement] = useState([]);
 
   let dummyBookedSeats = occupied;
 
   let logicalArrangement = [31, 32, 34];
+  let sleeperBusArrangement = [60];
 
   useEffect(() => {
     /**If layout is a logical arrangement (31,32,34) */
@@ -45,12 +47,16 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
       setSeatArrangement(seatRows);
     } else {
       /**If layout is hard layout */
-      setSeatArrangement(LayoutConfig[seatCapacity]);
+      let seatLayout = LayoutConfig[seatCapacity];
+      if (sleeperBusArrangement.includes(seatCapacity)) {
+        seatLayout = seatLayout[0];
+        setSleeperSeatArrangement(LayoutConfig[seatCapacity][1]);
+      }
+      setSeatArrangement(seatLayout);
     }
   }, []);
 
-  let onSeatSelect = e => {
-    let seatNo = Number(e.target.innerText);
+  let handleSelection = seatNo => {
     let seatIndex = selectedSeats.indexOf(seatNo);
     if (dummyBookedSeats.includes(seatNo)) {
       return;
@@ -67,9 +73,18 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
     handleSelect(selectedSeats);
   };
 
+  let onSeatSelect = e => {
+    let seatNo = Number(e.target.innerText);
+    handleSelection(seatNo);
+  };
+
+  let onSleeperSeatSelect = e => {
+    let seatNo = e.target.innerText;
+    handleSelection(seatNo);
+  };
+
   return (
     <Grid container direction="row" justify="center">
-      {/* <Grid item md={10} xs={12}> */}
       <ul className={classes.busLayoutContainer}>
         {/**Steering */}
         <li className={classes.steeringContainer}>
@@ -102,7 +117,42 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
         })}
         {/**seat row 4 end*/}
       </ul>
-      {/* </Grid> */}
+      <br></br>
+      {/**Sleeper row arrangement */}
+      {sleeperSeats.length ? (
+        <ul className={classes.busLayoutContainer}>
+          {/**Steering */}
+          <li className={classes.steeringContainer}>
+            <div>
+              <span className={classes.steering}></span>
+            </div>
+          </li>
+          {sleeperSeats.map((rows, index) => {
+            return (
+              <li key={index} className={classes.seatRows}>
+                {rows.map(seat => {
+                  let className = classes.sleeperUnoccupied;
+                  if (seat === "pavement") className = classes.pavement;
+                  if (seat === "") className = classes.blank;
+                  if (selectedSeats.includes(seat))
+                    className = classes.sleeperSelected;
+
+                  return (
+                    <div key={seat}>
+                      <span className={className} onClick={onSleeperSeatSelect}>
+                        {seat === "pavement" ? "" : seat}
+                      </span>
+                    </div>
+                  );
+                })}
+              </li>
+            );
+          })}
+          {/**seat row 4 end*/}
+        </ul>
+      ) : (
+        ""
+      )}
     </Grid>
   );
 };

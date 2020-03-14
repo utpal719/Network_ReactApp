@@ -38,8 +38,9 @@ export const Styles = () => ({
     height: "20px",
     backgroundImage: `url(${layout})`,
     backgroundPosition: "0 -40px",
-    display: "inline-block",
-    color: "#000"
+    color: "#fff",
+    fontWeight: "600",
+    display: "inline-block"
   },
   selectedSeat: {
     width: "20px",
@@ -47,7 +48,8 @@ export const Styles = () => ({
     backgroundImage: `url(${layout})`,
     backgroundPosition: "0 -60px",
     display: "inline-block",
-    color: "#000"
+    color: "#fff",
+    fontWeight: "600"
   },
   pavement: {
     width: "20px",
@@ -56,5 +58,33 @@ export const Styles = () => ({
   },
   blank: {
     display: "inline-block"
+  },
+  sleeperUnoccupied: {
+    height: "20px",
+    width: "40px",
+    display: "block",
+    backgroundImage: `url(${layout})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "-40px 0px"
+  },
+  sleeperSelected: {
+    height: "20px",
+    width: "40px",
+    display: "block",
+    backgroundImage: `url(${layout})`,
+    backgroundRepeat: "no-repeat",
+    color: "#fff",
+    fontWeight: "600",
+    backgroundPosition: "-40px -60px"
+  },
+  sleeperOccupied: {
+    height: "20px",
+    width: "40px",
+    display: "block",
+    backgroundImage: `url(${layout})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "-40px -60px",
+    color: "#fff",
+    fontWeight: "600"
   }
 });
