@@ -2,22 +2,22 @@ import React from 'react'
 import Slider from 'infinite-react-carousel'
 import { withStyles } from '@material-ui/core'
 import { Styles } from './Styles'
-import A from './A.png'
-import B from './B.png'
-import C from './C.png'
+import A from './../../images/A.png'
+import B from './../../images/B.png'
+import C from './../../images/C.png'
 const Carousel=(props)=>{
     const {classes}=props;
     return(
-        <div className={classes.carousel}>
+        <div >
             <Slider>
                 <div>
-                    <img src={A} alt="IMAGE ONE"/>
+                    <img src={A} alt="IMAGE ONE" className={classes.imageStyle}/>
                 </div>
                 <div>
-                    <img src={B} alt="IMAGE TWO"/>
+                    <img src={B} alt="IMAGE TWO" className={classes.imageStyle}/>
                 </div>
                 <div>
-                    <img src={C} alt="IMAGE THREE"/>
+                    <img src={C} alt="IMAGE THREE" className={classes.imageStyle}/>
                 </div>
             </Slider>
         </div>

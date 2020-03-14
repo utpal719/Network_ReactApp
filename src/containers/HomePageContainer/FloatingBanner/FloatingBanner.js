@@ -1,9 +1,9 @@
 import React from 'react'
 import { withStyles, Grid } from '@material-ui/core';
 import { Styles } from './Styles';
-import logo1 from './bus-80.png'
-import logo2 from './bus-81.png'
-import logo3 from './bus-82.png'
+import logo1 from './../../../images/bus-80.png'
+import logo2 from './../../../images/bus-81.png'
+import logo3 from './../../../images/bus-82.png'
 
 const FloatingBanner = (props) => {
 
