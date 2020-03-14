@@ -9,7 +9,7 @@ import TourismPage from './../../containers/TourismPageContainer/TourismPage'
 import CancellationPage from './../../containers/CancellationPageContainer/CancellationPage'
 import PrintTicketPage from './../../containers/PrintTicketContainer/PrintTicketPage'
 import ContactPage from './../../containers/ContactPageContainer/ContactPage'
-import Login from './../../containers/LoginContainer/Login'
+
 
 const NavBar = props => {
   const { classes } = props;
