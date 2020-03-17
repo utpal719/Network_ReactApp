@@ -7,7 +7,6 @@ export const Styles = () => ({
         justifyContent:"space-between",
         alignItems:"center",
         color: "grey",
-        alignItems: 'center',
         position:"relative",
         fontFamily: "Roboto, arial, helvetica, sans-serif",
         spacing: '2px'

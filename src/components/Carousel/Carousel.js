@@ -11,13 +11,13 @@ const Carousel=(props)=>{
         <div >
             <Slider>
                 <div>
-                    <img src={A} alt="IMAGE ONE" className={classes.imageStyle}/>
+                    <img src={A} alt="ONE" className={classes.imageStyle}/>
                 </div>
                 <div>
-                    <img src={B} alt="IMAGE TWO" className={classes.imageStyle}/>
+                    <img src={B} alt="TWO" className={classes.imageStyle}/>
                 </div>
                 <div>
-                    <img src={C} alt="IMAGE THREE" className={classes.imageStyle}/>
+                    <img src={C} alt="THREE" className={classes.imageStyle}/>
                 </div>
             </Slider>
         </div>

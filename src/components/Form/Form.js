@@ -3,15 +3,11 @@ import axios from "axios";
 import {
   TextField,
   Button,
-  Select,
-  Grid,
-  OutlinedInput
+  Grid
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import logo from "./../../images/location-icon.png";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
@@ -27,7 +23,6 @@ const Form = props => {
   };
   const [cityList, setCityList] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [startDate, setStartDate] = useState(new Date());
   const { classes } = props;
   useEffect(() => {
     // axios.get('http://www.networktravels.com/city/getAllCityName').then(res=>{

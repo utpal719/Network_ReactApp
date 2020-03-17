@@ -3,6 +3,7 @@ import { Grid, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Styles } from './Styles';
 import logo from './../../images/footer.jpg'
+import { NavLink } from 'react-router-dom';
 const Footer = (props) => {
 	const { classes } = props;
 	return (
@@ -19,17 +20,29 @@ const Footer = (props) => {
             </Typography>
 				</Grid>
 				<Grid item xs={4} className={classes.gitem}>
+					{/* <NavLink to={}> */}
 					<Typography variant="h8">Contact Us</Typography>
+					{/* </NavLink> */}
 					<br/>
+					<NavLink to="/aboutus">
 					<Typography variant="h8">About Us</Typography>
+					</NavLink>
 					<br/>
+					<NavLink to="/cancelticket">
 					<Typography variant="h8">Cancellation Policy </Typography>
+					</NavLink>
 					<br/>
+					<NavLink to="/termsandconditions">
 					<Typography variant="h8">Terms & Condition </Typography>
+					</NavLink>
 					<br/>
+					<NavLink to="/privacypolicy">
 					<Typography variant="h8">Privacy Policy </Typography>
+					</NavLink>
 					<br/>
+					<NavLink to="/refundpolicy">
 					<Typography variant="h8">Refund Policy </Typography>
+					</NavLink>
 					<br/>
 				</Grid>
 

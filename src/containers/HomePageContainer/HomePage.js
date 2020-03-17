@@ -17,7 +17,7 @@ const HomePage = (props)=>{
              <FloatingBanner/>
              <CaraouselBanner/>
              <TopDestinationBanner/>
-             <Footer/>  
+             <Footer/> 
         </div>
 
     );
