@@ -9,6 +9,7 @@ import ContentArea from "./ContentArea/ContentArea";
 import dummyResponse from "./dummyResponse";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
+import { useHistory } from "react-router-dom";
 
 /**
  * @author: Samudra Deka
@@ -28,8 +29,12 @@ function SearchResult(props) {
   };
   let [response, setResponse] = useState([]);
   let dispatch = useDispatch();
+  //   let history = useHistory();
 
   useEffect(() => {
+    // if (history.action === "POP") {
+    //   history.push("/");
+    // }
     dispatch({
       type: Constants.SET_SEARCH,
       payload: {

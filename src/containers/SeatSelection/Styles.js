@@ -38,6 +38,7 @@ export const Styles = () => ({
     color: "#000"
   },
   seatPaperContainer: {
-    padding: "20px 0px"
+    padding: "20px 0px",
+    background: "#EEEDED"
   }
 });
