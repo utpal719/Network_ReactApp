@@ -24,7 +24,7 @@
       "toCity": "TINSUKIA",
       "startTime": "04:30 PM",
       "endtime": "05:30 AM",
-      "seatCapacity": 31,
+      "seatCapacity": 32,
       "fare": 660,
       "travelTime": "10h:30m",
       "boardingPoints": null,
@@ -42,7 +42,7 @@
       "toCity": "TINSUKIA",
       "startTime": "05:00 PM",
       "endtime": "05:30 AM",
-      "seatCapacity": 31,
+      "seatCapacity": 34,
       "fare": 660,
       "travelTime": "10h:30m",
       "boardingPoints": null,
@@ -60,7 +60,7 @@
       "toCity": "TINSUKIA",
       "startTime": "05:15 PM",
       "endtime": "05:30 AM",
-      "seatCapacity": 31,
+      "seatCapacity": 35,
       "fare": 660,
       "travelTime": "10h:30m",
       "boardingPoints": null,
@@ -78,7 +78,7 @@
       "toCity": "TINSUKIA",
       "startTime": "06:30 PM",
       "endtime": "05:30 AM",
-      "seatCapacity": 31,
+      "seatCapacity": 39,
       "fare": 660,
       "travelTime": "10h:30m",
       "boardingPoints": null,
@@ -96,7 +96,7 @@
       "toCity": "TINSUKIA",
       "startTime": "09:00 PM",
       "endtime": "05:30 AM",
-      "seatCapacity": 31,
+      "seatCapacity": 45,
       "fare": 660,
       "travelTime": "16h:30m",
       "boardingPoints": null,
@@ -104,9 +104,25 @@
       "oldFare": 0,
       "sleeperFare": 0
     },
-    "stopovers": [
-      "Khanapara"
-    ],
+    "stopovers": ["Khanapara"],
+    "midId": 0
+  },
+  {
+    "bus": {
+      "busId": 150,
+      "fromCity": "MAJULI",
+      "toCity": "DHEMAJI",
+      "startTime": "08:00 PM",
+      "endtime": "09:00 PM",
+      "seatCapacity": 60,
+      "fare": 1.0,
+      "travelTime": null,
+      "boardingPoints": "Paltan Bazar",
+      "busType": null,
+      "oldFare": 0.0,
+      "sleeperFare": 2.0
+    },
+    "stopovers": null,
     "midId": 0
   }
 ]
