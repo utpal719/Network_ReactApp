@@ -20,9 +20,9 @@ const Footer = (props) => {
             </Typography>
 				</Grid>
 				<Grid item xs={4} className={classes.gitem}>
-					{/* <NavLink to={}> */}
+					<NavLink to="/contact">
 					<Typography variant="h8">Contact Us</Typography>
-					{/* </NavLink> */}
+					</NavLink>
 					<br/>
 					<NavLink to="/aboutus">
 					<Typography variant="h8">About Us</Typography>
