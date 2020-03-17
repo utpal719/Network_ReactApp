@@ -8,6 +8,11 @@ import {
 } from "@material-ui/core";
 import { Styles } from "../Styles";
 
+/**
+ * @method ContactDetails
+ * @description The contact component, used to collect the contact details of the user
+ * @param {Object} props - The props passed down the component tree
+ */
 const ContactDetails = ({ classes, setEmail, setPhone, email, phone }) => {
   return (
     <Paper elevation={2} className={classes.passengerDetails}>

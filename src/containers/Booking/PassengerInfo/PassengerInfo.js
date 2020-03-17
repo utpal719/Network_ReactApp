@@ -11,6 +11,11 @@ import {
 } from "@material-ui/core";
 import { Styles } from "../Styles";
 
+/**
+ * @method PassengerInfo
+ * @description The passenger info card which get generated per seat selection.
+ * @param {Object} props - The props passed down the component tree
+ */
 const PassengerInfo = ({
   classes,
   index,
