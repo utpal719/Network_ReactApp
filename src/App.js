@@ -8,6 +8,12 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
 import LoginPage from "./containers/LoginContainer/LoginPage";
+import AboutUsPage from './containers/AboutUsConatiner/AboutUsPage'
+import PrintTicketPage from './containers/PrintTicketContainer/PrintTicketPage'
+import CancellationPage from './containers/CancellationPageContainer/CancellationPage'
+import PrivacyPolicyPage from "./containers/PrivacyPolicyPage/PrivacyPolicyPage";
+import TandCPage from "./containers/TandCPage/TandCPage"
+import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage"
 
 let store = createStore(rootReducer);
 
@@ -21,7 +27,13 @@ function App() {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/printticket" component={PrintTicketPage} />
+            <Route exact path="/cancelticket" component={CancellationPage} />
+            <Route exact path="/termsandconditions" component={TandCPage} />
+            <Route exact path="/refundpolicy" component={RefundPolicyPage} />
+            <Route exact path="/aboutus" component={AboutUsPage} />
             <Route exact path="/searchresult" component={SearchResult} />
+            <Route exact path="/privacypolicy" component={PrivacyPolicyPage} />
             <Route exact path="/seatselection" component={SeatSelection} />
           </Switch>
         </Router>

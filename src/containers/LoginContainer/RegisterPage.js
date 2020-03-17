@@ -1,13 +1,4 @@
 import React from "react";
-import {
-  TextField,
-  MenuItem,
-  Button,
-  Select,
-  Grid,
-  OutlinedInput,
-  InputLabel
-} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Register from "./Register";
 import { Styles } from "./Styles";
