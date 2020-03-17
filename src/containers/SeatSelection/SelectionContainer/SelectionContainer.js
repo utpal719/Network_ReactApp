@@ -12,6 +12,7 @@ import { Styles } from "../Styles";
 import { CalendarToday } from "@material-ui/icons";
 import Layout from "../../../components/BusLayout/Layout/Layout";
 import Actions from "../../../redux/actionConstants";
+import { useHistory } from "react-router-dom";
 
 const SelectionContainer = ({
   classes,
@@ -21,6 +22,7 @@ const SelectionContainer = ({
   totalFare
 }) => {
   let dispatch = useDispatch();
+  let history = useHistory();
   let searchData = useSelector(state => state.search);
   let { seatCapacity = 32 } = useSelector(state => state.bus);
   let dummyBoardingPoints = [
@@ -41,9 +43,8 @@ const SelectionContainer = ({
   let handleContinue = () => {
     dispatch({ type: Actions.SET_FARE, payload: { fare: totalFare } });
     dispatch({ type: Actions.SET_SEATS, payload: { seats: selectedSeats } });
+    history.push("/booking");
   };
-
-  console.log(useStore().getState());
 
   return (
     <Grid

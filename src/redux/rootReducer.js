@@ -15,10 +15,8 @@ let initialState = {
   },
   bookingInfo: {
     fare: 0,
-    name: "",
+    passengerDetails: [{ name: "", gender: "", age: "" }],
     email: "",
-    gender: "",
-    age: "",
     mobile: "",
     totalPayable: 0,
     seats: []
@@ -61,6 +59,17 @@ export default function(state = initialState, action) {
         ...state,
         bookingInfo: { ...state.bookingInfo, seats: payload.seats }
       };
+
+    case Constants.SET_PASSENGER_DETAILS: {
+      let bookingInfo = { ...state.bookingInfo };
+      let passengerDetails = { ...bookingInfo.passengerDetails };
+      passengerDetails = payload.passengerDetails;
+      bookingInfo = { ...bookingInfo, passengerDetails: passengerDetails };
+      return {
+        ...state,
+        bookingInfo
+      };
+    }
     default:
       return state;
   }
