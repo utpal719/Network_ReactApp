@@ -3,8 +3,8 @@ import layout from "./busLayout.png";
 export const Styles = () => ({
   busLayoutContainer: {
     listStyle: "none",
-    padding: "20px 5px",
-    background: "aliceblue",
+    padding: "15px",
+    background: "#fff",
     borderRadius: "5px",
     boxShadow: "2px 2px 8px aliceblue",
     textAlign: "center",
