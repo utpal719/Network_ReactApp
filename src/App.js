@@ -3,20 +3,21 @@ import HomePage from "./containers/HomePageContainer/HomePage";
 import SearchResult from "./containers/SearchResultContainer/SearchResult";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SeatSelection from "./containers/SeatSelection/SeatSelection";
-import RegisterPage from "./containers/LoginContainer/RegisterPage"
+import RegisterPage from "./containers/LoginContainer/RegisterPage";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
-
 import LoginPage from "./containers/LoginContainer/LoginPage";
-import AboutUsPage from './containers/AboutUsConatiner/AboutUsPage'
-import PrintTicketPage from './containers/PrintTicketContainer/PrintTicketPage'
-import CancellationPage from './containers/CancellationPageContainer/CancellationPage'
+import AboutUsPage from "./containers/AboutUsConatiner/AboutUsPage";
+import PrintTicketPage from "./containers/PrintTicketContainer/PrintTicketPage";
+import CancellationPage from "./containers/CancellationPageContainer/CancellationPage";
 import PrivacyPolicyPage from "./containers/PrivacyPolicyPage/PrivacyPolicyPage";
-import TandCPage from "./containers/TandCPage/TandCPage"
-import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage"
-import ContactPage from "./containers/ContactPageContainer/ContactPage"
+import TandCPage from "./containers/TandCPage/TandCPage";
+import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage";
+import ContactPage from "./containers/ContactPageContainer/ContactPage";
 import Booking from "./containers/Booking/Booking";
+import TourismPage from "./containers/TourismPageContainer/TourismPage";
+import guide from "./pdf/NetworkTravel.pdf";
 
 let store = createStore(rootReducer);
 
@@ -32,8 +33,10 @@ function App() {
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/contact" component={ContactPage} />
             <Route exact path="/printticket" component={PrintTicketPage} />
+            <Route exact path="/tourism" component={TourismPage} />
             <Route exact path="/cancelticket" component={CancellationPage} />
             <Route exact path="/termsandconditions" component={TandCPage} />
+            <Route exact path="/travelguide" component={guide} />
             <Route exact path="/refundpolicy" component={RefundPolicyPage} />
             <Route exact path="/aboutus" component={AboutUsPage} />
             <Route exact path="/searchresult" component={SearchResult} />
