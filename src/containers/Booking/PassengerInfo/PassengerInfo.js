@@ -77,79 +77,81 @@ const PassengerInfo = ({
     <Paper elevation={1} className={classes.passengerDetails}>
       <Grid container direction="row" spacing={3}>
         <Grid item xs={12}>
-          <Grid container direction="row">
-            <Grid item md={2} xs={12} className={classes.seatDisplay}>
-              <Typography variant="caption" style={{ marginBottom: "20px" }}>
-                <strong>Seat </strong>
-                <Typography variant="h4">{seat}</Typography>
-              </Typography>
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Name
-              </Typography>
-              <TextField
-                variant="outlined"
-                placeholder="Passenger Name"
-                size="small"
-                InputProps={{
-                  classes: {
-                    input: classes.inputBox
-                  }
-                }}
-                value={name}
-                onChange={handleNameChange}
-              ></TextField>
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Gender
-              </Typography>
-              <RadioGroup
-                aria-label="position"
-                name="gender"
-                value={gender}
-                onChange={handleGenderChange}
-                row
-              >
-                <FormControlLabel
-                  value="male"
-                  control={<Radio size="small" color="primary" />}
-                  label="Male"
-                  classes={{
-                    label: classes.inputBox
+          <form>
+            <Grid container direction="row">
+              <Grid item md={2} xs={12} className={classes.seatDisplay}>
+                <Typography variant="caption" style={{ marginBottom: "20px" }}>
+                  <strong>Seat </strong>
+                  <Typography variant="h4">{seat}</Typography>
+                </Typography>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Name
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  placeholder="Passenger Name"
+                  size="small"
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
                   }}
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio size="small" color="primary" />}
-                  label="Female"
-                  classes={{
-                    label: classes.inputBox
+                  value={name}
+                  onChange={handleNameChange}
+                ></TextField>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Gender
+                </Typography>
+                <RadioGroup
+                  aria-label="position"
+                  name="gender"
+                  value={gender}
+                  onChange={handleGenderChange}
+                  row
+                >
+                  <FormControlLabel
+                    value="male"
+                    control={<Radio size="small" color="primary" />}
+                    label="Male"
+                    classes={{
+                      label: classes.inputBox
+                    }}
+                    labelPlacement="end"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={<Radio size="small" color="primary" />}
+                    label="Female"
+                    classes={{
+                      label: classes.inputBox
+                    }}
+                    labelPlacement="end"
+                  />
+                </RadioGroup>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Age
+                </Typography>
+                <TextField
+                  placeholder="age"
+                  variant="outlined"
+                  size="small"
+                  value={age}
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
                   }}
-                  labelPlacement="end"
-                />
-              </RadioGroup>
+                  onChange={handleAgeChange}
+                ></TextField>
+              </Grid>
             </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Age
-              </Typography>
-              <TextField
-                placeholder="age"
-                variant="outlined"
-                size="small"
-                value={age}
-                InputProps={{
-                  classes: {
-                    input: classes.inputBox
-                  }
-                }}
-                onChange={handleAgeChange}
-              ></TextField>
-            </Grid>
-          </Grid>
+          </form>
         </Grid>
       </Grid>
     </Paper>

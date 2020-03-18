@@ -16,7 +16,6 @@ import { useHistory } from "react-router-dom";
  */
 const Booking = ({ classes }) => {
   let { seats, fare } = useSelector(state => state.bookingInfo);
-  //   seats = [1, 2, 5];
   let history = useHistory();
   let [passengers, setPassengers] = useState([]);
   let [prefilledName, setPrefilledName] = useState("");
