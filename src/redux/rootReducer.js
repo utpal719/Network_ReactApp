@@ -20,7 +20,8 @@ let initialState = {
     mobile: "",
     totalPayable: 0,
     seats: []
-  }
+  },
+  busSearchData: []
 };
 
 export default function(state = initialState, action) {
@@ -69,6 +70,9 @@ export default function(state = initialState, action) {
         ...state,
         bookingInfo
       };
+    }
+    case Constants.SET_BUS_SEARCH_DATA: {
+      return { ...state, busSearchData: payload.busData };
     }
     default:
       return state;

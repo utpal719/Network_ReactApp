@@ -4,7 +4,7 @@ import avatar from "./n1.png";
 import { Styles } from "./Styles";
 import { DirectionsBus, AccessTime } from "@material-ui/icons";
 
-const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
+const BusCard = ({ classes, data: bus, handleClick }) => {
   return (
     <Paper variant="outlined" className={classes.busPaper}>
       <Grid container spacing={2}>
@@ -57,7 +57,7 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
             onClick={() =>
               handleClick({
                 busId: bus.busId,
-                midId: midId,
+                midId: bus.midId,
                 startTime: bus.startTime,
                 endtime: bus.endtime,
                 seatCapacity: bus.seatCapacity,

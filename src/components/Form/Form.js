@@ -7,30 +7,62 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
+import moment from "moment";
+import { useDispatch } from "react-redux";
+import Constants from "../../redux/actionConstants";
+import { useHistory } from "react-router-dom";
+import config from "../../config";
+import { getBuses } from "../../apis/buses";
 
 const Form = props => {
-  const handleSubmit = e => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    fetch("/networktravels/busSearch", {
-      method: "post",
-      body: data
-    });
-  };
   const [cityList, setCityList] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [fromCity, setSourceCity] = useState({});
+  const [toCity, setDestinationCity] = useState({});
   const { classes } = props;
-  useEffect(() => {
-    axios
-      .get(
-        "http://network-env.eba-qwadikw4.ap-south-1.elasticbeanstalk.com/getAllCity"
-      )
-      .then(res => {
-        let city = res.data.data;
-        console.log(city);
-        setCityList(city);
+
+  let dispatch = useDispatch();
+  let history = useHistory();
+
+  const handleSubmit = function(e) {
+    e.preventDefault();
+    dispatch({
+      type: Constants.SET_SEARCH,
+      payload: {
+        from: fromCity.cityname,
+        to: toCity.cityname,
+        date: selectedDate.toDateString()
+      }
+    });
+    /**
+     * Get all buses
+     */
+    (async () => {
+      let data = await getBuses({
+        fromCity: fromCity.cityname,
+        toCity: toCity.cityname,
+        journeyDate: moment(selectedDate).format("M d,YYYY")
       });
+
+      dispatch({
+        type: Constants.SET_BUS_SEARCH_DATA,
+        payload: { busData: data }
+      });
+
+      history.push("/searchresult");
+    })();
+  };
+
+  let handleSourceSelect = (e, value) => setSourceCity(value);
+  let handleDestinationSelect = (e, value) => setDestinationCity(value);
+
+  useEffect(() => {
+    axios.get(`${config.API_URL}/getAllCity`).then(res => {
+      let city = res.data.data;
+      setCityList(city);
+    });
   }, []);
+
   return (
     <div className={classes.bg}>
       <Grid
@@ -49,6 +81,7 @@ const Form = props => {
                   id="combo-box-demo"
                   options={cityList}
                   getOptionLabel={option => option.cityname}
+                  onChange={handleSourceSelect}
                   renderInput={params => (
                     <TextField
                       {...params}
@@ -64,6 +97,7 @@ const Form = props => {
                 <Autocomplete
                   options={cityList}
                   getOptionLabel={option => option.cityname}
+                  onChange={handleDestinationSelect}
                   renderInput={params => (
                     <TextField
                       {...params}
