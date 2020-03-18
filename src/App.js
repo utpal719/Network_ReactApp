@@ -7,7 +7,6 @@ import RegisterPage from "./containers/LoginContainer/RegisterPage";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
-
 import LoginPage from "./containers/LoginContainer/LoginPage";
 import AboutUsPage from "./containers/AboutUsConatiner/AboutUsPage";
 import PrintTicketPage from "./containers/PrintTicketContainer/PrintTicketPage";
@@ -17,8 +16,13 @@ import TandCPage from "./containers/TandCPage/TandCPage";
 import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage";
 import ContactPage from "./containers/ContactPageContainer/ContactPage";
 import Booking from "./containers/Booking/Booking";
+<<<<<<< HEAD
 import Preloader from "./components/Preloader/Preloader";
 import routes from "./routes";
+=======
+import TourismPage from "./containers/TourismPageContainer/TourismPage";
+import guide from "./pdf/NetworkTravel.pdf";
+>>>>>>> master
 
 let store = createStore(rootReducer);
 
