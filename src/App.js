@@ -15,6 +15,7 @@ import CancellationPage from './containers/CancellationPageContainer/Cancellatio
 import PrivacyPolicyPage from "./containers/PrivacyPolicyPage/PrivacyPolicyPage";
 import TandCPage from "./containers/TandCPage/TandCPage"
 import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage"
+import ContactPage from "./containers/ContactPageContainer/ContactPage"
 import Booking from "./containers/Booking/Booking";
 
 let store = createStore(rootReducer);
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
+            <Route exact path="/contact" component={ContactPage} />
             <Route exact path="/printticket" component={PrintTicketPage} />
             <Route exact path="/cancelticket" component={CancellationPage} />
             <Route exact path="/termsandconditions" component={TandCPage} />
