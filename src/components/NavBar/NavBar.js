@@ -1,17 +1,18 @@
-import React from 'react'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import { Styles } from './Styles'
-import {NavLink} from 'react-router-dom'
-import logo from './logo1.png'
-
+import React from "react";
+import { AppBar, Toolbar, Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { Styles } from "./Styles";
+import { NavLink } from "react-router-dom";
+import logo from "./logo1.png";
 
 const NavBar = props => {
   const { classes } = props;
   return (
     <AppBar>
       <Toolbar className={classes.navbar}>
-        <img src={logo} alt="NETWORK" />
+        <NavLink to="/home" style={{ textDecoration: "none", marginLeft: 50 }}>
+          <img src={logo} alt="NETWORK" />
+        </NavLink>
         <NavLink to="/home" style={{ textDecoration: "none", marginLeft: 50 }}>
           <Button color="inherit" className={classes.button}>
             HOME

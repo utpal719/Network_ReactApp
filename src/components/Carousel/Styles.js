@@ -1,5 +1,5 @@
 export const Styles = () => ({
-    imageStyle:{
-    width:"30%"
-    }
-  });
+  imageStyle: {
+    width: "30%"
+  }
+});

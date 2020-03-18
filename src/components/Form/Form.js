@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {
-  TextField,
-  Button,
-  Grid
-} from "@material-ui/core";
+import { TextField, Button, Grid } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -25,21 +21,26 @@ const Form = props => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const { classes } = props;
   useEffect(() => {
-    // axios.get('http://www.networktravels.com/city/getAllCityName').then(res=>{
-    // const city=res.data;
-    const city = [
-      { cityId: 1, cityName: "NAMSAI" },
-      { cityId: 2, cityName: "KAKOPATHAR" },
-      { cityId: 3, cityName: "RUPAI" }
-    ];
-    setCityList(city);
-    //	})
+    axios
+      .get(
+        "http://network-env.eba-qwadikw4.ap-south-1.elasticbeanstalk.com/getAllCity"
+      )
+      .then(res => {
+        let city = res.data.data;
+        console.log(city);
+        setCityList(city);
+      });
   }, []);
   return (
     <div className={classes.bg}>
-      <Grid container spacing={2} direction="column" className={classes.gridstyle}>
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        className={classes.gridstyle}
+      >
         <Grid item xs={12}>
-         <h3>Online Bus Ticket Booking</h3> 
+          <h3>Online Bus Ticket Booking</h3>
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2} direction="row">
               <Grid item xs={6}>
@@ -47,20 +48,13 @@ const Form = props => {
                 <Autocomplete
                   id="combo-box-demo"
                   options={cityList}
-                  getOptionLabel={option => option.cityName}
+                  getOptionLabel={option => option.cityname}
                   renderInput={params => (
                     <TextField
                       {...params}
                       label="Select city name"
                       variant="outlined"
-					        className={classes.inputbox}
-					//   InputProps={{
-					// 	startAdornment: (
-					// 	  <InputAdornment position="start">
-					// 		  <img src={logo} className={classes.imgstyle}></img>
-					// 	  </InputAdornment>
-					// 	),
-					//   }}
+                      className={classes.inputbox}
                     />
                   )}
                 />
@@ -69,7 +63,7 @@ const Form = props => {
                 <p>To</p>
                 <Autocomplete
                   options={cityList}
-                  getOptionLabel={option => option.cityName}
+                  getOptionLabel={option => option.cityname}
                   renderInput={params => (
                     <TextField
                       {...params}

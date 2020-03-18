@@ -1,6 +1,6 @@
 import React from "react";
 import { withStyles, Card, CardContent, Typography } from "@material-ui/core";
-import {Styles} from "./Styles"
+import { Styles } from "./Styles";
 const LocationCard = () => {
   return (
     <Card variant="outlined">

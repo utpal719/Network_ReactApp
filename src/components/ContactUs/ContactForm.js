@@ -21,8 +21,10 @@ const LoginForm = props => {
           <form onSubmit={handleSubmit} className={classes.formstyle}>
             <Grid container direction="row" spacing={2}>
               <Grid item xs={12}>
-                <InputLabel className={classes.inputlabel}>---HOW SHALL WE CALL YOU?---</InputLabel>
-                <br/>
+                <InputLabel className={classes.inputlabel}>
+                  ---HOW SHALL WE CALL YOU?---
+                </InputLabel>
+                <br />
                 <TextField
                   size="small"
                   type="text"
@@ -33,8 +35,10 @@ const LoginForm = props => {
                 ></TextField>
               </Grid>
               <Grid item xs={12}>
-                <InputLabel className={classes.inputlabel}>---SHARE YOUR EMAIL---</InputLabel>
-                <br/>
+                <InputLabel className={classes.inputlabel}>
+                  ---SHARE YOUR EMAIL---
+                </InputLabel>
+                <br />
                 <TextField
                   size="small"
                   type="email"
@@ -45,8 +49,10 @@ const LoginForm = props => {
                 ></TextField>
               </Grid>
               <Grid item xs={12}>
-                <InputLabel className={classes.inputlabel}>---SHARE YOUR CONTACT NUMBER---</InputLabel>
-                <br/>
+                <InputLabel className={classes.inputlabel}>
+                  ---SHARE YOUR CONTACT NUMBER---
+                </InputLabel>
+                <br />
                 <TextField
                   size="small"
                   type="text"
@@ -57,8 +63,10 @@ const LoginForm = props => {
                 ></TextField>
               </Grid>
               <Grid item xs={12}>
-                <InputLabel className={classes.inputlabel}>---THE HOLIDAY---</InputLabel>
-                <br/>
+                <InputLabel className={classes.inputlabel}>
+                  ---THE HOLIDAY---
+                </InputLabel>
+                <br />
                 <TextField
                   size="small"
                   type="text"
@@ -69,8 +77,10 @@ const LoginForm = props => {
                 ></TextField>
               </Grid>
               <Grid item xs={12}>
-                <InputLabel className={classes.inputlabel}>---WE ARE ALL EARS!---</InputLabel>
-                <br/>
+                <InputLabel className={classes.inputlabel}>
+                  ---WE ARE ALL EARS!---
+                </InputLabel>
+                <br />
                 <TextField
                   size="small"
                   type="text"
@@ -83,7 +93,11 @@ const LoginForm = props => {
                 ></TextField>
               </Grid>
               <Grid item xs={12}>
-                <Button type="Submit" label="Send Message" className={classes.button}>
+                <Button
+                  type="Submit"
+                  label="Send Message"
+                  className={classes.button}
+                >
                   Send Message
                 </Button>
               </Grid>

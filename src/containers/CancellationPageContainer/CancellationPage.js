@@ -11,7 +11,7 @@ const CancellationPage = props => {
   const { classes } = props;
   console.log(NavBar);
   return (
-    <div >
+    <div>
       <NavBar />
       <Grid conatiner direction="row" className={classes.bg}>
         <Grid item xs={12}>

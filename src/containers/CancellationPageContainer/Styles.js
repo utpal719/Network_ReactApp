@@ -1,19 +1,18 @@
 //import image from "./networkbg.jpg";
 export const Styles = () => ({
   bg: {
-//    backgroundImage: `url(${image})`,
+    //    backgroundImage: `url(${image})`,
     justifyContent: "center",
-    marginTop:"88px",
-    padding:"30px"
+    marginTop: "88px",
+    padding: "30px"
   },
-  container:{
-    justifyContent: "center",
-
+  container: {
+    justifyContent: "center"
   },
   gridstyle: {
     display: "flex",
     width: "100%",
-    height:"50vh",
+    height: "50vh",
     borderRadius: "0",
     borderStyle: "square",
     border: "3px",

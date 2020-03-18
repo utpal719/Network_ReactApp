@@ -1,4 +1,3 @@
-
 export const Styles = () => ({
   container: {
     justifyContent: "center"
@@ -25,13 +24,13 @@ export const Styles = () => ({
     width: "100%",
     backgroundColor: "rgba(241,243,242,1)",
     border: "none",
-    color:"grey"
+    color: "grey"
   },
   formstyle: {
     padding: "10px"
   },
-  inputlabel:{
-      color:"#B22222",
-      fontSize:"14px"
+  inputlabel: {
+    color: "#B22222",
+    fontSize: "14px"
   }
 });

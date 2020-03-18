@@ -1,14 +1,14 @@
 export const Styles = () => ({
-    footer: {
-    minHeight:200,
-    display:"flex",
+  footer: {
+    minHeight: 200,
+    display: "flex",
     background: "#262626",
     padding: "60px 0 30px 0",
     color: "#e6e6e6",
     fontSize: "11px",
-    paddingLeft:"120px"
-    },
-    gitem:{
-      paddingLeft:"120px"
+    paddingLeft: "120px"
   },
-  });
+  gitem: {
+    paddingLeft: "120px"
+  }
+});
