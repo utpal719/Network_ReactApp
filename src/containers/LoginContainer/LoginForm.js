@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink} from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 import {
   TextField,
   InputLabel,
@@ -21,23 +21,37 @@ const LoginForm = props => {
         <Paper className={classes.paper}>
           <form onSubmit={handleSubmit} className={classes.formstyle}>
             <Grid container direction="row" spacing={2}>
-            <Grid item xs={12}>
-            <TextField size="small" type="text" label="User Name" variant="outlined" className={classes.textfield} required></TextField>
-            </Grid>
-            <Grid item xs={12}>
-            <TextField size="small" type="password" label="Password" variant="outlined" className={classes.textfield} required></TextField>
-            </Grid>
-            <Grid item xs={12}>
-            <Button type="Submit" label="Log In" className={classes.button}>
-              LOG IN
-            </Button>
-            </Grid>
-            <Grid item xs={12}>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="text"
+                  label="User Name"
+                  variant="outlined"
+                  className={classes.textfield}
+                  required
+                ></TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="password"
+                  label="Password"
+                  variant="outlined"
+                  className={classes.textfield}
+                  required
+                ></TextField>
+              </Grid>
+              <Grid item xs={12}>
+                <Button type="Submit" label="Log In" className={classes.button}>
+                  LOG IN
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
                 Not Registered?
                 <NavLink to="/register" className={classes.navlinked}>
-                Create an Account
+                  Create an Account
                 </NavLink>
-            </Grid>
+              </Grid>
             </Grid>
           </form>
         </Paper>

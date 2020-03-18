@@ -11,5 +11,5 @@ const Form = props => {
       <LoginForm />
     </div>
   );
-}; 
+};
 export default withStyles(Styles)(Form);

@@ -65,7 +65,7 @@ const TandC = props => {
         9)The terms and conditions of our services can be amended, modified or
         withdrawn by networktravels.com at any time without notice.
       </Typography>
-      <br/>
+      <br />
       <Typography variant="h6" display="block" align="center">
         Failure Transaction :
       </Typography>

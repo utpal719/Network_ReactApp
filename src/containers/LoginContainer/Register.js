@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  TextField,
-  Button,
-  withStyles,
-  Grid,
-  Paper
-} from "@material-ui/core";
+import { TextField, Button, withStyles, Grid, Paper } from "@material-ui/core";
 import { Formik } from "formik";
 import { Styles } from "./Styles";
 
@@ -20,9 +14,8 @@ function validateEmail(value) {
 function validateContact(value) {
   let error;
   console.log("inside contact validation");
-  if (!/^\d{10}$/i.test(value.contact))
-  {
-    error="Mobile Number should contain 0-9"
+  if (!/^\d{10}$/i.test(value.contact)) {
+    error = "Mobile Number should contain 0-9";
   }
   return error;
 }
@@ -32,7 +25,7 @@ const Register = props => {
     e.preventDefault();
   };
 
-  const { classes} = props;
+  const { classes } = props;
 
   return (
     <Grid container className={classes.container}>
@@ -41,7 +34,7 @@ const Register = props => {
           <Formik
             initialValues={{
               email: "",
-              contact:""
+              contact: ""
             }}
           >
             {({ errors, touched, isValidating }) => (
@@ -68,7 +61,7 @@ const Register = props => {
                       className={classes.textfield}
                       required
                     ></TextField>
-                       {errors.email && touched.email && <div>{errors.email}</div>}
+                    {errors.email && touched.email && <div>{errors.email}</div>}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -81,7 +74,9 @@ const Register = props => {
                       className={classes.textfield}
                       required
                     ></TextField>
-                    {errors.contact && touched.contact && <div>{errors.contact}</div>}
+                    {errors.contact && touched.contact && (
+                      <div>{errors.contact}</div>
+                    )}
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
@@ -108,7 +103,6 @@ const Register = props => {
                       type="Submit"
                       label="Register"
                       className={classes.button}
-
                     >
                       REGISTER NOW
                     </Button>

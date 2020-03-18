@@ -41,7 +41,7 @@ const RefundPolicy = props => {
         boarding point on time.
       </Typography>
       <br />
-      <Typography variant="h7" display="block" align="center">
+      <Typography>
         6) In the event of cancellation of a bus, network travels will assist
         the passenger in providing an alternative bus, subject to availability.
         In case an alternative is not available, then network travels shall be

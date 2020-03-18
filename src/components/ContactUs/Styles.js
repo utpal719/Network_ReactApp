@@ -1,18 +1,9 @@
-//import image from "./networkbg.jpg";
 export const Styles = () => ({
-  bg: {
-    //    backgroundImage: `url(${image})`,
-    justifyContent: "center",
-    marginTop: "88px",
-    padding: "30px"
-  },
   container: {
     justifyContent: "center"
   },
   gridstyle: {
-    display: "flex",
     width: "100%",
-    height: "50vh",
     borderRadius: "0",
     borderStyle: "square",
     border: "3px",
@@ -21,11 +12,10 @@ export const Styles = () => ({
   paper: {
     width: "100%",
     margin: "auto",
-    padding: "30px",
     elevation: 4
   },
   button: {
-    backgroundColor: "#D9534F",
+    backgroundColor: "#28a745",
     borderRadius: "0",
     borderStyle: "square",
     width: "100%"
@@ -33,9 +23,14 @@ export const Styles = () => ({
   textfield: {
     width: "100%",
     backgroundColor: "rgba(241,243,242,1)",
-    border: "none"
+    border: "none",
+    color: "grey"
   },
   formstyle: {
     padding: "10px"
+  },
+  inputlabel: {
+    color: "#B22222",
+    fontSize: "14px"
   }
 });
