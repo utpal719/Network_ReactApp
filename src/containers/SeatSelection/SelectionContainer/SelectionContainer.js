@@ -13,8 +13,6 @@ import { CalendarToday } from "@material-ui/icons";
 import Layout from "../../../components/BusLayout/Layout/Layout";
 import Actions from "../../../redux/actionConstants";
 import { useHistory } from "react-router-dom";
-import Axios from "axios";
-import config from "../../../config";
 import { getBusDetailsById } from "../../../apis/buses";
 
 const SelectionContainer = ({
@@ -43,12 +41,14 @@ const SelectionContainer = ({
         busId,
         isMid: isMid || 0
       });
-      let boardingPoints = data.bus.boardingPoints;
-      if (boardingPoints) {
-        boardingPoint = boardingPoints.split(",");
-        setBoardingPoints(boardingPoint);
+      if (data) {
+        let boardingPoints = data.bus.boardingPoints;
+        if (boardingPoints) {
+          boardingPoint = boardingPoints.split(",");
+          setBoardingPoints(boardingPoint);
+        }
+        setOccupiedSeats(data.occupiedSeat);
       }
-      setOccupiedSeats(data.occupiedSeat);
     })();
   }, []);
 
@@ -166,7 +166,7 @@ const SelectionContainer = ({
                     variant="contained"
                     color="primary"
                     disabled={
-                      !Boolean(selectedSeats.length) && !Boolean(boardingPoint)
+                      !(Boolean(selectedSeats.length) && Boolean(boardingPoint))
                     }
                   >
                     Continue

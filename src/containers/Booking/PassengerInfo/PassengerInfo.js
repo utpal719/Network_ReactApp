@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Grid,
   withStyles,
@@ -20,58 +20,17 @@ const PassengerInfo = ({
   classes,
   index,
   seat,
-  prefilledName,
-  prefilledAge,
-  prefilledGender,
-  prefiller,
-  handlePassenger
+  defaultPassenger,
+  formik,
+  prefiller
 }) => {
-  let [gender, setGender] = useState("male");
-  let [name, setName] = useState("");
-  let [age, setAge] = useState("");
-
-  let handleGenderChange = e => {
-    setGender(e.target.value);
+  let handleDefaultValues = e => {
     if (index === 0)
       prefiller({
-        prefilledName,
-        prefilledAge,
-        prefilledGender: e.target.value
+        ...defaultPassenger,
+        [e.currentTarget.getAttribute("data-name")]: e.target.value
       });
-    handlePassenger(index, { name: name, gender: e.target.value, age });
   };
-  let handleNameChange = e => {
-    setName(e.target.value);
-    if (index === 0)
-      prefiller({
-        prefilledName: e.target.value,
-        prefilledAge,
-        prefilledGender
-      });
-    handlePassenger(index, { name: e.target.value, gender, age });
-  };
-  let handleAgeChange = e => {
-    setAge(e.target.value);
-    if (index === 0)
-      prefiller({
-        prefilledName,
-        prefilledAge: e.target.value,
-        prefilledGender
-      });
-    handlePassenger(index, { name, gender, age: e.target.value });
-  };
-
-  useEffect(() => {
-    setGender(prefilledGender);
-  }, [prefilledGender]);
-
-  useEffect(() => {
-    setName(prefilledName);
-  }, [prefilledName]);
-
-  useEffect(() => {
-    setAge(prefilledAge);
-  }, [prefilledAge]);
 
   return (
     <Paper elevation={1} className={classes.passengerDetails}>
@@ -92,15 +51,26 @@ const PassengerInfo = ({
                 <TextField
                   variant="outlined"
                   placeholder="Passenger Name"
+                  data-name="name"
                   size="small"
+                  name={`passengers[${index}].name`}
+                  inputProps={{ "data-name": "name" }}
                   InputProps={{
                     classes: {
                       input: classes.inputBox
                     }
                   }}
-                  value={name}
-                  onChange={handleNameChange}
+                  value={formik.values.passengers[index].name}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
+                  }}
                 ></TextField>
+                <div className={classes.error}>
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].name
+                    : ""}
+                </div>
               </Grid>
               <Grid item md={3} xs={12}>
                 <Typography variant="subtitle2" className={classes.inputLabel}>
@@ -108,14 +78,23 @@ const PassengerInfo = ({
                 </Typography>
                 <RadioGroup
                   aria-label="position"
-                  name="gender"
-                  value={gender}
-                  onChange={handleGenderChange}
+                  name={`passengers[${index}].gender`}
+                  value={formik.values.passengers[index].gender}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
+                  }}
                   row
                 >
                   <FormControlLabel
                     value="male"
-                    control={<Radio size="small" color="primary" />}
+                    control={
+                      <Radio
+                        size="small"
+                        inputProps={{ "data-name": "gender" }}
+                        color="primary"
+                      />
+                    }
                     label="Male"
                     classes={{
                       label: classes.inputBox
@@ -124,7 +103,13 @@ const PassengerInfo = ({
                   />
                   <FormControlLabel
                     value="female"
-                    control={<Radio size="small" color="primary" />}
+                    control={
+                      <Radio
+                        inputProps={{ "data-name": "gender" }}
+                        size="small"
+                        color="primary"
+                      />
+                    }
                     label="Female"
                     classes={{
                       label: classes.inputBox
@@ -132,6 +117,11 @@ const PassengerInfo = ({
                     labelPlacement="end"
                   />
                 </RadioGroup>
+                <div className={classes.error}>
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].gender
+                    : ""}
+                </div>
               </Grid>
               <Grid item md={3} xs={12}>
                 <Typography variant="subtitle2" className={classes.inputLabel}>
@@ -141,14 +131,24 @@ const PassengerInfo = ({
                   placeholder="age"
                   variant="outlined"
                   size="small"
-                  value={age}
+                  inputProps={{ "data-name": "age" }}
+                  name={`passengers[${index}].age`}
+                  value={formik.values.passengers[index].age}
                   InputProps={{
                     classes: {
                       input: classes.inputBox
                     }
                   }}
-                  onChange={handleAgeChange}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
+                  }}
                 ></TextField>
+                <div className={classes.error}>
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].age
+                    : ""}
+                </div>
               </Grid>
             </Grid>
           </form>

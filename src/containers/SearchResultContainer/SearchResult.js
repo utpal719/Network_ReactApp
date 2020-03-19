@@ -25,13 +25,13 @@ function SearchResult(props) {
   let data = {
     from: fromCity,
     to: toCity,
-    noOfBuses: busSearchData.length,
+    noOfBuses: busSearchData.length || 0,
     date: date
   };
 
   useEffect(() => {
     if (history.action === "POP") {
-      //   history.push("/");
+      history.push("/");
     }
     setResponse(busSearchData);
   }, [busSearchData]);

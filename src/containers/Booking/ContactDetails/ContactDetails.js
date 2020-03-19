@@ -7,13 +7,13 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Styles } from "../Styles";
-
 /**
  * @method ContactDetails
  * @description The contact component, used to collect the contact details of the user
  * @param {Object} props - The props passed down the component tree
  */
-const ContactDetails = ({ classes, setEmail, setPhone, email, phone }) => {
+
+const ContactDetails = ({ classes, formik }) => {
   return (
     <Paper elevation={2} className={classes.passengerDetails}>
       <Grid container direction="row" spacing={3}>
@@ -32,10 +32,12 @@ const ContactDetails = ({ classes, setEmail, setPhone, email, phone }) => {
                 variant="outlined"
                 label="email"
                 size="small"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
                 fullWidth
               ></TextField>
+              <div className={classes.error}>{formik.errors.email}</div>
             </Grid>
           </Grid>
         </Grid>
@@ -46,10 +48,12 @@ const ContactDetails = ({ classes, setEmail, setPhone, email, phone }) => {
                 variant="outlined"
                 label="phone"
                 size="small"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
+                name="phone"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
                 fullWidth
               ></TextField>
+              <div className={classes.error}>{formik.errors.phone}</div>
             </Grid>
           </Grid>
         </Grid>
