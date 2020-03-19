@@ -165,6 +165,9 @@ const SelectionContainer = ({
                     onClick={handleContinue}
                     variant="contained"
                     color="primary"
+                    disabled={
+                      !Boolean(selectedSeats.length) && !Boolean(boardingPoint)
+                    }
                   >
                     Continue
                   </Button>
