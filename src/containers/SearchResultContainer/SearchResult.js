@@ -4,11 +4,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import { withStyles } from "@material-ui/core";
 import { Styles } from "./Styles";
-import Form from "./Form/Form";
 import ContentArea from "./ContentArea/ContentArea";
-import dummyResponse from "./dummyResponse";
-import { useDispatch } from "react-redux";
-import Constants from "../../redux/actionConstants";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 /**
@@ -20,31 +17,25 @@ import { useHistory } from "react-router-dom";
 
 function SearchResult(props) {
   let { classes } = props;
-  let data = {
-    from: "Guwahati",
-    to: "Tinsukia",
-    noOfBuses: 0,
-    noOfPassengers: 1,
-    date: new Date().toDateString()
-  };
+  let { to: toCity, from: fromCity, date } = useSelector(state => state.search);
+
   let [response, setResponse] = useState([]);
-  let dispatch = useDispatch();
-  //   let history = useHistory();
+  let busSearchData = useSelector(state => state.busSearchData);
+  let history = useHistory();
+  let data = {
+    from: fromCity,
+    to: toCity,
+    noOfBuses: busSearchData.length || 0,
+    date: date
+  };
 
   useEffect(() => {
-    // if (history.action === "POP") {
-    //   history.push("/");
-    // }
-    dispatch({
-      type: Constants.SET_SEARCH,
-      payload: {
-        from: data.from,
-        to: data.to,
-        date: data.date
-      }
-    });
-    setResponse(dummyResponse);
-  }, []);
+    if (history.action === "POP") {
+      history.push("/");
+    }
+    setResponse(busSearchData);
+  }, [busSearchData]);
+
   return (
     <div className={classes.gridstyle}>
       <NavBar />
