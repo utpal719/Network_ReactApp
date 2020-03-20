@@ -6,6 +6,7 @@ import rootReducer from "./redux/rootReducer";
 import routes from "./routes";
 import TourismPage from "./containers/TourismPageContainer/TourismPage";
 import guide from "./pdf/NetworkTravel.pdf";
+import Preloader from "./components/Preloader/Preloader";
 
 let store = createStore(rootReducer);
 
@@ -15,13 +16,23 @@ function App() {
       <div className="App">
         <Router>
           <Switch>
-            {routes.map(({ exact, path, component: Component }) => (
-              <Route
-                path={path}
-                exact={exact}
-                render={props => <Component {...props} />}
-              ></Route>
-            ))}
+            {routes.map(
+              ({ exact, path, component: Component, wrapPreloader }) => (
+                <Route
+                  path={path}
+                  exact={exact}
+                  render={props => (
+                    <>
+                      {wrapPreloader ? (
+                        <Preloader {...props} Component={Component} />
+                      ) : (
+                        <Component {...props} />
+                      )}
+                    </>
+                  )}
+                ></Route>
+              )
+            )}
           </Switch>
         </Router>
       </div>

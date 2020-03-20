@@ -1,29 +1,41 @@
 import React from "react";
 import { TextField, Button, withStyles, Grid, Paper } from "@material-ui/core";
-import { Formik } from "formik";
 import { Styles } from "./Styles";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { register } from "../../apis/users";
 
-function validateEmail(value) {
-  let error;
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value.email)) {
-    error = "Invalid email address";
-  }
-  return error;
-}
-
-function validateContact(value) {
-  let error;
-  console.log("inside contact validation");
-  if (!/^\d{10}$/i.test(value.contact)) {
-    error = "Mobile Number should contain 0-9";
-  }
-  return error;
-}
+let validationSchema = Yup.object({
+  userName: Yup.string().required("Please enter a username"),
+  name: Yup.string().required("Please enter your name"),
+  email: Yup.string()
+    .email("Please enter a valid email")
+    .required("Please enter your email"),
+  password: Yup.string()
+    .min(8, "Password must be atleast 8 characters long")
+    .required("Please enter a password"),
+  mobile: Yup.string()
+    .matches(/^([0]|\+91)?[789]\d{9}$/, "Please enter a valid phone number")
+    .required()
+});
 
 const Register = props => {
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
+  let { values, errors, touched, handleSubmit, handleChange } = useFormik({
+    initialValues: {
+      userName: "",
+      password: "",
+      email: "",
+      mobile: "",
+      name: ""
+    },
+    validationSchema,
+    onSubmit: function(values) {
+      (async () => {
+        let data = await register(values);
+        console.log(data);
+      })();
+    }
+  });
 
   const { classes } = props;
 
@@ -31,86 +43,94 @@ const Register = props => {
     <Grid container className={classes.container}>
       <Grid item xs={4} className={classes.gridstyle}>
         <Paper className={classes.paper}>
-          <Formik
-            initialValues={{
-              email: "",
-              contact: ""
-            }}
-          >
-            {({ errors, touched, isValidating }) => (
-              <form onSubmit={handleSubmit} className={classes.formstyle}>
-                <Grid container direction="row" spacing={2}>
-                  <Grid item xs={12}>
-                    <TextField
-                      size="small"
-                      type="text"
-                      label="Full Name"
-                      variant="outlined"
-                      className={classes.textfield}
-                      required
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      size="small"
-                      type="email"
-                      name="email"
-                      label="Email"
-                      variant="outlined"
-                      validate={validateEmail}
-                      className={classes.textfield}
-                      required
-                    ></TextField>
-                    {errors.email && touched.email && <div>{errors.email}</div>}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      size="small"
-                      type="text"
-                      name="contact"
-                      label="Mobile Number"
-                      variant="outlined"
-                      validate={validateContact}
-                      className={classes.textfield}
-                      required
-                    ></TextField>
-                    {errors.contact && touched.contact && (
-                      <div>{errors.contact}</div>
-                    )}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      size="small"
-                      type="text"
-                      label="User Name"
-                      variant="outlined"
-                      className={classes.textfield}
-                      required
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextField
-                      size="small"
-                      type="password"
-                      label="Password"
-                      variant="outlined"
-                      className={classes.textfield}
-                      required
-                    ></TextField>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      type="Submit"
-                      label="Register"
-                      className={classes.button}
-                    >
-                      REGISTER NOW
-                    </Button>
-                  </Grid>
-                </Grid>
-              </form>
-            )}
-          </Formik>
+          <form onSubmit={handleSubmit} className={classes.formstyle}>
+            <Grid container direction="row" spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="text"
+                  label="Full Name"
+                  name="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  variant="outlined"
+                  className={classes.textfield}
+                ></TextField>
+                {errors.name && touched.name && (
+                  <div className="error">{errors.name}</div>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="text"
+                  name="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={handleChange}
+                  variant="outlined"
+                  className={classes.textfield}
+                ></TextField>
+                {errors.email && touched.email && (
+                  <div className="error">{errors.email}</div>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="text"
+                  name="mobile"
+                  value={values.mobile}
+                  onChange={handleChange}
+                  label="Mobile Number"
+                  variant="outlined"
+                  className={classes.textfield}
+                ></TextField>
+                {errors.mobile && touched.mobile && (
+                  <div className="error">{errors.mobile}</div>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="text"
+                  label="User Name"
+                  name="userName"
+                  value={values.userName}
+                  onChange={handleChange}
+                  variant="outlined"
+                  className={classes.textfield}
+                ></TextField>
+                {errors.userName && touched.userName && (
+                  <div className="error">{errors.userName}</div>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  size="small"
+                  type="password"
+                  label="Password"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  variant="outlined"
+                  className={classes.textfield}
+                ></TextField>
+                {errors.password && touched.password && (
+                  <div className="error">{errors.password}</div>
+                )}
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="Submit"
+                  label="Register"
+                  className={classes.button}
+                >
+                  REGISTER NOW
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
         </Paper>
       </Grid>
     </Grid>

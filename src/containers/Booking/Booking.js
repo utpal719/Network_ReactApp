@@ -63,7 +63,7 @@ const Booking = ({ classes }) => {
     },
     validationSchema,
     validateOnBlur: false,
-    validateOnChange: false,
+    validateOnChange: true,
     onSubmit: values => console.log(values)
   });
   /**

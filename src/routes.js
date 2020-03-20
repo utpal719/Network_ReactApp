@@ -13,18 +13,68 @@ import SeatSelection from "./containers/SeatSelection/SeatSelection";
 import Booking from "./containers/Booking/Booking";
 
 export default [
-  { path: "/", exact: true, component: HomePage },
-  { path: "/home", exact: true, component: HomePage },
-  { path: "/login", exact: true, component: LoginPage },
-  { path: "/register", exact: true, component: RegisterPage },
-  { path: "/contact", exact: true, component: ContactPage },
-  { path: "/printticket", exact: true, component: PrintTicketPage },
-  { path: "/cancelticket", exact: true, component: CancellationPage },
-  { path: "/termsandconditions", exact: true, component: TandCPage },
-  { path: "/refundpolicy", exact: true, component: RefundPolicyPage },
-  { path: "/aboutus", exact: true, component: AboutUsPage },
-  { path: "/searchresult", exact: true, component: SearchResult },
-  { path: "/privacypolicy", exact: true, component: PrivacyPolicyPage },
-  { path: "/seatselection", exact: true, component: SeatSelection },
-  { path: "/booking", exact: true, component: Booking }
+  { path: "/", exact: true, component: HomePage, wrapPreloader: false },
+  { path: "/home", exact: true, component: HomePage, wrapPreloader: false },
+  { path: "/login", exact: true, component: LoginPage, wrapPreloader: false },
+  {
+    path: "/register",
+    exact: true,
+    component: RegisterPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/contact",
+    exact: true,
+    component: ContactPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/printticket",
+    exact: true,
+    component: PrintTicketPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/cancelticket",
+    exact: true,
+    component: CancellationPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/termsandconditions",
+    exact: true,
+    component: TandCPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/refundpolicy",
+    exact: true,
+    component: RefundPolicyPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/aboutus",
+    exact: true,
+    component: AboutUsPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/searchresult",
+    exact: true,
+    component: SearchResult,
+    wrapPreloader: true
+  },
+  {
+    path: "/privacypolicy",
+    exact: true,
+    component: PrivacyPolicyPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/seatselection",
+    exact: true,
+    component: SeatSelection,
+    wrapPreloader: false
+  },
+  { path: "/booking", exact: true, component: Booking, wrapPreloader: false }
 ];

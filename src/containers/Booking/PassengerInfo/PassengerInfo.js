@@ -66,7 +66,7 @@ const PassengerInfo = ({
                     formik.handleChange(e);
                   }}
                 ></TextField>
-                <div className={classes.error}>
+                <div className="error">
                   {formik.errors.passengers && formik.errors.passengers[index]
                     ? formik.errors.passengers[index].name
                     : ""}
@@ -117,7 +117,7 @@ const PassengerInfo = ({
                     labelPlacement="end"
                   />
                 </RadioGroup>
-                <div className={classes.error}>
+                <div className="error">
                   {formik.errors.passengers && formik.errors.passengers[index]
                     ? formik.errors.passengers[index].gender
                     : ""}
@@ -144,7 +144,7 @@ const PassengerInfo = ({
                     formik.handleChange(e);
                   }}
                 ></TextField>
-                <div className={classes.error}>
+                <div className="error">
                   {formik.errors.passengers && formik.errors.passengers[index]
                     ? formik.errors.passengers[index].age
                     : ""}
