@@ -20,9 +20,9 @@ const SelectionContainer = ({
   handleSelect,
   handleBoardingPoint,
   selectedSeats,
-  totalFare
+  totalFare,
+  stopLoading
 }) => {
-  let [busData, setBusData] = useState({});
   let dispatch = useDispatch();
   let history = useHistory();
   let searchData = useSelector(state => state.search);
@@ -49,6 +49,7 @@ const SelectionContainer = ({
         }
         setOccupiedSeats(data.occupiedSeat);
       }
+      stopLoading();
     })();
   }, []);
 

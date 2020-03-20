@@ -34,23 +34,23 @@ const Form = props => {
         date: selectedDate.toDateString()
       }
     });
-    /**
-     * Get all buses
-     */
-    (async () => {
-      let data = await getBuses({
-        fromCity: fromCity.cityname,
-        toCity: toCity.cityname,
-        journeyDate: moment(selectedDate).format("M d,YYYY")
-      });
+    // /**
+    //  * Get all buses
+    //  */
+    // (async () => {
+    //   let data = await getBuses({
+    //     fromCity: fromCity.cityname,
+    //     toCity: toCity.cityname,
+    //     journeyDate: moment(selectedDate).format("M d,YYYY")
+    //   });
 
-      dispatch({
-        type: Constants.SET_BUS_SEARCH_DATA,
-        payload: { busData: data }
-      });
-
-      history.push("/searchresult");
-    })();
+    //   dispatch({
+    //     type: Constants.SET_BUS_SEARCH_DATA,
+    //     payload: { busData: data }
+    //   });
+    //   props.stopLoading();
+    history.push("/searchresult");
+    // })();
   };
 
   let handleSourceSelect = (e, value) => setSourceCity(value);
@@ -60,6 +60,7 @@ const Form = props => {
     axios.get(`${config.API_URL}/getAllCity`).then(res => {
       let city = res.data.data;
       setCityList(city);
+      props.stopLoading();
     });
   }, []);
 

@@ -7,6 +7,7 @@ import { Styles } from "./Styles";
 import SelectionHeader from "./SelectionHeader/SelectionHeader";
 import SelectionContainer from "./SelectionContainer/SelectionContainer";
 import { useHistory } from "react-router-dom";
+import Preloader from "../../components/Preloader/Preloader";
 
 const SeatSelection = ({ classes }) => {
   let { fare } = useSelector(state => state.bus);
@@ -32,11 +33,12 @@ const SeatSelection = ({ classes }) => {
       <NavBar />
       <SelectionHeader />
       {/**SelectionFormContainer */}
-      <SelectionContainer
+      <Preloader
         handleSelect={handleSelect}
         selectedSeats={selectedSeats}
         handleBoardingPoint={handleBoardingPoint}
         totalFare={totalFare}
+        Component={SelectionContainer}
       />
       <Footer />
     </div>

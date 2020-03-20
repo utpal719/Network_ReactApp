@@ -13,7 +13,7 @@ code {
     monospace;
 }
 
-.drawing {
+/* .drawing {
   width: 100vw;
   height: 100vh;
   position: relative;
@@ -373,4 +373,12 @@ code {
       40px 40px 0px 0px #ffffff, -40px -40px 0px 0px #ffffff,
       40px -40px 0px 0px #ffffff, -40px 40px 0px 0px #ffffff;
   }
+}
+
+*/ .drawing {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 10000;
 }
