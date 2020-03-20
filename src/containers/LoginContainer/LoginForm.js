@@ -1,19 +1,32 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  TextField,
-  InputLabel,
-  Button,
-  withStyles,
-  Grid,
-  Paper
-} from "@material-ui/core";
+import { TextField, Button, withStyles, Grid, Paper } from "@material-ui/core";
 import { Styles } from "./Styles";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { authenticate } from "../../apis/users";
+
+let validationSchema = Yup.object({
+  userName: Yup.string().required("Please provide a username"),
+  password: Yup.string().required("Please provide your password")
+});
 
 const LoginForm = props => {
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
+  let { values, errors, handleSubmit, handleChange } = useFormik({
+    initialValues: {
+      userName: "",
+      password: ""
+    },
+    validationSchema,
+    validateOnChange: true,
+    validateOnBlur: false,
+    onSubmit: function(values) {
+      (async () => {
+        let data = await authenticate(values);
+      })();
+    }
+  });
+
   const { classes } = props;
   return (
     <Grid container className={classes.container}>
@@ -27,9 +40,18 @@ const LoginForm = props => {
                   type="text"
                   label="User Name"
                   variant="outlined"
+                  name="userName"
+                  value={values.userName}
+                  onChange={handleChange}
                   className={classes.textfield}
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
+                  }}
                   required
                 ></TextField>
+                <div className="error">{errors.userName}</div>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -37,9 +59,18 @@ const LoginForm = props => {
                   type="password"
                   label="Password"
                   variant="outlined"
+                  name="password"
+                  value={values.password}
+                  onChange={handleChange}
                   className={classes.textfield}
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
+                  }}
                   required
                 ></TextField>
+                <div className="error">{errors.password}</div>
               </Grid>
               <Grid item xs={12}>
                 <Button type="Submit" label="Log In" className={classes.button}>

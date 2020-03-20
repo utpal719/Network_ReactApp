@@ -39,7 +39,6 @@ function SearchResult(props) {
      * Get all buses
      */
     (async () => {
-      console.log(typeof date, date);
       let data = await getBuses({
         fromCity: fromCity,
         toCity: toCity,

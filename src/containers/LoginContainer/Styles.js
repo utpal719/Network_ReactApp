@@ -39,5 +39,8 @@ export const Styles = () => ({
   navlinked: {
     color: "#28a745",
     font: "status-bar"
+  },
+  inputBox: {
+    fontSize: "12px"
   }
 });

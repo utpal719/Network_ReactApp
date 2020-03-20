@@ -12,7 +12,6 @@ import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { useHistory } from "react-router-dom";
 import config from "../../config";
-import { getBuses } from "../../apis/buses";
 
 const Form = props => {
   const [cityList, setCityList] = useState([]);
@@ -34,23 +33,8 @@ const Form = props => {
         date: selectedDate.toDateString()
       }
     });
-    // /**
-    //  * Get all buses
-    //  */
-    // (async () => {
-    //   let data = await getBuses({
-    //     fromCity: fromCity.cityname,
-    //     toCity: toCity.cityname,
-    //     journeyDate: moment(selectedDate).format("M d,YYYY")
-    //   });
 
-    //   dispatch({
-    //     type: Constants.SET_BUS_SEARCH_DATA,
-    //     payload: { busData: data }
-    //   });
-    //   props.stopLoading();
     history.push("/searchresult");
-    // })();
   };
 
   let handleSourceSelect = (e, value) => setSourceCity(value);

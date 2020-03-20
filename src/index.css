@@ -14,6 +14,6 @@ code {
 }
 
 .error {
-  color: "tomato";
+  color: tomato;
   font-size: 12px
 }
