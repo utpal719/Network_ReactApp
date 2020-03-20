@@ -32,9 +32,5 @@ export const Styles = () => ({
   },
   inputLabel: {
     lineHeight: "1.80"
-  },
-  error: {
-    color: "tomato",
-    fontSize: "12px"
   }
 });

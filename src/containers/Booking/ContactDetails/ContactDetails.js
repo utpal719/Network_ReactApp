@@ -37,7 +37,7 @@ const ContactDetails = ({ classes, formik }) => {
                 onChange={formik.handleChange}
                 fullWidth
               ></TextField>
-              <div className={classes.error}>{formik.errors.email}</div>
+              <div className="error">{formik.errors.email}</div>
             </Grid>
           </Grid>
         </Grid>
@@ -53,7 +53,7 @@ const ContactDetails = ({ classes, formik }) => {
                 onChange={formik.handleChange}
                 fullWidth
               ></TextField>
-              <div className={classes.error}>{formik.errors.phone}</div>
+              <div className="error">{formik.errors.phone}</div>
             </Grid>
           </Grid>
         </Grid>
