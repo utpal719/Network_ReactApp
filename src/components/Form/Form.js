@@ -7,11 +7,11 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
-import moment from "moment";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { useHistory } from "react-router-dom";
 import config from "../../config";
+import { formatDate } from "../../utilities/Functions";
 
 const Form = props => {
   const [cityList, setCityList] = useState([]);
@@ -30,7 +30,7 @@ const Form = props => {
       payload: {
         from: fromCity.cityname,
         to: toCity.cityname,
-        date: selectedDate.toDateString()
+        date: formatDate(selectedDate)
       }
     });
 
@@ -103,7 +103,7 @@ const Form = props => {
                   selected={selectedDate}
                   onChange={date => setSelectedDate(date)}
                   showMonthDropdown
-                  dateFormat="MMMM d, yyyy "
+                  dateFormat="MMM d, yyyy"
                   minDate={new Date()}
                   className={classes.inputdate}
                 />

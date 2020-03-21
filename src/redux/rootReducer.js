@@ -10,7 +10,7 @@ let initialState = {
     busId: "",
     midId: "",
     startTime: "",
-    endtime: "",
+    endTime: "",
     seats: ""
   },
   bookingInfo: {
@@ -26,6 +26,7 @@ let initialState = {
 
 export default function(state = initialState, action) {
   let { payload } = action;
+
   switch (action.type) {
     case Constants.SET_SEARCH:
       return {
@@ -45,7 +46,7 @@ export default function(state = initialState, action) {
           busId: payload.busId,
           midId: payload.midId,
           startTime: payload.startTime,
-          endtime: payload.endtime,
+          endTime: payload.endTime,
           seatCapacity: payload.seatCapacity,
           fare: payload.fare
         }
