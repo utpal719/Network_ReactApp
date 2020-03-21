@@ -18,7 +18,7 @@ const SelectionHeader = ({ classes }) => {
         <Grid item xs={12} md={10}>
           <Paper elevation={2} className={classes.section}>
             <Grid container direction="row" spacing={2}>
-              <Grid item xs={12} sm={2}>
+              <Grid item xs={12} sm={2} style={{ textAlign: "center" }}>
                 <img src={avatar} alt="avatar" className={classes.avatar}></img>
                 <Typography variant="subtitle2">Network travels</Typography>
               </Grid>
