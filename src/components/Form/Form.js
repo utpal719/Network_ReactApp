@@ -54,6 +54,7 @@ const Form = props => {
                       {...params}
                       label="Select city name"
                       variant="outlined"
+                      data-testid="fromInput"
                       className={classes.inputbox}
                     />
                   )}
@@ -69,6 +70,7 @@ const Form = props => {
                       {...params}
                       label="Select city name"
                       variant="outlined"
+                      data-testid="toInput"
                       className={classes.inputbox}
                     />
                   )}

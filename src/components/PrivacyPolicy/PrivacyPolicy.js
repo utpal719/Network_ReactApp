@@ -6,7 +6,7 @@ const PrivacyPolicy = props => {
   return (
     <div className={classes.container}>
       <Typography variant="h4" align="center">
-        Privacy Policy
+        Privacy Policies
       </Typography>
       <div className={classes.typo}></div>
       <br />
@@ -39,14 +39,14 @@ const PrivacyPolicy = props => {
         Our privacy policy is subject to change at any time without notice. To
         make sure you are aware of any changes, please review this policy
         periodically. By visiting this Website you agree to be bound by the
-        terms and conditions of this Privacy Policy. If you do not agree please
+        terms and conditions of this privacy policy. If you do not agree please
         do not use or access our Website.
       </Typography>
       <br />
       <Typography variant="h7" display="block" align="center">
         By using the Website and/or by providing your information, you consent
         to the collection and use of the information you disclose on the Website
-        in accordance with this Privacy Policy, including but not limited to
+        in accordance with this privacy policy, including but not limited to
         your consent for sharing your information as per this privacy policy. If
         we decide to change our privacy policy, we will post those changes on
         this page so that you are always aware of what information we collect,
