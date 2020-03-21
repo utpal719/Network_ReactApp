@@ -42,7 +42,7 @@ function SearchResult(props) {
       let data = await getBuses({
         fromCity: fromCity,
         toCity: toCity,
-        journeyDate: moment(date).format("M d,YYYY")
+        journeyDate: date
       });
       dispatch({
         type: Constants.SET_BUS_SEARCH_DATA,

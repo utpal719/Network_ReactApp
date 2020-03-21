@@ -24,7 +24,7 @@ export const Styles = () => ({
     height: "100%",
     color: "grey",
     borderStyle: "rounded",
-    borderRadius: "1px",
+    borderRadius: "5px",
     borderColor: "grey",
     borderWidth: "1px"
   },
@@ -34,8 +34,8 @@ export const Styles = () => ({
     height: "40px",
     color: "grey",
     borderStyle: "rounded",
-    borderRadius: "1px",
-    borderColor: "grey",
+    borderRadius: "5px",
+    borderColor: "#edd31c",
     borderWidth: "1px"
   },
   bg: {
@@ -43,8 +43,11 @@ export const Styles = () => ({
     padding: "140px"
   },
   button: {
-    color: "white",
-    backgroundColor: "#d9534f"
+    color: "black",
+    backgroundColor: "#edd31c",
+    "&:hover": {
+      backgroundColor: "#edd31c"
+    }
   },
   imgstyle: {
     width: "10%",
