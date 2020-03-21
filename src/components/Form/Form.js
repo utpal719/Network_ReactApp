@@ -55,6 +55,7 @@ const Form = props => {
         spacing={2}
         direction="column"
         className={classes.gridstyle}
+        style={{ marginTop: 10 }}
       >
         <Grid item xs={12}>
           <h3>Online Bus Ticket Booking</h3>
