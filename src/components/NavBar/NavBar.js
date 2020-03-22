@@ -1,12 +1,72 @@
 import React from "react";
-import { AppBar, Toolbar, Button } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Chip,
+  Avatar,
+  Popper,
+  MenuList,
+  Grow,
+  Paper,
+  MenuItem,
+  ClickAwayListener
+} from "@material-ui/core";
+import { AccountCircle, ArrowDropDown } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import logo from "./logo1.png";
+import actionConstants from "../../redux/actionConstants";
 
 const NavBar = props => {
   const { classes } = props;
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+  let userInfo = useSelector(state => state.user);
+  let dispatch = useDispatch();
+  let history = useHistory();
+
+  const handleToggle = () => {
+    setOpen(prevOpen => !prevOpen);
+  };
+
+  const handleClose = event => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleLogout = event => {
+    handleClose(event);
+    localStorage.removeItem("ntToken");
+    dispatch({ type: actionConstants.SET_USER_INFO, payload: { token: null } });
+    history.push("/");
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (
+      prevOpen.current === true &&
+      open === false &&
+      anchorRef.current != null
+    ) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
   return (
     <AppBar>
       <Toolbar className={classes.navbar}>
@@ -48,12 +108,63 @@ const NavBar = props => {
             REPORTS
           </Button>
         </NavLink>
+        {/** If user is logged in, hide Login button and show a menu item instead */}
+        {!userInfo.loggedIn ? (
+          <NavLink to="/login" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              LOGIN
+            </Button>
+          </NavLink>
+        ) : (
+          <div>
+            <Chip
+              ref={anchorRef}
+              aria-controls={open ? "menu-list-grow" : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+              avatar={
+                <Avatar>
+                  <AccountCircle fontSize="24px" />
+                </Avatar>
+              }
+              label={userInfo.username}
+              clickable
+              color="default"
+              deleteIcon={<ArrowDropDown />}
+            />
 
-        <NavLink to="/login" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            LOGIN
-          </Button>
-        </NavLink>
+            <Popper
+              open={open}
+              anchorEl={anchorRef.current}
+              role={undefined}
+              transition
+              disablePortal
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin:
+                      placement === "bottom" ? "center top" : "center bottom"
+                  }}
+                >
+                  <Paper>
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <MenuList
+                        autoFocusItem={open}
+                        id="menu-list-grow"
+                        onKeyDown={handleListKeyDown}
+                      >
+                        <MenuItem onClick={handleClose}>My tours</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          </div>
+        )}
       </Toolbar>
     </AppBar>
   );

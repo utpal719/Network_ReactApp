@@ -1,11 +1,10 @@
-import Axios from "axios";
-import config from "../../config";
+import Axios from "../axios.global";
 
 export const getBusDetailsById = async payload => {
   try {
     let {
       data: { data }
-    } = await Axios.post(`${config.API_URL}/getBusDetailsById`, payload);
+    } = await Axios.post(`/getBusDetailsById`, payload);
     return data;
   } catch (err) {
     return {};
@@ -16,7 +15,7 @@ export const getBuses = async payload => {
   try {
     let {
       data: { data }
-    } = await Axios.post(`${config.API_URL}/getBuses`, payload);
+    } = await Axios.post(`/getBuses`, payload);
     return data;
   } catch (err) {
     return [];

@@ -13,12 +13,10 @@ const HomePage = props => {
   const { classes } = props;
   return (
     <div className={classes.container}>
-      <NavBar />
       <Preloader Component={Form} />
       <FloatingBanner />
       <CaraouselBanner />
       <TopDestinationBanner />
-      <Footer />
     </div>
   );
 };

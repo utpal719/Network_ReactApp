@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 
 const Preloader = props => {
@@ -6,6 +6,12 @@ const Preloader = props => {
 
   let startLoading = _ => setLoading(true);
   let stopLoading = _ => setLoading(false);
+
+  useEffect(() => {
+    if (props.defaultLoading === false) {
+      stopLoading();
+    }
+  }, [props.defaultLoading]);
 
   return (
     <>
@@ -21,11 +27,10 @@ const Preloader = props => {
           </div>
         </div>
       )}
-
       <props.Component
+        {...props}
         startLoading={startLoading}
         stopLoading={stopLoading}
-        {...props}
       ></props.Component>
     </>
   );

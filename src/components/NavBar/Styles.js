@@ -10,9 +10,9 @@ export const Styles = () => ({
   },
   button: {
     fontSize: "15px",
-    size: "lg",
+    // size: "lg",
     padding: 20,
-    fontWeight: "600",
-    color: "black"
+    fontWeight: "300",
+    color: "#333"
   }
 });

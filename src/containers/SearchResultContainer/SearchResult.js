@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BookingTitle from "./BookingTitle/BookingTitle";
-import NavBar from "../../components/NavBar/NavBar";
-import Footer from "../../components/Footer/Footer";
 import { withStyles } from "@material-ui/core";
 import { Styles } from "./Styles";
 import ContentArea from "./ContentArea/ContentArea";
@@ -34,6 +32,7 @@ function SearchResult(props) {
   useEffect(() => {
     if (history.action === "POP") {
       history.push("/");
+      return;
     }
     /**
      * Get all buses
@@ -56,10 +55,8 @@ function SearchResult(props) {
 
   return (
     <div className={classes.gridstyle}>
-      <NavBar />
       <BookingTitle data={data} />
       <ContentArea response={response} data={data} />
-      <Footer />
     </div>
   );
 }

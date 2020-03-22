@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import NavBar from "../../components/NavBar/NavBar";
-import Footer from "../../components/Footer/Footer";
 import { withStyles } from "@material-ui/core";
 import { Styles } from "./Styles";
 import SelectionHeader from "./SelectionHeader/SelectionHeader";
@@ -30,7 +28,6 @@ const SeatSelection = ({ classes }) => {
 
   return (
     <div className={classes.gridstyle}>
-      <NavBar />
       <SelectionHeader />
       {/**SelectionFormContainer */}
       <Preloader
@@ -40,7 +37,6 @@ const SeatSelection = ({ classes }) => {
         totalFare={totalFare}
         Component={SelectionContainer}
       />
-      <Footer />
     </div>
   );
 };

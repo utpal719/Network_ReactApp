@@ -1,11 +1,8 @@
-import Axios from "axios";
-import config from "../../config";
+import Axios from "../axios.global";
 
 export const authenticate = async function({ userName, password }) {
   try {
-    let {
-      data: { data }
-    } = await Axios.post(`${config.API_URL}/authenticate`, {
+    let data = await Axios.post(`/authenticate`, {
       userName,
       password
     });
@@ -20,7 +17,7 @@ export const register = async function(payload) {
   try {
     let {
       data: { data }
-    } = await Axios.post(`${config.API_URL}/registerUser`, payload);
+    } = await Axios.post(`/registerUser`, payload);
     return data;
   } catch (err) {
     console.log(err);

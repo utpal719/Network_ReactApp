@@ -4,6 +4,7 @@ import { Styles } from "./Styles";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { register } from "../../apis/users";
+import { useHistory } from "react-router-dom";
 
 let validationSchema = Yup.object({
   userName: Yup.string().required("Please enter a username"),
@@ -20,6 +21,7 @@ let validationSchema = Yup.object({
 });
 
 const Register = props => {
+  let history = useHistory();
   let { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: {
       userName: "",
@@ -30,9 +32,12 @@ const Register = props => {
     },
     validationSchema,
     onSubmit: function(values) {
+      props.startLoading();
       (async () => {
         let data = await register(values);
         console.log(data);
+        props.stopLoading();
+        history.push("/login");
       })();
     }
   });
