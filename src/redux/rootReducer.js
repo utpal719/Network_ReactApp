@@ -1,28 +1,5 @@
 import Constants from "./actionConstants";
-
-let initialState = {
-  search: {
-    to: "",
-    from: "",
-    date: ""
-  },
-  bus: {
-    busId: "",
-    midId: "",
-    startTime: "",
-    endtime: "",
-    seats: ""
-  },
-  bookingInfo: {
-    fare: 0,
-    passengerDetails: [{ name: "", gender: "", age: "" }],
-    email: "",
-    mobile: "",
-    totalPayable: 0,
-    seats: []
-  },
-  busSearchData: []
-};
+import { initialState, decodeToken } from "./store";
 
 export default function(state = initialState, action) {
   let { payload } = action;
@@ -73,6 +50,18 @@ export default function(state = initialState, action) {
     }
     case Constants.SET_BUS_SEARCH_DATA: {
       return { ...state, busSearchData: payload.busData };
+    }
+    case Constants.SET_USER_INFO: {
+      let decoded = decodeToken(payload.token);
+      return {
+        ...state,
+        user: {
+          loggedIn: decoded.get("loggedIn") ? true : false,
+          role: decoded.get("role"),
+          username: decoded.get("userName"),
+          token: decoded.get("token")
+        }
+      };
     }
     default:
       return state;

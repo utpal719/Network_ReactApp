@@ -15,12 +15,17 @@ import Booking from "./containers/Booking/Booking";
 export default [
   { path: "/", exact: true, component: HomePage, wrapPreloader: false },
   { path: "/home", exact: true, component: HomePage, wrapPreloader: false },
-  { path: "/login", exact: true, component: LoginPage, wrapPreloader: false },
+  {
+    path: "/login",
+    exact: true,
+    component: LoginPage,
+    wrapPreloader: true,
+    defaultLoading: false
+  },
   {
     path: "/register",
     exact: true,
-    component: RegisterPage,
-    wrapPreloader: false
+    component: RegisterPage
   },
   {
     path: "/contact",

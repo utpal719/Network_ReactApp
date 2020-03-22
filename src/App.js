@@ -7,24 +7,39 @@ import routes from "./routes";
 import TourismPage from "./containers/TourismPageContainer/TourismPage";
 import guide from "./pdf/NetworkTravel.pdf";
 import Preloader from "./components/Preloader/Preloader";
-
+import jwt from "jsonwebtoken";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
 let store = createStore(rootReducer);
 
 function App() {
+  console.log(jwt.decode(localStorage.getItem("ntToken"), "nwt_techv"));
   return (
     <Provider store={store}>
       <div className="App">
         <Router>
+          <NavBar />
           <Switch>
             {routes.map(
-              ({ exact, path, component: Component, wrapPreloader }) => (
+              ({
+                exact,
+                path,
+                component: Component,
+                wrapPreloader = false,
+                defaultLoading = true
+              }) => (
                 <Route
+                  key={path}
                   path={path}
                   exact={exact}
                   render={props => (
                     <>
                       {wrapPreloader ? (
-                        <Preloader {...props} Component={Component} />
+                        <Preloader
+                          {...props}
+                          Component={Component}
+                          defaultLoading={defaultLoading}
+                        />
                       ) : (
                         <Component {...props} />
                       )}
@@ -34,6 +49,7 @@ function App() {
               )
             )}
           </Switch>
+          <Footer />
         </Router>
       </div>
     </Provider>

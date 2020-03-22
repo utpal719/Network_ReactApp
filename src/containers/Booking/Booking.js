@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Grid, withStyles, Typography, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Styles } from "./Styles";
-import NavBar from "../../components/NavBar/NavBar";
-import Footer from "../../components/Footer/Footer";
 import { AccountCircle, PermContactCalendar } from "@material-ui/icons";
 import PassengerInfo from "./PassengerInfo/PassengerInfo";
 import ContactDetails from "./ContactDetails/ContactDetails";
@@ -89,7 +87,6 @@ const Booking = ({ classes }) => {
   return (
     <div className={classes.gridstyle}>
       <form onSubmit={formik.handleSubmit}>
-        <NavBar />
         <Grid container justify="center" className={classes.sectionPadded}>
           <Grid item xs={12} md={10}>
             <Grid container direction="row" justify="center">
@@ -146,7 +143,6 @@ const Booking = ({ classes }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Footer />
       </form>
     </div>
   );
