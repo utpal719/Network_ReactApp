@@ -15,7 +15,7 @@ const SearchContent = ({ response, search }) => {
     busId,
     midId,
     startTime,
-    endtime,
+    endTime,
     seatCapacity,
     fare
   }) => {
@@ -25,7 +25,7 @@ const SearchContent = ({ response, search }) => {
         busId,
         midId,
         startTime,
-        endtime,
+        endTime,
         seatCapacity,
         fare
       }

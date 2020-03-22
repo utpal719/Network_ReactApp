@@ -1,17 +1,17 @@
 import moment from "moment";
 
 // FIXME: Use moment or react-moment.
-export const formatAMPM = date => {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
+export const formatAMPM = strTime => {
+  let strSplit = strTime.split(":");
+  let hours = strSplit[0];
   let ampm = hours >= 12 ? "PM" : "AM";
 
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? "0" + minutes : minutes;
+  const minutes = strSplit[1];
 
-  const strTime = `${hours}:${minutes} ${ampm}`;
-  return strTime;
+  const strAMAPMTime = `${hours}:${minutes} ${ampm}`;
+  return strAMAPMTime;
 };
 
 // FIXME: Use a localization library for formatting.
@@ -52,7 +52,7 @@ export const formatDate = (value, dateFormat) => {
   if (!value) {
     return "";
   }
-  return moment().format("MMM d, YYYY");
+  return moment(value).format("MM DD, YYYY");
 };
 
 export const getCurrentYear = () => {
