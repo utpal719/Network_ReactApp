@@ -52,7 +52,7 @@ export const formatDate = (value, dateFormat) => {
   if (!value) {
     return "";
   }
-  return moment(value).format("MM DD, YYYY");
+  return moment(value).format("MMM DD, YYYY");
 };
 
 export const getCurrentYear = () => {
