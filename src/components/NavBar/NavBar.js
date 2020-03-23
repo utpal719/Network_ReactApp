@@ -129,7 +129,7 @@ const NavBar = props => {
               }
               label={userInfo.username}
               clickable
-              color="default"
+              style={{ color: "black", backgroundColor: "white" }}
               deleteIcon={<ArrowDropDown />}
             />
 
@@ -155,7 +155,7 @@ const NavBar = props => {
                         id="menu-list-grow"
                         onKeyDown={handleListKeyDown}
                       >
-                        <MenuItem onClick={handleClose}>My tours</MenuItem>
+                        <MenuItem onClick={handleClose}>My Trips</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </MenuList>
                     </ClickAwayListener>
