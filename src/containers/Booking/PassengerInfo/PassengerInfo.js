@@ -51,16 +51,16 @@ const PassengerInfo = ({
                 <TextField
                   variant="outlined"
                   placeholder="Passenger Name"
-                  data-name="name"
+                  data-name="passengerName"
                   size="small"
-                  name={`passengers[${index}].name`}
-                  inputProps={{ "data-name": "name" }}
+                  name={`passengers[${index}].passengerName`}
+                  inputProps={{ "data-name": "passengerName" }}
                   InputProps={{
                     classes: {
                       input: classes.inputBox
                     }
                   }}
-                  value={formik.values.passengers[index].name}
+                  value={formik.values.passengers[index].passengerName}
                   onChange={e => {
                     handleDefaultValues(e);
                     formik.handleChange(e);
@@ -68,7 +68,7 @@ const PassengerInfo = ({
                 ></TextField>
                 <div className="error">
                   {formik.errors.passengers && formik.errors.passengers[index]
-                    ? formik.errors.passengers[index].name
+                    ? formik.errors.passengers[index].passengerName
                     : ""}
                 </div>
               </Grid>
@@ -131,6 +131,7 @@ const PassengerInfo = ({
                   placeholder="age"
                   variant="outlined"
                   size="small"
+                  type="number"
                   inputProps={{ "data-name": "age" }}
                   name={`passengers[${index}].age`}
                   value={formik.values.passengers[index].age}

@@ -1,3 +1,11 @@
-.MuiInputAdornment-root{
+.MuiInputAdornment-root {
     height: auto !important;
+}
+
+.form-error {
+    color: white !important;
+}
+
+.form-input-box {
+    padding: 0px !important
 }

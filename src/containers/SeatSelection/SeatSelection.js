@@ -10,11 +10,8 @@ import Preloader from "../../components/Preloader/Preloader";
 const SeatSelection = ({ classes }) => {
   let { fare } = useSelector(state => state.bus);
   let [selectedSeats, setSelected] = useState([]);
-  let [boardingPoint, setBoardingPoint] = useState("");
   let totalFare = selectedSeats.length * fare;
   let history = useHistory();
-
-  let handleBoardingPoint = boardingPoint => setBoardingPoint(boardingPoint);
 
   useEffect(() => {
     if (history.action === "POP") {
@@ -33,7 +30,7 @@ const SeatSelection = ({ classes }) => {
       <Preloader
         handleSelect={handleSelect}
         selectedSeats={selectedSeats}
-        handleBoardingPoint={handleBoardingPoint}
+        // handleBoardingPoint={handleBoardingPoint}
         totalFare={totalFare}
         Component={SelectionContainer}
       />

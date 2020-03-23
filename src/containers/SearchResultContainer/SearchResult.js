@@ -43,6 +43,7 @@ function SearchResult(props) {
         toCity: toCity,
         journeyDate: date
       });
+
       dispatch({
         type: Constants.SET_BUS_SEARCH_DATA,
         payload: { busData: data }

@@ -1,16 +1,18 @@
 import React from "react";
 import { withStyles, Typography, Grid, Paper } from "@material-ui/core";
 import { AccessTime, Weekend, ArrowRightAlt } from "@material-ui/icons";
-import { useSelector, useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { Styles } from "./Styles";
 import avatar from "./n1.png";
 import { formatAMPM } from "../../../utilities/Functions";
 
 const SelectionHeader = ({ classes }) => {
-  let { from, to, date } = useSelector(state => state.search);
+  let { from, to } = useSelector(state => state.search);
   let { startTime, endTime, seatCapacity, fare } = useSelector(
     state => state.bus
   );
+
+  console.log({ startTime, endTime, seatCapacity, fare });
 
   return (
     <div>
