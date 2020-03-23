@@ -77,7 +77,7 @@ const Booking = ({ classes }) => {
         mobile: values.phone,
         email: values.email,
         totalFare: fare,
-        noOfSeats: seats.length,
+        noOfSeat: seats.length,
         agentFare: "",
         toCity: searchInfo.to,
         fromCity: searchInfo.from,

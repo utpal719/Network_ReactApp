@@ -10,6 +10,7 @@ import Preloader from "./components/Preloader/Preloader";
 import jwt from "jsonwebtoken";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import ETicket from "./containers/ETicket/ETicket";
 let store = createStore(rootReducer);
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
+        {/* <ETicket /> */}
         <Router>
           <NavBar />
           <Switch>
