@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, withStyles, Typography, Button } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 import { Styles } from "./Styles";
 import { AccountCircle, PermContactCalendar } from "@material-ui/icons";
 import PassengerInfo from "./PassengerInfo/PassengerInfo";
@@ -8,6 +8,7 @@ import ContactDetails from "./ContactDetails/ContactDetails";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { book } from "../../apis/bookings";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -18,7 +19,7 @@ const validationSchema = Yup.object({
     .required(),
   passengers: Yup.array().of(
     Yup.object({
-      name: Yup.string().required("Please enter a name"),
+      passengerName: Yup.string().required("Please enter a name"),
       gender: Yup.string().required("Please provide your gender"),
       age: Yup.string().required("Please enter your age")
     })
@@ -30,10 +31,16 @@ const validationSchema = Yup.object({
  * @param {Object} props - props passed down the component tree
  */
 const Booking = ({ classes }) => {
-  let { seats, fare } = useSelector(state => state.bookingInfo);
+  /**get selected seats and total fare */
+  let { seats, fare, boardingPoint } = useSelector(state => state.bookingInfo);
+  /**get selected bus details */
+  let busDetails = useSelector(state => state.bus);
+  /**get search details */
+  let searchInfo = useSelector(state => state.search);
+
   let history = useHistory();
   let [defaultPassenger, setDefaultPassenger] = useState({
-    name: "",
+    passengerName: "",
     gender: "",
     age: ""
   });
@@ -47,7 +54,7 @@ const Booking = ({ classes }) => {
   let passengerArr = [];
   for (let i = 0; i < seats.length; i++) {
     passengerArr.push({
-      name: "",
+      passengerName: "",
       gender: "",
       age: ""
     });
@@ -62,7 +69,29 @@ const Booking = ({ classes }) => {
     validationSchema,
     validateOnBlur: false,
     validateOnChange: true,
-    onSubmit: values => console.log(values)
+    onSubmit: values => {
+      let bookingDetails = {
+        busId: busDetails.busId,
+        midId: busDetails.midId || 0,
+        journeyDate: searchInfo.date,
+        mobile: values.phone,
+        email: values.email,
+        totalFare: fare,
+        noOfSeats: seats.length,
+        agentFare: "",
+        toCity: searchInfo.to,
+        fromCity: searchInfo.from,
+        startTime: busDetails.startTime,
+        endTime: busDetails.endTime,
+        boardingPoint: boardingPoint,
+        passengerList: values.passengers,
+        selectedSeat: seats.join(",")
+      };
+      (async () => {
+        let data = await book(bookingDetails);
+        console.log(data);
+      })();
+    }
   });
   /**
    * Fill all passenger detail based on the input of the 1st passenger.
@@ -71,7 +100,10 @@ const Booking = ({ classes }) => {
   let prefiller = defaultPassenger => {
     setDefaultPassenger(defaultPassenger);
     for (let i = 1; i < seats.length; i++) {
-      formik.setFieldValue(`passengers[${i}].name`, defaultPassenger.name);
+      formik.setFieldValue(
+        `passengers[${i}].passengerName`,
+        defaultPassenger.passengerName
+      );
       formik.setFieldValue(`passengers[${i}].gender`, defaultPassenger.gender);
       formik.setFieldValue(`passengers[${i}].age`, defaultPassenger.age);
     }

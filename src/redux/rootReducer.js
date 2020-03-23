@@ -64,6 +64,15 @@ export default function(state = initialState, action) {
         }
       };
     }
+    case Constants.SET_BOARDING_POINT: {
+      return {
+        ...state,
+        bookingInfo: {
+          ...state.bookingInfo,
+          boardingPoint: payload.boardingPoint
+        }
+      };
+    }
     default:
       return state;
   }

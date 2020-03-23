@@ -35,7 +35,7 @@ export const initialState = {
     busId: "",
     midId: "",
     startTime: "",
-    endtime: "",
+    endTime: "",
     seats: ""
   },
   bookingInfo: {
@@ -44,7 +44,8 @@ export const initialState = {
     email: "",
     mobile: "",
     totalPayable: 0,
-    seats: []
+    seats: [],
+    boardingPoint: ""
   },
   busSearchData: []
 };

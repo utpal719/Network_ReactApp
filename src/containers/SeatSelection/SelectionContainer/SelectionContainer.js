@@ -18,7 +18,7 @@ import { getBusDetailsById } from "../../../apis/buses";
 const SelectionContainer = ({
   classes,
   handleSelect,
-  handleBoardingPoint,
+  //   handleBoardingPoint,
   selectedSeats,
   totalFare,
   stopLoading
@@ -56,7 +56,10 @@ const SelectionContainer = ({
   let handleBoardingSelect = e => {
     let boardingPoint = e.target.value;
     setBoardingPoint(boardingPoint);
-    handleBoardingPoint(boardingPoints[boardingPoint - 1]);
+    dispatch({
+      type: Actions.SET_BOARDING_POINT,
+      payload: { boardingPoint: boardingPoints[boardingPoint - 1] }
+    });
   };
 
   let handleContinue = () => {
