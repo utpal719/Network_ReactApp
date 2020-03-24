@@ -31,5 +31,11 @@ export const Styles = () => ({
   },
   appLinkImage: {
     width: "100%"
+  },
+  centeredHr: {
+    width: "100%",
+    height: "1px",
+    background: "#000",
+    margin : "auto"
   }
 });

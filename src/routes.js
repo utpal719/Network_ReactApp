@@ -11,6 +11,7 @@ import SearchResult from "./containers/SearchResultContainer/SearchResult";
 import PrivacyPolicyPage from "./containers/PrivacyPolicyPage/PrivacyPolicyPage";
 import SeatSelection from "./containers/SeatSelection/SeatSelection";
 import Booking from "./containers/Booking/Booking";
+import ETicket from "./containers/ETicket/ETicket";
 
 export default [
   { path: "/", exact: true, component: HomePage, wrapPreloader: false },
@@ -81,5 +82,6 @@ export default [
     component: SeatSelection,
     wrapPreloader: false
   },
-  { path: "/booking", exact: true, component: Booking, wrapPreloader: false }
+  { path: "/booking", exact: true, component: Booking, wrapPreloader: false },
+  { path: "/e-ticket", exact: true, component: ETicket, wrapPreloader: true }
 ];

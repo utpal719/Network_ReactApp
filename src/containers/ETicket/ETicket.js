@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   withStyles,
@@ -8,270 +8,257 @@ import {
   Chip,
   Avatar,
   Card,
-  CardContent
+  CardContent,
+  Box
 } from "@material-ui/core";
 import { Styles } from "./Styles";
+import logo from "./logo1.png";
 import {
   CheckCircle,
   ArrowForwardRounded,
   SupervisedUserCircle
 } from "@material-ui/icons";
+import PassengerDetails from "./PassengerDetails/PassengerDetails";
+import CancellationPolicy from "./CancellationPolicy/CancellationPolicy";
+import ImportantContacts from "./ImportantContacts/ImportantContacts";
+import { useHistory } from "react-router-dom";
+import { eTicket } from "../../apis/bookings";
 
-const ETicket = ({ classes }) => {
-  let email = "samdeka28@gmail.com";
-  let phone = "9706202403";
+const ETicket = props => {
+  let history = useHistory();
+  let [ticket, setTicket] = useState({});
+
+  let { classes } = props;
+
+  useEffect(() => {
+    let pnrNumber = history.location.state.pnrNumber;
+    (async () => {
+      let { data } = await eTicket({ pnrNumber });
+      setTicket(data);
+      props.stopLoading();
+    })();
+  }, []);
+
+  let handlePrint = _ => window.print();
   return (
-    <div className={classes.gridstyle}>
-      <Grid container justify="center">
-        <Grid item xs={12} md={6}>
-          {/**Top booking header */}
-          <Grid
-            container
-            direction="row"
-            className={classes.eticketContainer}
-            spacing={3}
-          >
-            <Grid item xs={6}>
-              <Typography variant="h6">E-Ticket</Typography>
-              <Typography variant="caption" color="textPrimary">
-                <strong>PNR :</strong> Pnr-1608825
-              </Typography>
-            </Grid>
-            <Grid item xs={3} className={classes.textCenter}>
-              <Typography variant="caption">Total Fare:</Typography>&nbsp;&nbsp;
-              <strong className={classes.totalFare}>&#8377;1920</strong>
-            </Grid>
-            <Grid item xs={3}>
-              <Button
-                variant="contained"
-                size="small"
-                style={{ background: "#4caf50", color: "#eee" }}
-                fullWidth
-              >
-                Print
-              </Button>
-            </Grid>
-            {/**Booking info container */}
-            <Grid item xs={12}>
-              <Paper elevation={2}>
-                <Grid
-                  container
-                  direction="row"
-                  spacing={2}
-                  className={classes.paddingTen}
-                >
-                  <Grid item xs={12}>
-                    <Chip
-                      avatar={
-                        <Avatar>
-                          <CheckCircle fontSize="24px" />
-                        </Avatar>
-                      }
-                      color="primary"
-                      label={`Your ticket has been sent to ${email} and ${phone}`}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="caption">
-                      Booking date : {new Date().toDateString()}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing="2" justify="space-around">
-                      <Grid item xs={5}>
-                        <Card elevation={3}>
-                          <CardContent>
-                            <Typography
-                              variant="caption"
-                              color="textSecondary"
-                              gutterBottom
-                            >
-                              From
-                            </Typography>
-                            <Typography variant="h6" color="textPrimary">
-                              <strong>Guwahati</strong>
-                            </Typography>
-                            <Typography variant="caption">
-                              <strong>Departing at : 10:30</strong>
-                            </Typography>
-                          </CardContent>
-                        </Card>
-                      </Grid>
-                      <Grid item xs={2} className={classes.flexed}>
-                        <Typography variant="h5" className={classes.marginAuto}>
-                          <ArrowForwardRounded />
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={5}>
-                        <Card elevation={3}>
-                          <CardContent>
-                            <Typography
-                              variant="caption"
-                              color="textSecondary"
-                              gutterBottom
-                            >
-                              To
-                            </Typography>
-                            <Typography variant="h6" color="textPrimary">
-                              <strong>Tinsukia</strong>
-                            </Typography>
-                            <Typography variant="caption">
-                              <strong>Arriving at : 17:30</strong>
-                            </Typography>
-                          </CardContent>
-                        </Card>
+    <>
+      <Box displayPrint="none">
+        <div className={classes.gridstyle} />
+      </Box>
+      <Box displayPrint="block">
+        <Grid container justify="center">
+          <Grid item xs={12} md={8}>
+            {/**Top booking header */}
+            <Grid
+              container
+              direction="row"
+              className={classes.eticketContainer}
+              spacing={3}
+            >
+              <Grid item xs={4}>
+                <Typography variant="h6">E-Ticket</Typography>
+                <Typography variant="caption" color="textPrimary">
+                  <strong>PNR :</strong> {ticket.pnrNumber}
+                </Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <img src={logo} alt="logo"></img>
+              </Grid>
+              {/* <Grid item xs={3} className={classes.textRight}>
+        <Typography variant="caption">Total Fare:</Typography>
+        &nbsp;&nbsp;
+        <strong className={classes.totalFare}>&#8377;1920</strong>
+      </Grid> */}
+              <Grid item xs={2}>
+                <Typography variant="caption">Total Fare:</Typography>
+                &nbsp;&nbsp;
+                <strong className={classes.totalFare}>
+                  &#8377;{ticket.totalFare}
+                </strong>
+                <Box displayPrint="none">
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{ background: "#4caf50", color: "#eee" }}
+                    fullWidth
+                    onClick={handlePrint}
+                  >
+                    Print
+                  </Button>
+                </Box>
+              </Grid>
+              {/**Booking info container */}
+              <Grid item xs={12}>
+                <Paper elevation={2}>
+                  <Grid
+                    container
+                    direction="row"
+                    spacing={2}
+                    className={classes.paddingTen}
+                  >
+                    {/**Top chip */}
+                    <Grid item xs={12}>
+                      <Chip
+                        avatar={
+                          <Avatar>
+                            <CheckCircle fontSize="24px" />
+                          </Avatar>
+                        }
+                        color="primary"
+                        label={`Your ticket has been sent to ${ticket.email} and ${ticket.mobile}`}
+                      />
+                    </Grid>
+                    {/**Booking date */}
+                    <Grid item xs={5}>
+                      <Typography variant="caption">
+                        <strong>Booking ID : {ticket.bookingId}</strong>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Typography
+                        variant="caption"
+                        className={classes.textRight}
+                      >
+                        <strong>Journey date : {ticket.journeyDate}</strong>
+                      </Typography>
+                    </Grid>
+                    {/**Time card */}
+                    <Grid item xs={12}>
+                      <Grid container spacing="2" justify="space-around">
+                        <Grid item xs={5}>
+                          <Card elevation={3}>
+                            <CardContent>
+                              <Typography
+                                variant="caption"
+                                color="textSecondary"
+                                gutterBottom
+                              >
+                                From
+                              </Typography>
+                              <Typography variant="h6" color="textPrimary">
+                                <strong>{ticket.fromCity}</strong>
+                              </Typography>
+                              <Typography variant="caption">
+                                <strong>
+                                  Departing at : {ticket.startTime}
+                                </strong>
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </Grid>
+                        <Grid item xs={2} className={classes.flexed}>
+                          <Typography
+                            variant="h5"
+                            className={classes.marginAuto}
+                          >
+                            <ArrowForwardRounded />
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={5}>
+                          <Card elevation={3}>
+                            <CardContent>
+                              <Typography
+                                variant="caption"
+                                color="textSecondary"
+                                gutterBottom
+                              >
+                                To
+                              </Typography>
+                              <Typography variant="h6" color="textPrimary">
+                                <strong>{ticket.toCity}</strong>
+                              </Typography>
+                              <Typography variant="caption">
+                                <strong>Arriving at : {ticket.endTime}</strong>
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Card elevation={3}>
-                      <CardContent>
-                        <Grid container>
-                          {/* <Grid item xs={1} className={classes.flexed}>
-                            <DepartureBoardRounded
-                              size="large"
-                              className={classes.marginAuto}
-                            />
-                          </Grid> */}
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2">
-                              <strong>ISBT Guwahati</strong>
-                            </Typography>
-                            <Typography variant="caption">
-                              Boarding Point
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2">
-                              <strong>10:00</strong>
-                            </Typography>
-                            <Typography variant="caption">
-                              Reporting Time
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={4}>
-                            <Typography variant="subtitle2">
-                              <strong>31, 26</strong>
-                            </Typography>
-                            <Typography variant="caption">
-                              Number of Seats : 2
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="h6" style={{ display: "flex" }}>
-                      <SupervisedUserCircle
-                        fontSize="large"
-                        color="secondary"
-                      />
-                      &nbsp;Passenger Details
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Paper elevation={3}>
-                      <Grid container direction="row" spacing={3}>
-                        <Grid item xs={12}>
+                    {/**Boarding details */}
+                    <Grid item xs={12}>
+                      <Card elevation={3}>
+                        <CardContent>
                           <Grid container>
-                            <Grid
-                              item
-                              md={2}
-                              xs={12}
-                              className={classes.seatDisplay}
-                            >
-                              <Typography
-                                variant="caption"
-                                // style={{ marginBottom: "20px" }}
-                              >
-                                <strong>Seat </strong>
-                                <Typography variant="subtitle2">
-                                  <strong>{32}</strong>
-                                </Typography>
+                            {/* <Grid item xs={1} className={classes.flexed}>
+                    <DepartureBoardRounded
+                      size="large"
+                      className={classes.marginAuto}
+                    />
+                  </Grid> */}
+                            <Grid item xs={4}>
+                              <Typography variant="subtitle2">
+                                <strong>{ticket.boardingPoint}</strong>
                               </Typography>
-                            </Grid>
-                            <Grid item md={3} xs={12}>
                               <Typography variant="caption">
-                                Passenger Name
-                              </Typography>
-                              <Typography variant="subtitle2">
-                                <strong>Samudra</strong>
+                                Boarding Point
                               </Typography>
                             </Grid>
-                            <Grid item md={3} xs={12}>
-                              <Typography variant="caption">Gender</Typography>
+                            <Grid item xs={4}>
                               <Typography variant="subtitle2">
-                                <strong>Male</strong>
+                                <strong>{ticket.reportingTime}</strong>
+                              </Typography>
+                              <Typography variant="caption">
+                                Reporting Time
                               </Typography>
                             </Grid>
-                            <Grid item md={3} xs={12}>
-                              <Typography variant="caption">Age</Typography>
+                            <Grid item xs={4}>
                               <Typography variant="subtitle2">
-                                <strong>27</strong>
+                                <strong>
+                                  {(ticket.passengerList || [])
+                                    .map(passenger => passenger.seatNumber)
+                                    .join(",")}
+                                </strong>
+                              </Typography>
+                              <Typography variant="caption">
+                                Number of Seats :{" "}
+                                {(ticket.passengerList || []).length}
                               </Typography>
                             </Grid>
                           </Grid>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                    {/**Passenger details header */}
+                    <Grid item xs={12}>
+                      <Typography variant="h6" style={{ display: "flex" }}>
+                        <SupervisedUserCircle
+                          fontSize="large"
+                          color="secondary"
+                        />
+                        &nbsp;Passenger Details
+                      </Typography>
+                    </Grid>
+                    {/**Passenger details */}
+                    <Grid item xs={12}>
+                      <Paper elevation={3}>
+                        <Grid container direction="row" spacing={3}>
+                          {(ticket.passengerList || []).map(passenger => (
+                            <PassengerDetails passenger={passenger} />
+                          ))}
                         </Grid>
-                        {/** */}
-                        <Grid item xs={12}>
-                          <Grid container>
-                            <Grid
-                              item
-                              md={2}
-                              xs={12}
-                              className={classes.seatDisplay}
-                            >
-                              <Typography
-                                variant="caption"
-                                // style={{ marginBottom: "20px" }}
-                              >
-                                <strong>Seat </strong>
-                                <Typography variant="subtitle2">
-                                  <strong>{32}</strong>
-                                </Typography>
-                              </Typography>
-                            </Grid>
-                            <Grid item md={3} xs={12}>
-                              <Typography variant="caption">
-                                Passenger Name
-                              </Typography>
-                              <Typography variant="subtitle2">
-                                <strong> Samudra</strong>
-                              </Typography>
-                            </Grid>
-                            <Grid item md={3} xs={12}>
-                              <Typography variant="caption">Gender</Typography>
-                              <Typography variant="subtitle2">
-                                <strong>Male</strong>
-                              </Typography>
-                            </Grid>
-                            <Grid item md={3} xs={12}>
-                              <Typography variant="caption">Age</Typography>
-                              <Typography variant="subtitle2">
-                                <strong>27</strong>
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
+                      </Paper>
+                    </Grid>
+                    {/**App link */}
+                    <Grid item xs={12}>
+                      <a href="http://techvariable.com" target="_blank">
+                        <img
+                          className={classes.appLinkImage}
+                          alt="appLink"
+                          src="http://www.techvariable.com/database/banner.png"
+                        />
+                      </a>
+                    </Grid>
                   </Grid>
-                  {/**App link */}
-                  <Grid item xs={12}>
-                    <img
-                      className={classes.appLinkImage}
-                      alt="app"
-                      src="http://www.techvariable.com/database/banner.png"
-                    ></img>
-                  </Grid>
-                </Grid>
-              </Paper>
+                  <CancellationPolicy />
+                  <ImportantContacts />
+                </Paper>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </Box>
+    </>
   );
 };
 

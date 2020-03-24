@@ -18,7 +18,6 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        {/* <ETicket /> */}
         <Router>
           <NavBar />
           <Switch>
