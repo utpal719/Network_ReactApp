@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Box } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
 import logo from "./../../images/footer.jpg";
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const Footer = props => {
   const { classes } = props;
   return (
-    <div>
+    <Box displayPrint="none">
       <Grid container className={classes.footer} spacing={2}>
         <Grid item xs={4} spacing={2} className={classes.gitem}>
           <Typography>
@@ -81,7 +81,7 @@ const Footer = props => {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 export default withStyles(Styles)(Footer);

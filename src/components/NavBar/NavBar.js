@@ -10,7 +10,8 @@ import {
   Grow,
   Paper,
   MenuItem,
-  ClickAwayListener
+  ClickAwayListener,
+  Box
 } from "@material-ui/core";
 import { AccountCircle, ArrowDropDown } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
@@ -19,6 +20,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "./logo1.png";
 import actionConstants from "../../redux/actionConstants";
+import { getMyTrips } from "../../apis/bookings";
 
 const NavBar = props => {
   const { classes } = props;
@@ -47,6 +49,14 @@ const NavBar = props => {
     history.push("/");
   };
 
+  const handleMyTrip = e => {
+    handleClose(e);
+    (async () => {
+      let data = await getMyTrips();
+      console.log(data);
+    })();
+  };
+
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -68,105 +78,113 @@ const NavBar = props => {
     prevOpen.current = open;
   }, [open]);
   return (
-    <AppBar>
-      <Toolbar className={classes.navbar}>
-        <NavLink to="/home" style={{ textDecoration: "none", marginLeft: 50 }}>
-          <img src={logo} alt="NETWORK" />
-        </NavLink>
-        <NavLink to="/home" style={{ textDecoration: "none", marginLeft: 50 }}>
-          <Button color="inherit" className={classes.button}>
-            HOME
-          </Button>
-        </NavLink>
-
-        <NavLink to="/tourism" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            TOURISM
-          </Button>
-        </NavLink>
-
-        <NavLink to="/cancelticket" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            CANCELLATION
-          </Button>
-        </NavLink>
-
-        <NavLink to="/printticket" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            PRINT/SMS TICKET
-          </Button>
-        </NavLink>
-
-        <NavLink to="/contact" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            CONTACT US
-          </Button>
-        </NavLink>
-
-        <NavLink to="/reports" style={{ textDecoration: "none" }}>
-          <Button color="inherit" className={classes.button}>
-            REPORTS
-          </Button>
-        </NavLink>
-        {/** If user is logged in, hide Login button and show a menu item instead */}
-        {!userInfo.loggedIn ? (
-          <NavLink to="/login" style={{ textDecoration: "none" }}>
+    <Box displayPrint="none">
+      <AppBar>
+        <Toolbar className={classes.navbar}>
+          <NavLink
+            to="/home"
+            style={{ textDecoration: "none", marginLeft: 50 }}
+          >
+            <img src={logo} alt="NETWORK" />
+          </NavLink>
+          <NavLink
+            to="/home"
+            style={{ textDecoration: "none", marginLeft: 50 }}
+          >
             <Button color="inherit" className={classes.button}>
-              LOGIN
+              HOME
             </Button>
           </NavLink>
-        ) : (
-          <div>
-            <Chip
-              ref={anchorRef}
-              aria-controls={open ? "menu-list-grow" : undefined}
-              aria-haspopup="true"
-              onClick={handleToggle}
-              avatar={
-                <Avatar>
-                  <AccountCircle fontSize="24px" />
-                </Avatar>
-              }
-              label={userInfo.username}
-              clickable
-              style={{ color: "black", backgroundColor: "white" }}
-              deleteIcon={<ArrowDropDown />}
-            />
 
-            <Popper
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              transition
-              disablePortal
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom"
-                  }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList
-                        autoFocusItem={open}
-                        id="menu-list-grow"
-                        onKeyDown={handleListKeyDown}
-                      >
-                        <MenuItem onClick={handleClose}>My Trips</MenuItem>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </div>
-        )}
-      </Toolbar>
-    </AppBar>
+          <NavLink to="/tourism" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              TOURISM
+            </Button>
+          </NavLink>
+
+          <NavLink to="/cancelticket" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              CANCELLATION
+            </Button>
+          </NavLink>
+
+          <NavLink to="/printticket" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              PRINT/SMS TICKET
+            </Button>
+          </NavLink>
+
+          <NavLink to="/contact" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              CONTACT US
+            </Button>
+          </NavLink>
+
+          <NavLink to="/reports" style={{ textDecoration: "none" }}>
+            <Button color="inherit" className={classes.button}>
+              REPORTS
+            </Button>
+          </NavLink>
+          {/** If user is logged in, hide Login button and show a menu item instead */}
+          {!userInfo.loggedIn ? (
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+              <Button color="inherit" className={classes.button}>
+                LOGIN
+              </Button>
+            </NavLink>
+          ) : (
+            <div>
+              <Chip
+                ref={anchorRef}
+                aria-controls={open ? "menu-list-grow" : undefined}
+                aria-haspopup="true"
+                onClick={handleToggle}
+                avatar={
+                  <Avatar>
+                    <AccountCircle fontSize="24px" />
+                  </Avatar>
+                }
+                label={userInfo.username}
+                clickable
+                style={{ color: "black", backgroundColor: "white" }}
+                deleteIcon={<ArrowDropDown />}
+              />
+
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                transition
+                disablePortal
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === "bottom" ? "center top" : "center bottom"
+                    }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id="menu-list-grow"
+                          onKeyDown={handleListKeyDown}
+                        >
+                          <MenuItem onClick={handleMyTrip}>My Trips</MenuItem>
+                          <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
+          )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 };
 export default withStyles(Styles)(NavBar);
