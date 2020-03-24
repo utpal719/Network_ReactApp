@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, withStyles, Divider } from "@material-ui/core";
 import { Styles } from "./Styles";
-import { NavLink } from "react-router-dom";
+import Pdf from "./../../pdf/NetworkTravel.pdf"
 import TopDestinationBanner from "../../components/TopDestinationBanner/TopDestinationBanner";
 import ContactForm from "../../components/ContactUs/ContactForm";
 import ContactCard from "./ContactCard";
@@ -20,11 +20,9 @@ const TourismPageLayout = props => {
         Myanmar
       </Typography>
       <br/>
-      <NavLink to="/travelguide" className={classes.navlink}>
       <Typography variant="h5" display="block" align="center">
-        Download our E-Brouchure
+         <a href = {Pdf} target = "_blank" className={classes.navlink}>Download our E-Brouchure</a>
       </Typography>
-      </NavLink>
       <br/>
       <TopDestinationBanner />
       <TopDestinationDetails />
