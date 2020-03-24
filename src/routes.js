@@ -1,6 +1,7 @@
 import HomePage from "./containers/HomePageContainer/HomePage";
 import LoginPage from "./containers/LoginContainer/LoginPage";
 import RegisterPage from "./containers/LoginContainer/RegisterPage";
+import TourismPage from "./containers/TourismPageContainer/TourismPage";
 import ContactPage from "./containers/ContactPageContainer/ContactPage";
 import PrintTicketPage from "./containers/PrintTicketContainer/PrintTicketPage";
 import CancellationPage from "./containers/CancellationPageContainer/CancellationPage";
@@ -43,6 +44,12 @@ export default [
     path: "/cancelticket",
     exact: true,
     component: CancellationPage,
+    wrapPreloader: false
+  },
+  {
+    path: "/tourism",
+    exact: true,
+    component: TourismPage,
     wrapPreloader: false
   },
   {

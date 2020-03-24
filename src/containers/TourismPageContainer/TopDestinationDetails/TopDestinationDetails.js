@@ -1,7 +1,7 @@
 import React from "react";
 import { withStyles, Grid } from "@material-ui/core";
 import { Styles } from "./Styles";
-import { NavLink } from "react-router-dom";
+import Pdf from "./../../../pdf/NetworkTravel.pdf"
 
 const TopDestinationDetails = props => {
   const { classes } = props;
@@ -12,20 +12,20 @@ const TopDestinationDetails = props => {
           <p>
             Those fortunate enough to visit Bhutan describe it as a unique,
             deeply spiritual and mystical experience.
-            <NavLink to="/travelguide" className={classes.navlink}>Know More...</NavLink>
+            <a href = {Pdf} target = "_blank" className={classes.navlink}>Know More..</a>
           </p>
         </Grid>
         <Grid item xs={3} className={classes.gitem}>
           <p>
             We pride ourselves in providing custom itineraries for all!
-            <NavLink to="/travelguide" className={classes.navlink}>Know More...</NavLink>
+            <a href = {Pdf} target = "_blank" className={classes.navlink}>Know More..</a>
           </p>
         </Grid>
         <Grid item xs={3} className={classes.gitem}>
           <p>
             It's a country that fuels your emotions, stimulates your senses and
             stays in your soul.
-            <NavLink to="/travelguide" className={classes.navlink}>Know More...</NavLink>
+            <a href = {Pdf} target = "_blank" className={classes.navlink}>Know More..</a>
           </p>
         </Grid>
         <Grid item xs={3} className={classes.gitem}>
@@ -33,7 +33,7 @@ const TopDestinationDetails = props => {
             Fresh mountain air, charming people, Buddhist monasteries and prayer
             flags dot the pristine landscape and home of Khangchendzonga - the
             world's third highest mountain
-            <NavLink to="/travelguide" className={classes.navlink}>Know More...</NavLink>
+            <a href = {Pdf} target = "_blank" className={classes.navlink}>Know More..</a>
           </p>
         </Grid>
       </Grid>
