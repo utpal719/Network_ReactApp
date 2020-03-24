@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import {
   withStyles,
@@ -13,31 +13,53 @@ import { CalendarToday } from "@material-ui/icons";
 import Layout from "../../../components/BusLayout/Layout/Layout";
 import Actions from "../../../redux/actionConstants";
 import { useHistory } from "react-router-dom";
+import { getBusDetailsById } from "../../../apis/buses";
 
 const SelectionContainer = ({
   classes,
   handleSelect,
-  handleBoardingPoint,
+  //   handleBoardingPoint,
   selectedSeats,
-  totalFare
+  totalFare,
+  stopLoading
 }) => {
   let dispatch = useDispatch();
   let history = useHistory();
   let searchData = useSelector(state => state.search);
-  let { seatCapacity = 32 } = useSelector(state => state.bus);
-  let dummyBoardingPoints = [
-    "PALTAN BAZAR(09:00 PM)",
-    "ISBT GUWAHATI(09:45 PM)"
-  ];
-
+  let [boardingPoints, setBoardingPoints] = useState([]);
+  let [occupiedSeats, setOccupiedSeats] = useState([]);
   let [boardingPoint, setBoardingPoint] = useState(0);
 
-  let occupied = [5, 10, 12];
+  let { seatCapacity = 32, busId, midId: isMid } = useSelector(
+    state => state.bus
+  );
+
+  useEffect(() => {
+    (async () => {
+      let data = await getBusDetailsById({
+        journeyDate: searchData.date,
+        busId,
+        isMid: isMid || 0
+      });
+      if (data) {
+        let boardingPoints = data.bus.boardingPoints;
+        if (boardingPoints) {
+          boardingPoint = boardingPoints.split(",");
+          setBoardingPoints(boardingPoint);
+        }
+        setOccupiedSeats(data.occupiedSeat);
+      }
+      stopLoading();
+    })();
+  }, []);
 
   let handleBoardingSelect = e => {
     let boardingPoint = e.target.value;
     setBoardingPoint(boardingPoint);
-    handleBoardingPoint(dummyBoardingPoints[boardingPoint - 1]);
+    dispatch({
+      type: Actions.SET_BOARDING_POINT,
+      payload: { boardingPoint: boardingPoints[boardingPoint - 1] }
+    });
   };
 
   let handleContinue = () => {
@@ -60,7 +82,7 @@ const SelectionContainer = ({
               <Layout
                 handleSelect={handleSelect}
                 seatCapacity={seatCapacity}
-                occupied={occupied}
+                occupied={occupiedSeats}
               ></Layout>
             </Grid>
             {/**Seat info */}
@@ -135,7 +157,7 @@ const SelectionContainer = ({
                     style={{ display: "block", margin: "10px 0px" }}
                   >
                     <option value={0}>--Boarding Points-- </option>
-                    {dummyBoardingPoints.map((points, index) => {
+                    {boardingPoints.map((points, index) => {
                       return (
                         <option key={index} value={index + 1}>
                           {points}
@@ -147,6 +169,9 @@ const SelectionContainer = ({
                     onClick={handleContinue}
                     variant="contained"
                     color="primary"
+                    disabled={
+                      !(Boolean(selectedSeats.length) && Boolean(boardingPoint))
+                    }
                   >
                     Continue
                   </Button>

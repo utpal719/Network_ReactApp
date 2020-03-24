@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Grid,
   withStyles,
@@ -20,136 +20,139 @@ const PassengerInfo = ({
   classes,
   index,
   seat,
-  prefilledName,
-  prefilledAge,
-  prefilledGender,
-  prefiller,
-  handlePassenger
+  defaultPassenger,
+  formik,
+  prefiller
 }) => {
-  let [gender, setGender] = useState("male");
-  let [name, setName] = useState("");
-  let [age, setAge] = useState("");
-
-  let handleGenderChange = e => {
-    setGender(e.target.value);
+  let handleDefaultValues = e => {
     if (index === 0)
       prefiller({
-        prefilledName,
-        prefilledAge,
-        prefilledGender: e.target.value
+        ...defaultPassenger,
+        [e.currentTarget.getAttribute("data-name")]: e.target.value
       });
-    handlePassenger(index, { name: name, gender: e.target.value, age });
   };
-  let handleNameChange = e => {
-    setName(e.target.value);
-    if (index === 0)
-      prefiller({
-        prefilledName: e.target.value,
-        prefilledAge,
-        prefilledGender
-      });
-    handlePassenger(index, { name: e.target.value, gender, age });
-  };
-  let handleAgeChange = e => {
-    setAge(e.target.value);
-    if (index === 0)
-      prefiller({
-        prefilledName,
-        prefilledAge: e.target.value,
-        prefilledGender
-      });
-    handlePassenger(index, { name, gender, age: e.target.value });
-  };
-
-  useEffect(() => {
-    setGender(prefilledGender);
-  }, [prefilledGender]);
-
-  useEffect(() => {
-    setName(prefilledName);
-  }, [prefilledName]);
-
-  useEffect(() => {
-    setAge(prefilledAge);
-  }, [prefilledAge]);
 
   return (
     <Paper elevation={1} className={classes.passengerDetails}>
       <Grid container direction="row" spacing={3}>
         <Grid item xs={12}>
-          <Grid container direction="row">
-            <Grid item md={2} xs={12} className={classes.seatDisplay}>
-              <Typography variant="caption" style={{ marginBottom: "20px" }}>
-                <strong>Seat </strong>
-                <Typography variant="h4">{seat}</Typography>
-              </Typography>
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Name
-              </Typography>
-              <TextField
-                variant="outlined"
-                placeholder="Passenger Name"
-                size="small"
-                InputProps={{
-                  classes: {
-                    input: classes.inputBox
-                  }
-                }}
-                value={name}
-                onChange={handleNameChange}
-              ></TextField>
-            </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Gender
-              </Typography>
-              <RadioGroup
-                aria-label="position"
-                name="gender"
-                value={gender}
-                onChange={handleGenderChange}
-                row
-              >
-                <FormControlLabel
-                  value="male"
-                  control={<Radio size="small" color="primary" />}
-                  label="Male"
-                  classes={{
-                    label: classes.inputBox
+          <form>
+            <Grid container direction="row">
+              <Grid item md={2} xs={12} className={classes.seatDisplay}>
+                <Typography variant="caption" style={{ marginBottom: "20px" }}>
+                  <strong>Seat </strong>
+                  <Typography variant="h4">{seat}</Typography>
+                </Typography>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Name
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  placeholder="Passenger Name"
+                  data-name="passengerName"
+                  size="small"
+                  name={`passengers[${index}].passengerName`}
+                  inputProps={{ "data-name": "passengerName" }}
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
                   }}
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  value="female"
-                  control={<Radio size="small" color="primary" />}
-                  label="Female"
-                  classes={{
-                    label: classes.inputBox
+                  value={formik.values.passengers[index].passengerName}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
                   }}
-                  labelPlacement="end"
-                />
-              </RadioGroup>
+                ></TextField>
+                <div className="error">
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].passengerName
+                    : ""}
+                </div>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Gender
+                </Typography>
+                <RadioGroup
+                  aria-label="position"
+                  name={`passengers[${index}].gender`}
+                  value={formik.values.passengers[index].gender}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
+                  }}
+                  row
+                >
+                  <FormControlLabel
+                    value="male"
+                    control={
+                      <Radio
+                        size="small"
+                        inputProps={{ "data-name": "gender" }}
+                        color="primary"
+                      />
+                    }
+                    label="Male"
+                    classes={{
+                      label: classes.inputBox
+                    }}
+                    labelPlacement="end"
+                  />
+                  <FormControlLabel
+                    value="female"
+                    control={
+                      <Radio
+                        inputProps={{ "data-name": "gender" }}
+                        size="small"
+                        color="primary"
+                      />
+                    }
+                    label="Female"
+                    classes={{
+                      label: classes.inputBox
+                    }}
+                    labelPlacement="end"
+                  />
+                </RadioGroup>
+                <div className="error">
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].gender
+                    : ""}
+                </div>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Typography variant="subtitle2" className={classes.inputLabel}>
+                  Age
+                </Typography>
+                <TextField
+                  placeholder="age"
+                  variant="outlined"
+                  size="small"
+                  type="number"
+                  inputProps={{ "data-name": "age" }}
+                  name={`passengers[${index}].age`}
+                  value={formik.values.passengers[index].age}
+                  InputProps={{
+                    classes: {
+                      input: classes.inputBox
+                    }
+                  }}
+                  onChange={e => {
+                    handleDefaultValues(e);
+                    formik.handleChange(e);
+                  }}
+                ></TextField>
+                <div className="error">
+                  {formik.errors.passengers && formik.errors.passengers[index]
+                    ? formik.errors.passengers[index].age
+                    : ""}
+                </div>
+              </Grid>
             </Grid>
-            <Grid item md={3} xs={12}>
-              <Typography variant="subtitle2" className={classes.inputLabel}>
-                Age
-              </Typography>
-              <TextField
-                placeholder="age"
-                variant="outlined"
-                size="small"
-                value={age}
-                InputProps={{
-                  classes: {
-                    input: classes.inputBox
-                  }
-                }}
-                onChange={handleAgeChange}
-              ></TextField>
-            </Grid>
-          </Grid>
+          </form>
         </Grid>
       </Grid>
     </Paper>

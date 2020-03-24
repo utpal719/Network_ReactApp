@@ -1,49 +1,57 @@
 import React from "react";
-import HomePage from "./containers/HomePageContainer/HomePage";
-import SearchResult from "./containers/SearchResultContainer/SearchResult";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import SeatSelection from "./containers/SeatSelection/SeatSelection";
-import RegisterPage from "./containers/LoginContainer/RegisterPage";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
-import LoginPage from "./containers/LoginContainer/LoginPage";
-import AboutUsPage from "./containers/AboutUsConatiner/AboutUsPage";
-import PrintTicketPage from "./containers/PrintTicketContainer/PrintTicketPage";
-import CancellationPage from "./containers/CancellationPageContainer/CancellationPage";
-import PrivacyPolicyPage from "./containers/PrivacyPolicyPage/PrivacyPolicyPage";
-import TandCPage from "./containers/TandCPage/TandCPage";
-import RefundPolicyPage from "./containers/RefundPolicypage/RefundPolicyPage";
-import ContactPage from "./containers/ContactPageContainer/ContactPage";
-import Booking from "./containers/Booking/Booking";
+import routes from "./routes";
 import TourismPage from "./containers/TourismPageContainer/TourismPage";
 import guide from "./pdf/NetworkTravel.pdf";
-
+import Preloader from "./components/Preloader/Preloader";
+import jwt from "jsonwebtoken";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
+import ETicket from "./containers/ETicket/ETicket";
 let store = createStore(rootReducer);
 
 function App() {
+  console.log(jwt.decode(localStorage.getItem("ntToken"), "nwt_techv"));
   return (
     <Provider store={store}>
       <div className="App">
+        {/* <ETicket /> */}
         <Router>
+          <NavBar />
           <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/home" component={HomePage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/contact" component={ContactPage} />
-            <Route exact path="/printticket" component={PrintTicketPage} />
-            <Route exact path="/tourism" component={TourismPage} />
-            <Route exact path="/cancelticket" component={CancellationPage} />
-            <Route exact path="/termsandconditions" component={TandCPage} />
-            <Route exact path="/travelguide" component={guide} />
-            <Route exact path="/refundpolicy" component={RefundPolicyPage} />
-            <Route exact path="/aboutus" component={AboutUsPage} />
-            <Route exact path="/searchresult" component={SearchResult} />
-            <Route exact path="/privacypolicy" component={PrivacyPolicyPage} />
-            <Route exact path="/seatselection" component={SeatSelection} />
-            <Route exact path="/booking" component={Booking} />
+            {routes.map(
+              ({
+                exact,
+                path,
+                component: Component,
+                wrapPreloader = false,
+                defaultLoading = true
+              }) => (
+                <Route
+                  key={path}
+                  path={path}
+                  exact={exact}
+                  render={props => (
+                    <>
+                      {wrapPreloader ? (
+                        <Preloader
+                          {...props}
+                          Component={Component}
+                          defaultLoading={defaultLoading}
+                        />
+                      ) : (
+                        <Component {...props} />
+                      )}
+                    </>
+                  )}
+                ></Route>
+              )
+            )}
           </Switch>
+          <Footer />
         </Router>
       </div>
     </Provider>

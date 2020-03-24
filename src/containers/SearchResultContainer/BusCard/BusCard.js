@@ -3,8 +3,9 @@ import { Paper, Grid, Typography, Button, withStyles } from "@material-ui/core";
 import avatar from "./n1.png";
 import { Styles } from "./Styles";
 import { DirectionsBus, AccessTime } from "@material-ui/icons";
+import { formatAMPM } from "../../../utilities/Functions";
 
-const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
+const BusCard = ({ classes, data: bus, handleClick }) => {
   return (
     <Paper variant="outlined" className={classes.busPaper}>
       <Grid container spacing={2}>
@@ -18,7 +19,7 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
               <DirectionsBus />
             </Grid>
             <Grid item xs={12}>
-              <Typography>{bus.startTime}</Typography>
+              <Typography>{formatAMPM(bus.startTime)}</Typography>
               <Typography variant="caption">
                 {bus.fromCity.toUpperCase()}
               </Typography>
@@ -31,7 +32,7 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
               <DirectionsBus />
             </Grid>
             <Grid item xs={12}>
-              <Typography>{bus.endtime}</Typography>
+              <Typography>{formatAMPM(bus.endTime)}</Typography>
               <Typography variant="caption">
                 {bus.toCity.toUpperCase()}
               </Typography>
@@ -57,9 +58,9 @@ const BusCard = ({ classes, data: { bus, midId }, handleClick }) => {
             onClick={() =>
               handleClick({
                 busId: bus.busId,
-                midId: midId,
+                midId: bus.midId,
                 startTime: bus.startTime,
-                endtime: bus.endtime,
+                endTime: bus.endTime,
                 seatCapacity: bus.seatCapacity,
                 fare: bus.fare
               })

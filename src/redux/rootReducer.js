@@ -1,30 +1,9 @@
 import Constants from "./actionConstants";
-
-let initialState = {
-  search: {
-    to: "",
-    from: "",
-    date: ""
-  },
-  bus: {
-    busId: "",
-    midId: "",
-    startTime: "",
-    endtime: "",
-    seats: ""
-  },
-  bookingInfo: {
-    fare: 0,
-    passengerDetails: [{ name: "", gender: "", age: "" }],
-    email: "",
-    mobile: "",
-    totalPayable: 0,
-    seats: []
-  }
-};
+import { initialState, decodeToken } from "./store";
 
 export default function(state = initialState, action) {
   let { payload } = action;
+
   switch (action.type) {
     case Constants.SET_SEARCH:
       return {
@@ -44,7 +23,7 @@ export default function(state = initialState, action) {
           busId: payload.busId,
           midId: payload.midId,
           startTime: payload.startTime,
-          endtime: payload.endtime,
+          endTime: payload.endTime,
           seatCapacity: payload.seatCapacity,
           fare: payload.fare
         }
@@ -68,6 +47,30 @@ export default function(state = initialState, action) {
       return {
         ...state,
         bookingInfo
+      };
+    }
+    case Constants.SET_BUS_SEARCH_DATA: {
+      return { ...state, busSearchData: payload.busData };
+    }
+    case Constants.SET_USER_INFO: {
+      let decoded = decodeToken(payload.token);
+      return {
+        ...state,
+        user: {
+          loggedIn: decoded.get("loggedIn") ? true : false,
+          role: decoded.get("role"),
+          username: decoded.get("userName"),
+          token: decoded.get("token")
+        }
+      };
+    }
+    case Constants.SET_BOARDING_POINT: {
+      return {
+        ...state,
+        bookingInfo: {
+          ...state.bookingInfo,
+          boardingPoint: payload.boardingPoint
+        }
       };
     }
     default:

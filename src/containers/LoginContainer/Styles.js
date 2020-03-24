@@ -4,7 +4,9 @@ export const Styles = () => ({
     justifyContent: "center"
   },
   bg: {
-    backgroundImage: `url(${image})`
+    backgroundImage: `url(${image})`,
+    backgroundSize: "100%",
+    backgroundRepeat: "no-repeat"
   },
   gridstyle: {
     display: "flex",
@@ -26,7 +28,8 @@ export const Styles = () => ({
     backgroundColor: "#28a745",
     borderRadius: "0",
     borderStyle: "square",
-    width: "100%"
+    width: "100%",
+    color: "#eee"
   },
   textfield: {
     width: "100%",
@@ -39,5 +42,8 @@ export const Styles = () => ({
   navlinked: {
     color: "#28a745",
     font: "status-bar"
+  },
+  inputBox: {
+    fontSize: "12px"
   }
 });

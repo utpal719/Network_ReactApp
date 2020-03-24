@@ -7,17 +7,16 @@ import TopDestinationBanner from "./../../components/TopDestinationBanner/TopDes
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
 import CaraouselBanner from "./CarouselBanner/CaraouselBanner";
+import Preloader from "../../components/Preloader/Preloader";
+
 const HomePage = props => {
   const { classes } = props;
-  console.log(NavBar);
   return (
     <div className={classes.container}>
-      <NavBar />
-      <Form />
+      <Preloader Component={Form} />
       <FloatingBanner />
       <CaraouselBanner />
       <TopDestinationBanner />
-      <Footer />
     </div>
   );
 };
