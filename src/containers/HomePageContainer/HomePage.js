@@ -1,6 +1,4 @@
 import React from "react";
-import NavBar from "../../components/NavBar/NavBar";
-import Footer from "./../../components/Footer/Footer";
 import Form from "./../../components/Form/Form";
 import FloatingBanner from "./FloatingBanner/FloatingBanner";
 import TopDestinationBanner from "./../../components/TopDestinationBanner/TopDestinationBanner";

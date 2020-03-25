@@ -1,7 +1,6 @@
 import React from "react";
 import {
   TextField,
-  InputLabel,
   Button,
   withStyles,
   Grid,

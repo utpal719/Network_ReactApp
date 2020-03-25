@@ -4,12 +4,10 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
 import routes from "./routes";
-import TourismPage from "./containers/TourismPageContainer/TourismPage";
-import guide from "./pdf/NetworkTravel.pdf";
 import Preloader from "./components/Preloader/Preloader";
-import jwt from "jsonwebtoken";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
+import MyTrips from "./containers/MyTrips/MyTrips";
 let store = createStore(rootReducer);
 
 function App() {

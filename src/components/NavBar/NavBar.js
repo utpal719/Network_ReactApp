@@ -20,7 +20,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "./logo1.png";
 import actionConstants from "../../redux/actionConstants";
-import { getMyTrips } from "../../apis/bookings";
 
 const NavBar = props => {
   const { classes } = props;
@@ -51,10 +50,7 @@ const NavBar = props => {
 
   const handleMyTrip = e => {
     handleClose(e);
-    (async () => {
-      let data = await getMyTrips();
-      console.log(data);
-    })();
+    history.push("/mytrips");
   };
 
   function handleListKeyDown(event) {
