@@ -1,6 +1,9 @@
 import React from "react";
-import { Card, CardHeader, CardContent, withStyles } from "@material-ui/core";
-import { Styles } from "./Styles";
+import {
+  Card,
+  CardContent,
+  Typography
+} from "@material-ui/core";
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -13,14 +16,22 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return(
-      <Card >
-        <CardHeader>ERROR.</CardHeader>
-        <CardContent>Something Went Wrong..Please, Try Again.</CardContent>
-      </Card>
+      return (
+        <Card style={{ color:"#CE1126",
+        boxAlign:"center",
+        alignContent:"center",
+        width:"100%",
+        padding:"50px"}}>
+          <CardContent>
+          <Typography variant="h3" >ERROR</Typography>
+          </CardContent>
+          <CardContent>
+            <Typography variant="h5" >Something Went Wrong..Please, Try Again.</Typography>
+          </CardContent>
+        </Card>
       );
     }
     return this.props.children;
   }
 }
-export default withStyles(Styles)(ErrorBoundary)
+export default ErrorBoundary;

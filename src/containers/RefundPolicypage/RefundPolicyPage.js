@@ -5,11 +5,9 @@ import RefundPolicy from "../../components/RefundPolicy/RefundPolicy";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const RefundPolicyPage = () => {
   return (
-    <ErrorBoundary>
     <div>
       <RefundPolicy />
     </div>
-    </ErrorBoundary>
   );
 };
 export default withStyles(Styles)(RefundPolicyPage);

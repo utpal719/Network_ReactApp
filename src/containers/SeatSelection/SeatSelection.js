@@ -25,7 +25,6 @@ const SeatSelection = ({ classes }) => {
   };
 
   return (
-    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <SelectionHeader />
       {/**SelectionFormContainer */}
@@ -37,7 +36,6 @@ const SeatSelection = ({ classes }) => {
         Component={SelectionContainer}
       />
     </div>
-    </ErrorBoundary>
   );
 };
 

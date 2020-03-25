@@ -13,15 +13,14 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const HomePage = props => {
   const { classes } = props;
   return (
-    <ErrorBoundary>
     <div className={classes.container}>
       <Preloader Component={Form} />
       <FloatingBanner />
       <CaraouselBanner />
       <TopDestinationBanner />
     </div>
-    </ErrorBoundary>
   );
+
 };
 
 export default withStyles(Styles)(HomePage);

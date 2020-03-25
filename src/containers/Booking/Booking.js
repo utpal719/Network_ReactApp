@@ -118,7 +118,6 @@ const Booking = ({ classes }) => {
    */
 
   return (
-    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <form onSubmit={formik.handleSubmit}>
         <Grid container justify="center" className={classes.sectionPadded}>
@@ -179,7 +178,6 @@ const Booking = ({ classes }) => {
         </Grid>
       </form>
     </div>
-    </ErrorBoundary>
   );
 };
 

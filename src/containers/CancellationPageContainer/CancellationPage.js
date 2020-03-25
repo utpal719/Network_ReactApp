@@ -9,7 +9,6 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const CancellationPage = props => {
   const { classes } = props;
   return (
-    <ErrorBoundary>
     <div>
       <Grid conatiner direction="row" className={classes.bg}>
         <Grid item xs={12}>
@@ -23,7 +22,6 @@ const CancellationPage = props => {
         </Grid>
       </Grid>
     </div>
-    </ErrorBoundary>
   );
 };
 
