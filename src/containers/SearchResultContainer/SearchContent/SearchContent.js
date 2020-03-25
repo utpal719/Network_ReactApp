@@ -22,7 +22,7 @@ const SearchContent = ({ response, search }) => {
     dispatch({
       type: Constants.BUS_SELECT,
       payload: {
-        busId,
+//        busId,
         midId,
         startTime,
         endTime,

@@ -6,6 +6,7 @@ import SelectionHeader from "./SelectionHeader/SelectionHeader";
 import SelectionContainer from "./SelectionContainer/SelectionContainer";
 import { useHistory } from "react-router-dom";
 import Preloader from "../../components/Preloader/Preloader";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const SeatSelection = ({ classes }) => {
   let { fare } = useSelector(state => state.bus);
@@ -24,6 +25,7 @@ const SeatSelection = ({ classes }) => {
   };
 
   return (
+    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <SelectionHeader />
       {/**SelectionFormContainer */}
@@ -35,6 +37,7 @@ const SeatSelection = ({ classes }) => {
         Component={SelectionContainer}
       />
     </div>
+    </ErrorBoundary>
   );
 };
 

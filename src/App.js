@@ -4,18 +4,17 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
 import routes from "./routes";
-import TourismPage from "./containers/TourismPageContainer/TourismPage";
-import guide from "./pdf/NetworkTravel.pdf";
 import Preloader from "./components/Preloader/Preloader";
 import jwt from "jsonwebtoken";
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
-import ETicket from "./containers/ETicket/ETicket";
+import Footer from "./components/Footer/Footer"
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary"
 let store = createStore(rootReducer);
 
 function App() {
   console.log(jwt.decode(localStorage.getItem("ntToken"), "nwt_techv"));
   return (
+    <ErrorBoundary>
     <Provider store={store}>
       <div className="App">
         {/* <ETicket /> */}
@@ -55,6 +54,7 @@ function App() {
         </Router>
       </div>
     </Provider>
+    </ErrorBoundary>
   );
 }
 

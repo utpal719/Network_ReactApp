@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { book } from "../../apis/bookings";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -117,6 +118,7 @@ const Booking = ({ classes }) => {
    */
 
   return (
+    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <form onSubmit={formik.handleSubmit}>
         <Grid container justify="center" className={classes.sectionPadded}>
@@ -177,6 +179,7 @@ const Booking = ({ classes }) => {
         </Grid>
       </form>
     </div>
+    </ErrorBoundary>
   );
 };
 

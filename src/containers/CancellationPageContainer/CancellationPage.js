@@ -5,9 +5,11 @@ import CancellatiohHeader from "./CancellatiohHeader";
 import CancellationForm from "./CancellationForm";
 import CancellationPolicy from "./CancelationPolicy";
 import { Grid } from "@material-ui/core";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const CancellationPage = props => {
   const { classes } = props;
   return (
+    <ErrorBoundary>
     <div>
       <Grid conatiner direction="row" className={classes.bg}>
         <Grid item xs={12}>
@@ -21,6 +23,7 @@ const CancellationPage = props => {
         </Grid>
       </Grid>
     </div>
+    </ErrorBoundary>
   );
 };
 

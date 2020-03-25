@@ -21,6 +21,7 @@ const ETicket = ({ classes }) => {
   let email = "samdeka28@gmail.com";
   let phone = "9706202403";
   return (
+    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <Grid container justify="center">
         <Grid item xs={12} md={6}>
@@ -272,6 +273,7 @@ const ETicket = ({ classes }) => {
         </Grid>
       </Grid>
     </div>
+    </ErrorBoundary>
   );
 };
 
