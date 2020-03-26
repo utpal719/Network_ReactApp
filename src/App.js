@@ -7,7 +7,6 @@ import routes from "./routes";
 import Preloader from "./components/Preloader/Preloader";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
-import MyTrips from "./containers/MyTrips/MyTrips";
 let store = createStore(rootReducer);
 
 function App() {

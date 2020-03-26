@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "./../../components/Form/Form";
+import Form from "../../components/Form/Form";
 import FloatingBanner from "./FloatingBanner/FloatingBanner";
 import TopDestinationBanner from "./../../components/TopDestinationBanner/TopDestinationBanner";
 import { withStyles } from "@material-ui/core/styles";

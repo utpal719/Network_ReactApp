@@ -2,10 +2,29 @@ import React from "react";
 import { Grid, Typography, withStyles } from "@material-ui/core";
 import { Styles } from "../Styles";
 
-const PassengerDetails = ({ classes, passenger }) => {
+const PassengerDetails = ({
+  classes,
+  passenger,
+  selectable,
+  handleSelect,
+  selectedPassengers,
+  isAllSelected,
+  index
+}) => {
   return (
     <Grid item xs={12}>
       <Grid container>
+        {selectable && (
+          <Grid item xs={1} className={classes.flexed}>
+            <input
+              type="checkbox"
+              className={classes.marginAuto}
+              disabled={isAllSelected}
+              checked={selectedPassengers.includes(index) ? true : false}
+              onClick={e => handleSelect(index)}
+            ></input>
+          </Grid>
+        )}
         <Grid item md={2} xs={2} className={classes.seatDisplay}>
           <Typography
             variant="caption"

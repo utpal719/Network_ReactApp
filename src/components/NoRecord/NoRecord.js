@@ -1,8 +1,14 @@
 import React from "react";
-import { withStyles, Typography } from "@material-ui/core";
-import { Styles } from "../Styles";
+import { withStyles, Typography, Button } from "@material-ui/core";
+import { Styles } from "./Styles";
+import { useHistory } from "react-router-dom";
 
 const NoRecord = ({ classes }) => {
+  let history = useHistory();
+
+  let handleBack = _ => {
+    history.goBack();
+  };
   return (
     <div className={classes.noTicketContainer}>
       <div className={classes.flexed}>
@@ -22,6 +28,11 @@ const NoRecord = ({ classes }) => {
                 </span>
                 .
               </Typography>
+            </p>
+            <p className={classes.textCenter}>
+              <Button variant="contained" color="primary" onClick={handleBack}>
+                Go back
+              </Button>
             </p>
           </div>
         </div>
