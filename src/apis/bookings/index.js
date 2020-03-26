@@ -28,3 +28,25 @@ export const getMyTrips = async function() {
     console.log(err);
   }
 };
+
+export const getCancelTicketBooking = async payload => {
+  try {
+    let {
+      data: { data }
+    } = await axios.post("/cancelTicketGetBooking", payload);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const cancelTicket = async payload => {
+  try {
+    let {
+      data: { data }
+    } = await axios.post("/cancelBooking", payload);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

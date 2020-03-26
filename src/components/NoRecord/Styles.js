@@ -45,6 +45,6 @@ export const Styles = () => ({
     color: "tomato"
   },
   selectAll: {
-    margin: "0px 0px -15px 20px"
+    margin: "0px 15px"
   }
 });

@@ -14,6 +14,7 @@ import SeatSelection from "./containers/SeatSelection/SeatSelection";
 import Booking from "./containers/Booking/Booking";
 import ETicket from "./containers/ETicket/ETicket";
 import MyTrips from "./containers/MyTrips/MyTrips";
+import Cancellation from "./containers/Cancellation/Cancellation";
 
 export default [
   { path: "/", exact: true, component: HomePage, wrapPreloader: false },
@@ -92,5 +93,11 @@ export default [
   },
   { path: "/booking", exact: true, component: Booking, wrapPreloader: false },
   { path: "/e-ticket", exact: true, component: ETicket, wrapPreloader: true },
-  { path: "/mytrips", exact: true, component: MyTrips, wrapPreloader: true }
+  { path: "/mytrips", exact: true, component: MyTrips, wrapPreloader: true },
+  {
+    path: "/cancelbooking",
+    exact: true,
+    component: Cancellation,
+    wrapPreloader: true
+  }
 ];
