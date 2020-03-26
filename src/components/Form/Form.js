@@ -23,9 +23,6 @@ let validationSchema = Yup.object({
 
 const Form = props => {
   const [cityList, setCityList] = useState([]);
-  //   const [selectedDate, setSelectedDate] = useState(new Date());
-  //   const [fromCity, setSourceCity] = useState({});
-  //   const [toCity, setDestinationCity] = useState({});
   const { classes } = props;
 
   let formik = useFormik({
@@ -51,20 +48,6 @@ const Form = props => {
 
   let dispatch = useDispatch();
   let history = useHistory();
-
-  //   const handleSubmit = function(e) {
-  //     e.preventDefault();
-  //     dispatch({
-  //       type: Constants.SET_SEARCH,
-  //       payload: {
-  //         from: fromCity.cityname,
-  //         to: toCity.cityname,
-  //         date: formatDate(selectedDate)
-  //       }
-  //     });
-
-  //     history.push("/searchresult");
-  //   };
 
   let handleSourceChange = (_, value) =>
     formik.setFieldValue("fromCity", value);

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   TextField,
-  InputLabel,
   Button,
   withStyles,
   Grid,
@@ -11,18 +10,34 @@ import {
   Radio
 } from "@material-ui/core";
 import { Styles } from "./Styles";
+import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  action: Yup.string().required("Please select an action"),
+  pnrNumber: Yup.string()
+    .matches(new RegExp("pnr-", "gi"), "Please enter a valid PNR (e.g : PNR-4)")
+    .required("Please enter your PNR")
+});
 
 const PrintTicketForm = props => {
-  const [value, setValue] = React.useState("view");
+  const history = useHistory();
 
-  const handleChange = event => {
-    setValue(event.target.value);
-    console.log(value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
+  let { values, handleChange, errors, touched, handleSubmit } = useFormik({
+    initialValues: {
+      action: "view",
+      pnrNumber: ""
+    },
+    validationSchema,
+    onSubmit: function() {
+      if (values.action === "view") {
+        history.push("/e-ticket", {
+          pnrNumber: values.pnrNumber
+        });
+      }
+    }
+  });
 
   const { classes } = props;
   return (
@@ -36,16 +51,22 @@ const PrintTicketForm = props => {
                   size="small"
                   type="text"
                   label="PNR Number"
+                  name="pnrNumber"
                   variant="outlined"
+                  onChange={handleChange}
+                  value={values.pnrNumber}
                   className={classes.textfield}
-                  required
                 ></TextField>
+                <br />
+                <div className="error">
+                  {touched.pnrNumber && errors.pnrNumber && errors.pnrNumber}
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <RadioGroup
                   aria-label="tickettype"
-                  name="tickettype"
-                  value={value}
+                  name="action"
+                  value={values.action}
                   onChange={handleChange}
                 >
                   <FormControlLabel
@@ -54,19 +75,22 @@ const PrintTicketForm = props => {
                     label="View ticket"
                   />
                   <FormControlLabel
-                    value="sms"
+                    value="mail"
                     control={<Radio />}
                     label="Get Ticket by Email"
                   />
                   <FormControlLabel
-                    value="mail"
+                    value="sms"
                     control={<Radio />}
                     label=" Get mTicket by SMS"
                   />
                 </RadioGroup>
+                <div className="error">
+                  {touched.action && errors.action && errors.action}
+                </div>
               </Grid>
               <Grid item xs={12}>
-                <Button type="Submit" label="Go" className={classes.button}>
+                <Button type="submit" label="Go" className={classes.button}>
                   Go!!
                 </Button>
               </Grid>

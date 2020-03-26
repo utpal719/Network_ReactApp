@@ -36,6 +36,12 @@ export const Styles = () => ({
     width: "100%",
     height: "1px",
     background: "#000",
-    margin : "auto"
+    margin: "auto"
+  },
+  noTicketContainer: {
+    margin: "10%"
+  },
+  textRed: {
+    color: "tomato"
   }
 });

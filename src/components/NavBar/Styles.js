@@ -14,5 +14,9 @@ export const Styles = () => ({
     padding: 20,
     fontWeight: "300",
     color: "#333"
+  },
+  gridstyle: {
+    marginTop: "88px",
+    color: "#292f33"
   }
 });
