@@ -5,16 +5,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
-import "./style.css";
+// import "./style.css";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import busChart from "./../../apis/buschart/index";
+import { busChart } from "./../../apis/buschart/index";
 
 let validationSchema = Yup.object({
-  busRoute: Yup.string().required("Please select a route"),
+  busRoute: Yup.string().required("Please select a city"),
   journeyDate: Yup.date().required("Please select a date")
 });
 
@@ -51,8 +51,10 @@ const BusChart = props => {
     (async () => {
       let data = await busChart();
       console.log(data);
+      setBusRoute(data); // newly added
     })();
-    setBusRoute(data);
+    // setBusRoute(data); //NOTE : data is not available outside the context, the scope of the data variable is only limited to the IIFE above
+    //    props.stopLoading(); //Since this component is wraped with the Preloader component, props.stopLoading() should be called to stop the loader, otherwise the loading spinner will never stop
     props.stopLoading();
   }, []);
 
