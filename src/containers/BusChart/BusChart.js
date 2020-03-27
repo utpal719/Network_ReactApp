@@ -14,7 +14,7 @@ import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
+import busChart from "./../../apis/buschart/index"
 
 let validationSchema = Yup.object({
   fromCity: Yup.string().required("Please select a city"),
@@ -22,7 +22,7 @@ let validationSchema = Yup.object({
   journeyDate: Yup.date().required("Please select a date")
 });
 
-const Form = props => {
+const BusChart = props => {
   const [busRoute, setBusRoute] = useState([]);
   const { classes } = props;
 
@@ -54,12 +54,16 @@ const Form = props => {
   };
 
   useEffect(() => {
-    axios.get(`${config.API_URL}/getAllBuses`).then(res => {
-      let route = res.data.data;
-      route = route.map(item => item.cityname);
-      setBusRoute(route);
+    (async () => {
+      let data = await busChart();
+      console.log(data);
+    })();
+ //   axios.get(`${config.API_URL}/getAllBuses`).then(res => {
+ //     let route = res.data.data;
+ //     route = route.map(item => item.cityname);
+      setBusRoute(data);
       props.stopLoading();
-    });
+ //   });
   }, []);
 
   return (
@@ -129,4 +133,4 @@ const Form = props => {
   );
 };
 
-export default withStyles(Styles)(Form);
+export default withStyles(Styles)(BusChart);

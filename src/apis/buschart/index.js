@@ -4,7 +4,7 @@ export const busChart = async function() {
   try {
     let {
       data: { data }
-    } = await axios.get("/getAllBuses", payload);
+    } = await axios.get("/getAllBuses");
     return data;
   } catch (err) {
     console.log(err);
