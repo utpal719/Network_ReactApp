@@ -5,55 +5,57 @@ import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
-import "./style.css";
+// import "./style.css";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import busChart from "./../../apis/buschart/index";
+import { busChart } from "./../../apis/buschart/index";
 
-// let validationSchema = Yup.object({
-//   busRoute: Yup.string().required("Please select a city"),
-//   journeyDate: Yup.date().required("Please select a date")
-// });
+let validationSchema = Yup.object({
+  busRoute: Yup.string().required("Please select a city"),
+  journeyDate: Yup.date().required("Please select a date")
+});
 
 const BusChart = props => {
   console.log("inside bus chart");
   const [busRoute, setBusRoute] = useState([]);
   const { classes } = props;
 
-  // let formik = useFormik({
-  //   initialValues: {
-  //     fromCity: "",
-  //     journeyDate: new Date()
-  //   },
-  //   validationSchema,
-  //   onSubmit: function(values) {
-  //     dispatch({
-  //       type: Constants.SET_SEARCH,
-  //       payload: {
-  //         from: values.busRoute,
-  //         date: formatDate(values.journeyDate)
-  //       }
-  //     });
-  //   }
-  // });
+  let formik = useFormik({
+    initialValues: {
+      fromCity: "",
+      journeyDate: new Date()
+    },
+    validationSchema,
+    onSubmit: function(values) {
+      dispatch({
+        type: Constants.SET_SEARCH,
+        payload: {
+          from: values.busRoute,
+          date: formatDate(values.journeyDate)
+        }
+      });
+    }
+  });
 
-  // let dispatch = useDispatch();
-  // let handleSourceChange = (_, value) =>
-  //   formik.setFieldValue("busRoute", value);
-  // let setSelectedDate = function(date) {
-  //   formik.setFieldValue("journeyDate", date);
-  // };
+  let dispatch = useDispatch();
+  let handleSourceChange = (_, value) =>
+    formik.setFieldValue("busRoute", value);
+  let setSelectedDate = function(date) {
+    formik.setFieldValue("journeyDate", date);
+  };
 
   useEffect(() => {
     (async () => {
       let data = await busChart();
       console.log(data);
+      setBusRoute(data); // newly added
     })();
-    setBusRoute(data);
-//    props.stopLoading();
+    // setBusRoute(data); //NOTE : data is not available outside the context, the scope of the data variable is only limited to the IIFE above
+    //    props.stopLoading(); //Since this component is wraped with the Preloader component, props.stopLoading() should be called to stop the loader, otherwise the loading spinner will never stop
+    props.stopLoading();
   }, []);
 
   return (
