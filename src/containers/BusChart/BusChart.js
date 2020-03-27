@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { TextField, Button, Grid } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
@@ -9,46 +8,44 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
-import { useHistory } from "react-router-dom";
-import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import busChart from "./../../apis/buschart/index";
 
-let validationSchema = Yup.object({
-  busRoute: Yup.string().required("Please select a city"),
-  journeyDate: Yup.date().required("Please select a date")
-});
+// let validationSchema = Yup.object({
+//   busRoute: Yup.string().required("Please select a city"),
+//   journeyDate: Yup.date().required("Please select a date")
+// });
 
 const BusChart = props => {
   console.log("inside bus chart");
   const [busRoute, setBusRoute] = useState([]);
   const { classes } = props;
 
-  let formik = useFormik({
-    initialValues: {
-      fromCity: "",
-      journeyDate: new Date()
-    },
-    validationSchema,
-    onSubmit: function(values) {
-      dispatch({
-        type: Constants.SET_SEARCH,
-        payload: {
-          from: values.busRoute,
-          date: formatDate(values.journeyDate)
-        }
-      });
-    }
-  });
+  // let formik = useFormik({
+  //   initialValues: {
+  //     fromCity: "",
+  //     journeyDate: new Date()
+  //   },
+  //   validationSchema,
+  //   onSubmit: function(values) {
+  //     dispatch({
+  //       type: Constants.SET_SEARCH,
+  //       payload: {
+  //         from: values.busRoute,
+  //         date: formatDate(values.journeyDate)
+  //       }
+  //     });
+  //   }
+  // });
 
-  let dispatch = useDispatch();
-  let handleSourceChange = (_, value) =>
-    formik.setFieldValue("busRoute", value);
-  let setSelectedDate = function(date) {
-    formik.setFieldValue("journeyDate", date);
-  };
+  // let dispatch = useDispatch();
+  // let handleSourceChange = (_, value) =>
+  //   formik.setFieldValue("busRoute", value);
+  // let setSelectedDate = function(date) {
+  //   formik.setFieldValue("journeyDate", date);
+  // };
 
   useEffect(() => {
     (async () => {
@@ -56,7 +53,7 @@ const BusChart = props => {
       console.log(data);
     })();
     setBusRoute(data);
-    props.stopLoading();
+//    props.stopLoading();
   }, []);
 
   return (
@@ -92,11 +89,11 @@ const BusChart = props => {
                   )}
                 />
                 <br />
-                <div class="error form-error">
+                {/* <div class="error form-error">
                   {formik.errors.busRoute &&
                     formik.touched.busRoute &&
                     formik.errors.busRoute}
-                </div>
+                </div> */}
               </Grid>
             </Grid>
             <Grid container spacing={4} direction="row">
@@ -112,7 +109,7 @@ const BusChart = props => {
                   className={classes.inputdate}
                 />
                 <br />
-                <div class="error form-error">{formik.errors.journeyDate}</div>
+                {/* <div class="error form-error">{formik.errors.journeyDate}</div> */}
               </Grid>
             </Grid>
             <br />
