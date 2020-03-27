@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Grid, withStyles, Button, Typography } from "@material-ui/core";
+import { Grid, withStyles, Button } from "@material-ui/core";
 import { Styles } from "./Styles";
 import { getCancelTicketBooking, cancelTicket } from "../../apis/bookings";
 import { useState } from "react";
@@ -8,6 +8,8 @@ import PassengerDetailContainer from "../ETicket/PassengerDetailContainer/Passen
 import { useHistory } from "react-router-dom";
 import NoRecord from "../../components/NoRecord/NoRecord";
 import Alert from "@material-ui/lab/Alert";
+import GeneralInfo from "./GeneralInfo/GeneralInfo";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
 const Cancellation = props => {
   let { classes } = props;
@@ -97,6 +99,7 @@ const Cancellation = props => {
         >
           <Grid item xs={8}>
             <Grid container spacing={3} className={classes.container}>
+              {/**Cancellation success message */}
               {success && (
                 <Grid item xs={12}>
                   <Alert>
@@ -106,17 +109,13 @@ const Cancellation = props => {
                 </Grid>
               )}
               {/**pnr and journey date */}
-              <Grid item xs={6} className={classes.textLeft}>
-                <Typography variant="subtitle2">
-                  <strong>PNR :</strong> {ticket.pnrNumber}
-                </Typography>
-              </Grid>
-              <Grid item xs={6} className={classes.textRight}>
-                <Typography variant="subtitle2">
-                  <strong>Journey Date :</strong> {ticket.journeyDate}
-                </Typography>
-              </Grid>
+              <GeneralInfo
+                journeyDate={ticket.journeyDate}
+                pnrNumber={ticket.pnrNumber}
+              />
+              {/**Journey Details */}
               <TimeCard ticket={ticket} />
+              {/**Passenger Details */}
               <PassengerDetailContainer
                 ticket={ticket}
                 selectable={true}
@@ -142,32 +141,4 @@ const Cancellation = props => {
   );
 };
 
-const ErrorMessage = error => {
-  error = error.split(":");
-  let errorMessage = error[1];
-  if (error[0] !== "java.util.NoSuchElementException") {
-    return (
-      <p>
-        <Typography varaint="h6">{errorMessage}</Typography>
-      </p>
-    );
-  } else {
-    return (
-      <>
-        <p>
-          <Typography variant="h6">No data found.</Typography>
-        </p>
-        <p>
-          <Typography variant="caption">
-            Kindly ensure that you've entered the correct{" "}
-            <span>
-              <strong>PNR</strong>
-            </span>
-            .
-          </Typography>
-        </p>
-      </>
-    );
-  }
-};
 export default withStyles(Styles)(Cancellation);
