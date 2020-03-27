@@ -5,19 +5,16 @@ import { Provider } from "react-redux";
 import rootReducer from "./redux/rootReducer";
 import routes from "./routes";
 import Preloader from "./components/Preloader/Preloader";
-import jwt from "jsonwebtoken";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer"
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary"
 let store = createStore(rootReducer);
 
 function App() {
-  console.log(jwt.decode(localStorage.getItem("ntToken"), "nwt_techv"));
   return (
     <ErrorBoundary>
     <Provider store={store}>
       <div className="App">
-        {/* <ETicket /> */}
         <Router>
           <NavBar />
           <Switch>

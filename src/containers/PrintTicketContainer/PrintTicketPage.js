@@ -6,7 +6,7 @@ import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const PrintTicketPage = props => {
   const { classes } = props;
   return (
-    <div className={classes.bg}>
+    <div>
       <PrintTicketForm />
     </div>
   );

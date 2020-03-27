@@ -3,13 +3,10 @@ export const Styles = () => ({
   container: {
     justifyContent: "center"
   },
-  bg: {
-    backgroundImage: `url(${image})`
-  },
   gridstyle: {
     display: "flex",
     width: "100%",
-    height: "100vh",
+    height: "80vh",
     borderRadius: "0",
     borderStyle: "square",
     marginTop: "88px",
@@ -35,5 +32,8 @@ export const Styles = () => ({
   },
   formstyle: {
     padding: "10px"
+  },
+  textCenter: {
+    textAlign: "center"
   }
 });

@@ -89,8 +89,11 @@ const Booking = ({ classes }) => {
         selectedSeat: seats.join(",")
       };
       (async () => {
-        let data = await book(bookingDetails);
+        let { data } = await book(bookingDetails);
         console.log(data);
+        history.push("/e-ticket", {
+          pnrNumber: data.pnrNumber
+        });
       })();
     }
   });
