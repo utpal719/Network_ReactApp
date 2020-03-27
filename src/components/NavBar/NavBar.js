@@ -156,6 +156,7 @@ const NavBar = props => {
                         onKeyDown={handleListKeyDown}
                       >
                         <MenuItem onClick={handleClose}>My Trips</MenuItem>
+                        {/* <MenuItem onClick={handleClose}>Bus Chart</MenuItem> */}
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </MenuList>
                     </ClickAwayListener>
