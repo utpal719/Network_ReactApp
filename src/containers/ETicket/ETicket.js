@@ -51,7 +51,24 @@ const ETicket = props => {
         <div className={classes.gridstyle} />
       </Box>
       {error ? (
-        <NoRecord />
+        <NoRecord
+          render={
+            <>
+              <p>
+                <Typography variant="h6">No data found.</Typography>
+              </p>
+              <p>
+                <Typography variant="caption">
+                  Kindly ensure that you've entered the correct{" "}
+                  <span className={classes.textRed}>
+                    <strong>PNR</strong>
+                  </span>
+                  .
+                </Typography>
+              </p>
+            </>
+          }
+        />
       ) : (
         <>
           <Box displayPrint="block">

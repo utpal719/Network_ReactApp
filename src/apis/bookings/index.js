@@ -31,9 +31,7 @@ export const getMyTrips = async function() {
 
 export const getCancelTicketBooking = async payload => {
   try {
-    let {
-      data: { data }
-    } = await axios.post("/cancelTicketGetBooking", payload);
+    let { data } = await axios.post("/cancelTicketGetBooking", payload);
     return data;
   } catch (err) {
     console.log(err);
