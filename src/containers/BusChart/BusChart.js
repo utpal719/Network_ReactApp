@@ -14,15 +14,15 @@ import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import busChart from "./../../apis/buschart/index"
+import busChart from "./../../apis/buschart/index";
 
 let validationSchema = Yup.object({
-  fromCity: Yup.string().required("Please select a city"),
-  toCity: Yup.string().required("Please select a city"),
+  busRoute: Yup.string().required("Please select a city"),
   journeyDate: Yup.date().required("Please select a date")
 });
 
 const BusChart = props => {
+  console.log("inside bus chart");
   const [busRoute, setBusRoute] = useState([]);
   const { classes } = props;
 
@@ -40,13 +40,10 @@ const BusChart = props => {
           date: formatDate(values.journeyDate)
         }
       });
-
-//      history.push("/searchresult");
     }
   });
 
   let dispatch = useDispatch();
-//  let history = useHistory();
   let handleSourceChange = (_, value) =>
     formik.setFieldValue("busRoute", value);
   let setSelectedDate = function(date) {
@@ -58,12 +55,8 @@ const BusChart = props => {
       let data = await busChart();
       console.log(data);
     })();
- //   axios.get(`${config.API_URL}/getAllBuses`).then(res => {
- //     let route = res.data.data;
- //     route = route.map(item => item.cityname);
-      setBusRoute(data);
-      props.stopLoading();
- //   });
+    setBusRoute(data);
+    props.stopLoading();
   }, []);
 
   return (
@@ -86,7 +79,7 @@ const BusChart = props => {
                   ListboxProps={{
                     name: "busRoute"
                   }}
-                  options={cityList}
+                  options={busRoute}
                   getOptionLabel={option => option}
                   onChange={handleSourceChange}
                   renderInput={params => (

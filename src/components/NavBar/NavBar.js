@@ -52,6 +52,10 @@ const NavBar = props => {
     handleClose(e);
     history.push("/mytrips");
   };
+  const handleBusChart = e => {
+    handleClose(e);
+    history.push("/buschart");
+  };
 
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
@@ -169,6 +173,7 @@ const NavBar = props => {
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleMyTrip}>My Trips</MenuItem>
+                          <MenuItem onClick={handleBusChart}>Bus Chart</MenuItem>
                           <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </MenuList>
                       </ClickAwayListener>
