@@ -13,18 +13,17 @@ import * as Yup from "yup";
 import { busChart } from "./../../apis/buschart/index";
 
 let validationSchema = Yup.object({
-  busRoute: Yup.string().required("Please select a city"),
+  busId: Yup.string().required("Please select a city"),
   journeyDate: Yup.date().required("Please select a date")
 });
 
 const BusChart = props => {
   const [busRoute, setBusRoute] = useState([]);
-  const [busId,setBusId]=useState();
   const { classes } = props;
 
   let formik = useFormik({
     initialValues: {
-      fromCity: "",
+      busId: "",
       journeyDate: new Date()
     },
     validationSchema,
@@ -32,7 +31,7 @@ const BusChart = props => {
       dispatch({
         type: Constants.SET_SEARCH,
         payload: {
-          from: values.busRoute,
+          busId: values.busId,
           journeyDate: formatDate(values.journeyDate)
         }
       });
@@ -40,21 +39,25 @@ const BusChart = props => {
   });
 
   let dispatch = useDispatch();
-  let handleSourceChange = (_, value) =>
-    formik.setFieldValue("busRoute", value);
+
+  let handleSourceChange = (_, value) => {
+    formik.setFieldValue("busId", value.busId);
+  };
+
   let setSelectedDate = function(date) {
     formik.setFieldValue("journeyDate", date);
+  };
+
+  let getLabels = option => {
+    return option.fromCity + "-" + option.toCity + " : " + option.startTime;
   };
 
   useEffect(() => {
     (async () => {
       let data = await busChart();
-      console.log(data);
-      const buses=data.map((data,key)=>data.fromCity+"-"+data.toCity+" : "+data.startTime);
-      const id=data.map((data,key)=>data.busID);
-      setBusRoute(buses);
+      setBusRoute(data);
+      props.stopLoading();
     })();
-    props.stopLoading();
   }, []);
 
   return (
@@ -73,12 +76,12 @@ const BusChart = props => {
               <Grid item xs={6}>
                 <p>Select Bus</p>
                 <Autocomplete
-                  id="busRoute"
+                  id="busId"
                   ListboxProps={{
-                    name: "busRoute"
+                    name: "busId"
                   }}
                   options={busRoute}
-                  getOptionLabel={option => option}
+                  getOptionLabel={option => getLabels(option)}
                   onChange={handleSourceChange}
                   renderInput={params => (
                     <TextField
