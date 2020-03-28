@@ -5,7 +5,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
-// import "./style.css";
 import { useDispatch } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { formatDate } from "../../utilities/Functions";
@@ -19,8 +18,8 @@ let validationSchema = Yup.object({
 });
 
 const BusChart = props => {
-  console.log("inside bus chart");
   const [busRoute, setBusRoute] = useState([]);
+  const [busId,setBusId]=useState();
   const { classes } = props;
 
   let formik = useFormik({
@@ -34,7 +33,7 @@ const BusChart = props => {
         type: Constants.SET_SEARCH,
         payload: {
           from: values.busRoute,
-          date: formatDate(values.journeyDate)
+          journeyDate: formatDate(values.journeyDate)
         }
       });
     }
@@ -51,10 +50,10 @@ const BusChart = props => {
     (async () => {
       let data = await busChart();
       console.log(data);
-      setBusRoute(data); // newly added
+      const buses=data.map((data,key)=>data.fromCity+"-"+data.toCity+" : "+data.startTime);
+      const id=data.map((data,key)=>data.busID);
+      setBusRoute(buses);
     })();
-    // setBusRoute(data); //NOTE : data is not available outside the context, the scope of the data variable is only limited to the IIFE above
-    //    props.stopLoading(); //Since this component is wraped with the Preloader component, props.stopLoading() should be called to stop the loader, otherwise the loading spinner will never stop
     props.stopLoading();
   }, []);
 
@@ -107,7 +106,6 @@ const BusChart = props => {
                   onChange={date => setSelectedDate(date)}
                   showMonthDropdown
                   dateFormat="MMM d, yyyy"
-                  minDate={new Date()}
                   className={classes.inputdate}
                 />
                 <br />
@@ -116,7 +114,7 @@ const BusChart = props => {
             </Grid>
             <br />
             <Button type="submit" className={classes.button}>
-              Search Buses
+              View Tickets
             </Button>
           </form>
         </Grid>
