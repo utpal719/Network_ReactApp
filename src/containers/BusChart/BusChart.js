@@ -5,12 +5,12 @@ import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch } from "react-redux";
-import Constants from "../../redux/actionConstants";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { busChart } from "./../../apis/buschart/index";
+import { getAllPassengersByBus } from "./../../apis/tickets/index";
+import PassengerTable from "./PassengerTable";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
@@ -19,6 +19,8 @@ let validationSchema = Yup.object({
 
 const BusChart = props => {
   const [busRoute, setBusRoute] = useState([]);
+  const [passengerList, setPassengerList] = useState();
+  const [showTable, setShowTable] = useState(false);
   const { classes } = props;
 
   let formik = useFormik({
@@ -28,17 +30,20 @@ const BusChart = props => {
     },
     validationSchema,
     onSubmit: function(values) {
-      dispatch({
-        type: Constants.SET_SEARCH,
-        payload: {
-          busId: values.busId,
-          journeyDate: formatDate(values.journeyDate)
-        }
-      });
+      const payload = {
+        busId: values.busId,
+        journeyDate: formatDate(values.journeyDate)
+      };
+      console.log("inside submit");
+      (async () => {
+        let data = await getAllPassengersByBus(payload);
+        setPassengerList(data);
+        console.log("data", data);
+        setShowTable(true);
+        props.stopLoading();
+      })();
     }
   });
-
-  let dispatch = useDispatch();
 
   let handleSourceChange = (_, value) => {
     formik.setFieldValue("busId", value.busId);
@@ -64,8 +69,8 @@ const BusChart = props => {
     <div className={classes.bg}>
       <Grid
         container
-        spacing={2}
-        direction="column"
+        spacing={4}
+        direction="row"
         className={classes.gridstyle}
         style={{ marginTop: 10 }}
       >
@@ -120,6 +125,9 @@ const BusChart = props => {
               View Tickets
             </Button>
           </form>
+        </Grid>
+        <Grid item xs={12}>
+          {showTable ? <PassengerTable list={passengerList} /> : null}
         </Grid>
       </Grid>
     </div>

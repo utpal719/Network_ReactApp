@@ -52,5 +52,16 @@ export const Styles = () => ({
   imgstyle: {
     width: "10%",
     height: "10%"
-  }
+  },
+  table : {
+    borderCollapse: "collapse"
+  },
+  tablehead:{
+    backgroundColor:"#edd31c",
+    color:"black"
+  },
+  tablerow:{'&:nth-of-type(odd)': {
+    backgroundColor: "lightyellow",
+  }}
+
 });
