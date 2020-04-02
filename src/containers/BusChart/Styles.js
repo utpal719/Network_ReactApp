@@ -39,7 +39,7 @@ export const Styles = () => ({
   },
   bg: {
     // backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
-    backgroundColor: "#eee"
+    backgroundColor: "#F2F2F2"
     // padding: "140px"
   },
   button: {
@@ -66,8 +66,9 @@ export const Styles = () => ({
     }
   },
   formContainer: {
-    background: "#eee",
+    background: "#F2F2F2",
     padding: "20px",
+    color: "#0B0B0B",
     boxShadow:
       "inset 0 0 15px rgba(66, 66, 66, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(58, 58, 58, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2)"
   }
