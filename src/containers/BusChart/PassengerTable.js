@@ -12,9 +12,7 @@ import {
 } from "@material-ui/core";
 
 const PassengerTable = props => {
-  console.log("props", props);
   const { classes, list } = props;
-  console.log("list", list);
   const columns = [
     { column: "Seat No" },
     { column: "Passenger Name" },
@@ -43,20 +41,28 @@ const PassengerTable = props => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map(item => {
-            return item.passengerList.map(header => {
-              return (
-                <TableRow className={classes.tablerow}>
-                  {innerList.map(il => {
-                    return <TableCell>{header[il.column]}</TableCell>;
-                  })}
-                  {outerList.map(ol => {
-                    return <TableCell>{item[ol.column]}</TableCell>;
-                  })}
-                </TableRow>
-              );
-            });
-          })}
+          {list.length ? (
+            list.map(item => {
+              return item.passengerList.map(header => {
+                return (
+                  <TableRow className={classes.tablerow}>
+                    {innerList.map(il => {
+                      return <TableCell>{header[il.column]}</TableCell>;
+                    })}
+                    {outerList.map(ol => {
+                      return <TableCell>{item[ol.column]}</TableCell>;
+                    })}
+                  </TableRow>
+                );
+              });
+            })
+          ) : (
+            <TableRow className={classes.tablerow}>
+              <TableCell colSpan={columns.length} align="center">
+                No Records found
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </Card>

@@ -3,14 +3,13 @@ import image from "./../../images/n2.jpg";
 export const Styles = () => ({
   gridstyle: {
     display: "flex",
-    width: "70%",
-    height: "auto",
     color: "white",
     paddingLeft: "40px",
     borderStyle: "rounded",
     background: "rgba(255,255,255,0.2)",
     marginTop: "88px",
     padding: "10px",
+    paddingBottom: "20px",
     border: "3px",
     borderRadius: "15px",
     fontFamily: "'Open Sans', Tahoma, Arial, helvetica, sans-serif"
@@ -39,8 +38,9 @@ export const Styles = () => ({
     borderWidth: "1px"
   },
   bg: {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
-    padding: "140px"
+    // backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
+    backgroundColor: "#eee"
+    // padding: "140px"
   },
   button: {
     color: "black",
@@ -53,15 +53,22 @@ export const Styles = () => ({
     width: "10%",
     height: "10%"
   },
-  table : {
+  table: {
     borderCollapse: "collapse"
   },
-  tablehead:{
-    backgroundColor:"#edd31c",
-    color:"black"
+  tablehead: {
+    backgroundColor: "#edd31c",
+    color: "black"
   },
-  tablerow:{'&:nth-of-type(odd)': {
-    backgroundColor: "lightyellow",
-  }}
-
+  tablerow: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: "lightyellow"
+    }
+  },
+  formContainer: {
+    background: "#eee",
+    padding: "20px",
+    boxShadow:
+      "inset 0 0 15px rgba(66, 66, 66, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(58, 58, 58, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2)"
+  }
 });

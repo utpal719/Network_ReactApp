@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Button, Grid, Paper } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -38,7 +38,6 @@ const BusChart = props => {
       (async () => {
         let data = await getAllPassengersByBus(payload);
         setPassengerList(data);
-        console.log("data", data);
         setShowTable(true);
         props.stopLoading();
       })();
@@ -72,61 +71,75 @@ const BusChart = props => {
         spacing={4}
         direction="row"
         className={classes.gridstyle}
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 90 }}
+        justify="center"
       >
-        <Grid item xs={12}>
-          <h3>BUS CHART</h3>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid container spacing={2} direction="row">
-              <Grid item xs={6}>
-                <p>Select Bus</p>
-                <Autocomplete
-                  id="busId"
-                  ListboxProps={{
-                    name: "busId"
-                  }}
-                  options={busRoute}
-                  getOptionLabel={option => getLabels(option)}
-                  onChange={handleSourceChange}
-                  renderInput={params => (
-                    <TextField
-                      {...params}
-                      placeholder="Select bus route"
-                      variant="outlined"
-                      className={classes.inputbox}
-                    />
-                  )}
-                />
-                <br />
-                <div class="error form-error">
-                  {formik.errors.busRoute &&
-                    formik.touched.busRoute &&
-                    formik.errors.busRoute}
-                </div>
+        <Grid item xs={10}>
+          <Paper elevation={2} className={classes.formContainer}>
+            <form onSubmit={formik.handleSubmit}>
+              <Grid container spacing={2} direction="row">
+                <Grid item xs={4}>
+                  <p>Select Bus</p>
+                  <Autocomplete
+                    id="busId"
+                    ListboxProps={{
+                      name: "busId"
+                    }}
+                    options={busRoute}
+                    getOptionLabel={option => getLabels(option)}
+                    onChange={handleSourceChange}
+                    renderInput={params => (
+                      <TextField
+                        {...params}
+                        placeholder="Select bus route"
+                        variant="outlined"
+                        size="small"
+                        className={classes.inputbox}
+                      />
+                    )}
+                  />
+                  <br />
+                  <div class="error">
+                    {formik.errors.busId &&
+                      formik.touched.busId &&
+                      formik.errors.busId}
+                  </div>
+                </Grid>
+                <Grid item xs={4}>
+                  <p>Departing</p>
+                  <DatePicker
+                    selected={formik.values.journeyDate}
+                    name="journeyDate"
+                    onChange={date => setSelectedDate(date)}
+                    showMonthDropdown
+                    dateFormat="MMM d, yyyy"
+                    popperPlacement="bottom-start"
+                    popperModifiers={{
+                      flip: {
+                        enabled: false
+                      },
+                      preventOverflow: {
+                        enabled: true,
+                        escapeWithReference: false
+                      }
+                    }}
+                    className={classes.inputdate}
+                  />
+                  <br />
+                  <div class="error form-error">
+                    {formik.errors.journeyDate}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button type="submit" className={classes.button}>
+                    View Tickets
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid container spacing={4} direction="row">
-              <Grid item xs={6}>
-                <p>Departing</p>
-                <DatePicker
-                  selected={formik.values.journeyDate}
-                  name="journeyDate"
-                  onChange={date => setSelectedDate(date)}
-                  showMonthDropdown
-                  dateFormat="MMM d, yyyy"
-                  className={classes.inputdate}
-                />
-                <br />
-                <div class="error form-error">{formik.errors.journeyDate}</div>
-              </Grid>
-            </Grid>
-            <br />
-            <Button type="submit" className={classes.button}>
-              View Tickets
-            </Button>
-          </form>
+            </form>
+          </Paper>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={10}>
           {showTable ? <PassengerTable list={passengerList} /> : null}
         </Grid>
       </Grid>
