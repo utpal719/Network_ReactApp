@@ -14,6 +14,7 @@ import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 let validationSchema = Yup.object({
   fromCity: Yup.string().required("Please select a city"),

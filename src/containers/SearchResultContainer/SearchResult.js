@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { getBuses } from "../../apis/buses";
 import moment from "moment";
 import Constants from "../../redux/actionConstants";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 /**
  * @author: Samudra Deka
@@ -55,10 +56,12 @@ function SearchResult(props) {
   }, []);
 
   return (
+    <ErrorBoundary>
     <div className={classes.gridstyle}>
       <BookingTitle data={data} />
       <ContentArea response={response} data={data} />
     </div>
+    </ErrorBoundary>
   );
 }
 

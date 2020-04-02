@@ -3,6 +3,7 @@ import cover from "./ne1.jpg";
 import { withStyles } from "@material-ui/core";
 import { Styles } from "./Styles";
 import TourismPageLayout from "./TourismPageLayout";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 const TourismPage = props => {
   const { classes } = props;
   return (

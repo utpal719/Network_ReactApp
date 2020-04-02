@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Dialog, DialogTitle, DialogContent, withStyles, Tabs, Tab, Grid, Select, Button, MenuItem, TextField, InputLabel } from "@material-ui/core";
 import { Styles } from "./Styles"
+import ErrorBoundary from "../../../components/ErrorBoundary/ErrorBoundary";
 
 const SearchModal = ({ classes }) => {
     let [isOpen, toggle] = useState(false);
@@ -11,6 +12,7 @@ const SearchModal = ({ classes }) => {
     let changeTrip = (e, newValue) => setTrip(newValue);
     console.log({ trip })
     return (
+        <ErrorBoundary>
         <div className={classes.modalLinkContainer}>
             <Typography variant="caption">Not what you are looking for? <a href="#" onClick={toggleModal}>Try your search again</a></Typography>
             <Dialog open={isOpen} onClose={handleClose} >
@@ -78,6 +80,7 @@ const SearchModal = ({ classes }) => {
                 </DialogContent>
             </Dialog>
         </div>
+        </ErrorBoundary>
     )
 }
 

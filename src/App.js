@@ -6,11 +6,13 @@ import rootReducer from "./redux/rootReducer";
 import routes from "./routes";
 import Preloader from "./components/Preloader/Preloader";
 import NavBar from "./components/NavBar/NavBar";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Footer/Footer"
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary"
 let store = createStore(rootReducer);
 
 function App() {
   return (
+    <ErrorBoundary>
     <Provider store={store}>
       <div className="App">
         <Router>
@@ -49,6 +51,7 @@ function App() {
         </Router>
       </div>
     </Provider>
+    </ErrorBoundary>
   );
 }
 

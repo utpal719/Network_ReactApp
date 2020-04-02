@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { book } from "../../apis/bookings";
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const validationSchema = Yup.object({
   email: Yup.string()

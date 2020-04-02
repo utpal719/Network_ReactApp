@@ -3,9 +3,12 @@ import { Grid, withStyles } from "@material-ui/core";
 import Filter from "../Filter/Filter";
 import { Styles } from "./Styles";
 import SearchContent from "../SearchContent/SearchContent";
+import ErrorBoundary from "./../../../components/ErrorBoundary/ErrorBoundary"
 
 const ContentArea = ({ classes, response, data: search }) => {
+
     return (
+        <ErrorBoundary>
         <div className={classes.section}>
             <Grid container justify="center">
                 <Grid item xs={11}>
@@ -16,6 +19,7 @@ const ContentArea = ({ classes, response, data: search }) => {
                 </Grid>
             </Grid>
         </div>
+        </ErrorBoundary>
     )
 }
 
