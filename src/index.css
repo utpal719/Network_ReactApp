@@ -17,3 +17,22 @@ code {
   color: tomato;
   font-size: 12px
 }
+
+@media print {
+  @page {
+    margin: 0%;
+    size: A4 portrait;
+    scale: 0;
+  }
+
+  div {
+    background: #fff !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  body {
+    transform: scale(.8);
+    background-color: #fff;
+  }
+}
