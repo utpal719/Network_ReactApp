@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
 import {
@@ -8,7 +8,7 @@ import {
   TableCell,
   TableBody,
   Card,
-  CardContent
+  Box
 } from "@material-ui/core";
 
 const PassengerTable = props => {
@@ -31,41 +31,43 @@ const PassengerTable = props => {
     { column: "agentFare" }
   ];
   return (
-    <Card>
-      <Table className={classes.table}>
-        <TableHead className={classes.tablehead}>
-          <TableRow>
-            {columns.map(item => {
-              return <TableCell>{item.column}</TableCell>;
-            })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {list.length ? (
-            list.map(item => {
-              return item.passengerList.map(header => {
-                return (
-                  <TableRow className={classes.tablerow}>
-                    {innerList.map(il => {
-                      return <TableCell>{header[il.column]}</TableCell>;
-                    })}
-                    {outerList.map(ol => {
-                      return <TableCell>{item[ol.column]}</TableCell>;
-                    })}
-                  </TableRow>
-                );
-              });
-            })
-          ) : (
-            <TableRow className={classes.tablerow}>
-              <TableCell colSpan={columns.length} align="center">
-                No Records found
-              </TableCell>
+    <Box displayPrint="block">
+      <Card>
+        <Table className={classes.table}>
+          <TableHead className={classes.tablehead}>
+            <TableRow>
+              {columns.map(item => {
+                return <TableCell>{item.column}</TableCell>;
+              })}
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </Card>
+          </TableHead>
+          <TableBody>
+            {list.length ? (
+              list.map(item => {
+                return item.passengerList.map(header => {
+                  return (
+                    <TableRow className={classes.tablerow}>
+                      {innerList.map(il => {
+                        return <TableCell>{header[il.column]}</TableCell>;
+                      })}
+                      {outerList.map(ol => {
+                        return <TableCell>{item[ol.column]}</TableCell>;
+                      })}
+                    </TableRow>
+                  );
+                });
+              })
+            ) : (
+              <TableRow className={classes.tablerow}>
+                <TableCell colSpan={columns.length} align="center">
+                  No Records found
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Card>
+    </Box>
   );
 };
 

@@ -32,10 +32,10 @@ export const Styles = () => ({
     width: "100%",
     height: "40px",
     color: "grey",
+    border: "none",
     borderStyle: "rounded",
     borderRadius: "5px",
-    borderColor: "#edd31c",
-    borderWidth: "1px"
+    paddingLeft: "6px"
   },
   bg: {
     // backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
