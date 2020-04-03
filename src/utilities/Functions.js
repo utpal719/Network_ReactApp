@@ -2,16 +2,29 @@ import moment from "moment";
 
 // FIXME: Use moment or react-moment.
 export const formatAMPM = strTime => {
-  let strSplit = strTime.split(":");
-  let hours = strSplit[0];
-  let ampm = hours >= 12 ? "PM" : "AM";
+  try {
+    if (strTime.indexOf(":") > -1) {
+      let strSplit = strTime.split(":");
+      let hours = strSplit[0];
+      let ampm = hours >= 12 ? "PM" : "AM";
 
-  hours = hours % 12;
-  hours = hours ? hours : 12; // the hour '0' should be '12'
-  const minutes = strSplit[1];
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      const minutes = strSplit[1];
 
-  const strAMAPMTime = `${hours}:${minutes} ${ampm}`;
-  return strAMAPMTime;
+      const strAMAPMTime = `${hours}:${minutes} ${ampm}`;
+      return strAMAPMTime;
+    } else {
+      let ampm = strTime >= 12 ? "PM" : "AM";
+      let hours = strTime % 12;
+      hours = hours ? hours : 12;
+      const minutes = "00";
+      return `${hours}:${minutes} ${ampm}`;
+    }
+  } catch (e) {
+    console.log("error while converting AM PM", strTime);
+    return strTime;
+  }
 };
 
 // FIXME: Use a localization library for formatting.

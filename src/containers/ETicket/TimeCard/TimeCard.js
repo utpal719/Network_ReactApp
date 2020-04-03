@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { Styles } from "../Styles";
 import { ArrowForwardRounded } from "@material-ui/icons";
+import { formatAMPM } from "../../../utilities/Functions";
 
 const TimeCard = ({ classes, ticket }) => {
   return (
@@ -23,7 +24,7 @@ const TimeCard = ({ classes, ticket }) => {
                 <strong>{ticket.fromCity}</strong>
               </Typography>
               <Typography variant="caption">
-                <strong>Departing at : {ticket.startTime}</strong>
+                <strong>Departing at : {formatAMPM(ticket.startTime)}</strong>
               </Typography>
             </CardContent>
           </Card>
@@ -43,7 +44,7 @@ const TimeCard = ({ classes, ticket }) => {
                 <strong>{ticket.toCity}</strong>
               </Typography>
               <Typography variant="caption">
-                <strong>Arriving at : {ticket.endTime}</strong>
+                <strong>Arriving at : {formatAMPM(ticket.endTime)}</strong>
               </Typography>
             </CardContent>
           </Card>
