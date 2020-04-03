@@ -35,12 +35,17 @@ export const Styles = () => ({
     color: "grey",
     borderStyle: "rounded",
     borderRadius: "5px",
-    borderColor: "#edd31c",
+    // borderColor: "#edd31c",
+    paddingLeft: "6px",
+    border: "none",
     borderWidth: "1px"
   },
   bg: {
-    backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
-    padding: "140px"
+    backgroundImage: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)), url(${image})`,
+    padding: "140px",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundAttachment: "fixed"
   },
   button: {
     color: "black",

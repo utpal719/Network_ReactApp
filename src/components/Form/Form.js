@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { TextField, Button, Grid } from "@material-ui/core";
 import DatePicker from "react-datepicker";
@@ -14,7 +14,6 @@ import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 
 let validationSchema = Yup.object({
   fromCity: Yup.string().required("Please select a city"),
@@ -25,6 +24,8 @@ let validationSchema = Yup.object({
 const Form = props => {
   const [cityList, setCityList] = useState([]);
   const { classes } = props;
+
+  let formBg = useRef(null);
 
   let formik = useFormik({
     initialValues: {
@@ -69,16 +70,28 @@ const Form = props => {
     });
   }, []);
 
+  useEffect(() => {
+    onscroll = function() {
+      let pageY = window.scrollY;
+      if (formBg.current) {
+        formBg.current.style.setProperty(
+          "background-position-y",
+          `${pageY * -0.15}px`
+        );
+      }
+    };
+  }, [window.scrollY, formBg.current]);
+
   return (
-    <div className={classes.bg}>
+    <div className={classes.bg} ref={formBg}>
       <Grid
         container
-        spacing={2}
+        spacing={1}
         direction="column"
         className={classes.gridstyle}
         style={{ marginTop: 10 }}
       >
-        <Grid item xs={12}>
+        <Grid item xs={10}>
           <h3>Online Bus Ticket Booking</h3>
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2} direction="row">
@@ -97,6 +110,7 @@ const Form = props => {
                       {...params}
                       placeholder="Select city name"
                       variant="outlined"
+                      size="small"
                       className={classes.inputbox}
                     />
                   )}
@@ -120,6 +134,7 @@ const Form = props => {
                       placeholder="Select city name"
                       name="toCity"
                       variant="outlined"
+                      size="small"
                       className={classes.inputbox}
                     />
                   )}
@@ -158,5 +173,4 @@ const Form = props => {
     </div>
   );
 };
-
 export default withStyles(Styles)(Form);

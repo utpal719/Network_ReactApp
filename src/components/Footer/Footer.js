@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
 import logo from "./../../images/footer.jpg";
 import { NavLink } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const Footer = props => {
   const { classes } = props;
   return (
@@ -18,29 +20,46 @@ const Footer = props => {
             <br />
             packages, and lots more!
           </Typography>
+          <ul className={classes.social}>
+            <li>
+              <i class="fab fa-facebook-f"></i>
+            </li>
+            <li>
+              <i class="fab fa-twitter"></i>
+            </li>
+            <li>
+              <i class="fab fa-google-plus"></i>
+            </li>
+            <li>
+              <i class="fab fa-linkedin"></i>
+            </li>
+            <li>
+              <i class="fab fa-pinterest"></i>
+            </li>
+          </ul>
         </Grid>
         <Grid item xs={4} className={classes.gitem}>
-          <NavLink to="/contact">
+          <NavLink to="/contact" className={classes.link}>
             <Typography variant="h8">Contact Us</Typography>
           </NavLink>
           <br />
-          <NavLink to="/aboutus">
+          <NavLink to="/aboutus" className={classes.link}>
             <Typography variant="h8">About Us</Typography>
           </NavLink>
           <br />
-          <NavLink to="/cancelticket">
+          <NavLink to="/cancelticket" className={classes.link}>
             <Typography variant="h8">Cancellation Policy </Typography>
           </NavLink>
           <br />
-          <NavLink to="/termsandconditions">
+          <NavLink to="/termsandconditions" className={classes.link}>
             <Typography variant="h8">Terms & Condition </Typography>
           </NavLink>
           <br />
-          <NavLink to="/privacypolicy">
+          <NavLink to="/privacypolicy" className={classes.link}>
             <Typography variant="h8">Privacy Policy </Typography>
           </NavLink>
           <br />
-          <NavLink to="/refundpolicy">
+          <NavLink to="/refundpolicy" className={classes.link}>
             <Typography variant="h8">Refund Policy </Typography>
           </NavLink>
           <br />
