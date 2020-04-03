@@ -9,7 +9,15 @@ const Carousel = props => {
   const { classes } = props;
   return (
     <div>
-      <Slider>
+      <Slider
+        centerMode={true}
+        arrows={false}
+        dots={true}
+        adaptiveHeight="true"
+        centerPadding={0}
+        autoplay={true}
+        className={classes.slider}
+      >
         <div>
           <img src={A} alt="ONE" className={classes.imageStyle} />
         </div>

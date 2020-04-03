@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, withStyles, Divider } from "@material-ui/core";
 import { Styles } from "./Styles";
-import Pdf from "./../../pdf/NetworkTravel.pdf"
+import Pdf from "./../../pdf/NetworkTravel.pdf";
 import TopDestinationBanner from "../../components/TopDestinationBanner/TopDestinationBanner";
 import ContactForm from "../../components/ContactUs/ContactForm";
 import ContactCard from "./ContactCard";
@@ -19,13 +19,17 @@ const TourismPageLayout = props => {
         Tailor-made Holidays & Group tours to Bhutan, Northeast India and
         Myanmar
       </Typography>
-      <br/>
+      <br />
       <Typography variant="h5" display="block" align="center">
-         <a href = {Pdf} target = "_blank" className={classes.navlink}>Download our E-Brouchure</a>
+        <a href={Pdf} target="_blank" className={classes.navlink}>
+          Download our E-Brouchure
+        </a>
       </Typography>
-      <br/>
+      <br />
       <TopDestinationBanner />
       <TopDestinationDetails />
+      <br />
+      <br />
       <br />
       <Typography variant="h5" align="center">
         Free travel plan suggestions

@@ -43,6 +43,7 @@ const BusChart = props => {
         busId: values.busId,
         journeyDate: formatDate(values.journeyDate)
       };
+      props.startLoading();
       (async () => {
         let data = await getAllPassengersByBus(payload);
         data = generateTableData(data);
