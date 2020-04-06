@@ -8,10 +8,10 @@ import {
   TableCell,
   TableBody,
   Card,
-  Box
+  Box,
 } from "@material-ui/core";
 
-const PassengerTable = props => {
+const PassengerTable = (props) => {
   const { classes, list } = props;
   const columns = [
     { column: "Seat No" },
@@ -20,7 +20,7 @@ const PassengerTable = props => {
     { column: "Mobile" },
     { column: "PNR Number" },
     { column: "Destination" },
-    { column: "User" }
+    { column: "User" },
   ];
   const innerList = [{ column: "seatNumber" }, { column: "passengerName" }];
   const outerList = [
@@ -28,29 +28,29 @@ const PassengerTable = props => {
     { column: "mobile" },
     { column: "pnrNumber" },
     { column: "toCity" },
-    { column: "userName" }
+    { column: "userName" },
   ];
   return (
     <Box displayPrint="block">
       <Card>
         <Table className={classes.table}>
-          <TableHead className={classes.tablehead}>
-            <TableRow>
-              {columns.map(item => {
-                return <TableCell>{item.column}</TableCell>;
-              })}
-            </TableRow>
-          </TableHead>
+          {/* <TableHead className={classes.tablehead}> */}
+          <TableRow className={classes.tablehead}>
+            {columns.map((item) => {
+              return <TableCell>{item.column}</TableCell>;
+            })}
+          </TableRow>
+          {/* </TableHead> */}
           <TableBody>
             {list.length ? (
-              list.map(item => {
-                return item.passengerList.map(header => {
+              list.map((item) => {
+                return item.passengerList.map((header) => {
                   return (
                     <TableRow className={classes.tablerow}>
-                      {innerList.map(il => {
+                      {innerList.map((il) => {
                         return <TableCell>{header[il.column]}</TableCell>;
                       })}
-                      {outerList.map(ol => {
+                      {outerList.map((ol) => {
                         return <TableCell>{item[ol.column]}</TableCell>;
                       })}
                     </TableRow>

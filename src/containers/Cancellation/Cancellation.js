@@ -11,7 +11,7 @@ import Alert from "@material-ui/lab/Alert";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
 
-const Cancellation = props => {
+const Cancellation = (props) => {
   let { classes } = props;
   let history = useHistory();
   /**state contains the data passed from  the cancellation page using history state */
@@ -24,12 +24,12 @@ const Cancellation = props => {
   let [isSubmitted, setSubmitted] = useState(false);
   let [cancellationError, setCancellationError] = useState({
     error: false,
-    message: ""
+    message: "",
   });
 
   let [error, setError] = useState({
     error: false,
-    message: "You must select a passenger"
+    message: "You must select a passenger",
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Cancellation = props => {
     (async () => {
       let data = await getCancelTicketBooking({
         pnrNumber,
-        mobile
+        mobile,
       });
 
       if (data.success) {
@@ -67,7 +67,7 @@ const Cancellation = props => {
     }
   };
 
-  let handleSubmit = _ => {
+  let handleSubmit = (_) => {
     if (!selectedPassengers.length) {
       setError({ ...error, error: true });
     } else {
@@ -75,7 +75,7 @@ const Cancellation = props => {
       setError({ ...error, error: false });
       let construct = {
         pnrNumber: pnrNumber,
-        passengerList: selectedPassengers
+        passengerList: selectedPassengers,
       };
       (async () => {
         let data = await cancelTicket(construct);

@@ -7,15 +7,14 @@ export const Styles = () => ({
     paddingLeft: "40px",
     borderStyle: "rounded",
     background: "rgba(255,255,255,0.2)",
-    marginTop: "88px",
     padding: "10px",
     paddingBottom: "20px",
     border: "3px",
     borderRadius: "15px",
-    fontFamily: "'Open Sans', Tahoma, Arial, helvetica, sans-serif"
+    fontFamily: "'Open Sans', Tahoma, Arial, helvetica, sans-serif",
   },
   style: {
-    color: "black"
+    color: "black",
   },
   inputbox: {
     backgroundColor: "white",
@@ -25,7 +24,7 @@ export const Styles = () => ({
     borderStyle: "rounded",
     borderRadius: "5px",
     borderColor: "grey",
-    borderWidth: "1px"
+    borderWidth: "1px",
   },
   inputdate: {
     backgroundColor: "white",
@@ -35,41 +34,44 @@ export const Styles = () => ({
     border: "none",
     borderStyle: "rounded",
     borderRadius: "5px",
-    paddingLeft: "6px"
+    paddingLeft: "6px",
+  },
+  marginTop88: {
+    marginTop: "100px",
   },
   bg: {
     // backgroundImage: `linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.4)), url(${image})`,
-    backgroundColor: "#F2F2F2"
+    backgroundColor: "#F2F2F2",
     // padding: "140px"
   },
   button: {
     color: "black",
     backgroundColor: "#edd31c",
     "&:hover": {
-      backgroundColor: "#edd31c"
-    }
+      backgroundColor: "#edd31c",
+    },
   },
   imgstyle: {
     width: "10%",
-    height: "10%"
+    height: "10%",
   },
   table: {
-    borderCollapse: "collapse"
+    borderCollapse: "collapse",
   },
   tablehead: {
     backgroundColor: "#edd31c",
-    color: "black"
+    color: "black",
   },
   tablerow: {
     "&:nth-of-type(odd)": {
-      backgroundColor: "lightyellow"
-    }
+      backgroundColor: "lightyellow",
+    },
   },
   formContainer: {
     background: "#F2F2F2",
     padding: "20px",
     color: "#0B0B0B",
     boxShadow:
-      "inset 0 0 15px rgba(66, 66, 66, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(58, 58, 58, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2)"
-  }
+      "inset 0 0 15px rgba(66, 66, 66, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(58, 58, 58, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2)",
+  },
 });
