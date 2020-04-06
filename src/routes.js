@@ -25,72 +25,72 @@ export default [
     exact: true,
     component: LoginPage,
     wrapPreloader: true,
-    defaultLoading: false
+    defaultLoading: false,
   },
   {
     path: "/register",
     exact: true,
-    component: RegisterPage
+    component: RegisterPage,
   },
   {
     path: "/contact",
     exact: true,
     component: ContactPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/printticket",
     exact: true,
     component: PrintTicketPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/cancelticket",
     exact: true,
     component: CancellationPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/tourism",
     exact: true,
     component: TourismPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/termsandconditions",
     exact: true,
     component: TandCPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/refundpolicy",
     exact: true,
     component: RefundPolicyPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/aboutus",
     exact: true,
     component: AboutUsPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/searchresult",
     exact: true,
     component: SearchResult,
-    wrapPreloader: true
+    wrapPreloader: true,
   },
   {
     path: "/privacypolicy",
     exact: true,
     component: PrivacyPolicyPage,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   {
     path: "/seatselection",
     exact: true,
     component: SeatSelection,
-    wrapPreloader: false
+    wrapPreloader: false,
   },
   { path: "/booking", exact: true, component: Booking, wrapPreloader: false },
   { path: "/e-ticket", exact: true, component: ETicket, wrapPreloader: true },
@@ -100,6 +100,6 @@ export default [
     path: "/cancelbooking",
     exact: true,
     component: Cancellation,
-    wrapPreloader: true
-  }
+    wrapPreloader: true,
+  },
 ];

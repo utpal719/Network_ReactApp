@@ -2,12 +2,11 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import LoginForm from "./LoginForm";
 import { Styles } from "./Styles";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-const Form = props => {
+const Form = (props) => {
   const { classes } = props;
   return (
     <div className={classes.bg}>
-      <LoginForm />
+      <LoginForm {...props} />
     </div>
   );
 };
