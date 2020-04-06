@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, withStyles, Paper, Box } from "@material-ui/core";
+import { Typography, Grid, withStyles, Paper, Box } from "@material-ui/core";
 import { Styles } from "./Styles";
 import PassengerDetailContainer from "./PassengerDetailContainer/PassengerDetailContainer";
 import CancellationPolicy from "./CancellationPolicy/CancellationPolicy";
@@ -40,7 +40,24 @@ const ETicket = props => {
         <div className={classes.gridstyle} />
       </Box>
       {error ? (
-        <NoRecord />
+        <NoRecord
+          render={
+            <>
+              <p>
+                <Typography variant="h6">No data found.</Typography>
+              </p>
+              <p>
+                <Typography variant="caption">
+                  Kindly ensure that you've entered the correct{" "}
+                  <span className={classes.textRed}>
+                    <strong>PNR</strong>
+                  </span>
+                  .
+                </Typography>
+              </p>
+            </>
+          }
+        />
       ) : (
         <>
           <Box displayPrint="block">

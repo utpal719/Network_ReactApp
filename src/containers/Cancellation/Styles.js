@@ -5,5 +5,11 @@ export const Styles = () => ({
   },
   container: {
     margin: "20px 0px"
+  },
+  textRight: {
+    textAlign: "right"
+  },
+  textLeft: {
+    textAlign: "left"
   }
 });

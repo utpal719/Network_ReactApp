@@ -20,7 +20,7 @@ const PassengerTable = props => {
     { column: "Mobile" },
     { column: "PNR Number" },
     { column: "Destination" },
-    { column: "Agent" }
+    { column: "User" }
   ];
   const innerList = [{ column: "seatNumber" }, { column: "passengerName" }];
   const outerList = [
@@ -28,7 +28,7 @@ const PassengerTable = props => {
     { column: "mobile" },
     { column: "pnrNumber" },
     { column: "toCity" },
-    { column: "agentFare" }
+    { column: "userName" }
   ];
   return (
     <Box displayPrint="block">

@@ -3,7 +3,7 @@ import { withStyles, Typography, Button } from "@material-ui/core";
 import { Styles } from "./Styles";
 import { useHistory } from "react-router-dom";
 
-const NoRecord = ({ classes }) => {
+const NoRecord = ({ classes, render }) => {
   let history = useHistory();
 
   let handleBack = _ => {
@@ -17,18 +17,7 @@ const NoRecord = ({ classes }) => {
             <Typography variant="h1" color="textSecondary">
               Ooops!!!
             </Typography>
-            <p>
-              <Typography variant="h6">No data found.</Typography>
-            </p>
-            <p>
-              <Typography variant="caption">
-                Kindly ensure that you've entered the correct{" "}
-                <span className={classes.textRed}>
-                  <strong>PNR</strong>
-                </span>
-                .
-              </Typography>
-            </p>
+            {render}
             <p className={classes.textCenter}>
               <Button variant="contained" color="primary" onClick={handleBack}>
                 Go back
