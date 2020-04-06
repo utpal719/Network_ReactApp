@@ -5,7 +5,7 @@ import {
   Grid,
   Paper,
   Box,
-  Typography
+  Typography,
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
@@ -23,26 +23,27 @@ import { formatAMPM } from "../../utilities/Functions";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
-  journeyDate: Yup.date().required("Please select a date")
+  journeyDate: Yup.date().required("Please select a date"),
 });
 
-const BusChart = props => {
+const BusChart = (props) => {
   const [busRoute, setBusRoute] = useState([]);
   const [selectedRoute, setSelectedBusRoute] = useState("");
   const [passengerList, setPassengerList] = useState([]);
+  const [seatCapacity, setSeatCapacity] = useState(0);
   const [showTable, setShowTable] = useState(false);
   const { classes } = props;
 
   let formik = useFormik({
     initialValues: {
       busId: "",
-      journeyDate: new Date()
+      journeyDate: new Date(),
     },
     validationSchema,
     onSubmit: function(values) {
       const payload = {
         busId: values.busId,
-        journeyDate: formatDate(values.journeyDate)
+        journeyDate: formatDate(values.journeyDate),
       };
       props.startLoading();
       (async () => {
@@ -52,7 +53,7 @@ const BusChart = props => {
         setShowTable(true);
         props.stopLoading();
       })();
-    }
+    },
   });
 
   let handleSourceChange = (_, value) => {
@@ -65,6 +66,7 @@ const BusChart = props => {
           " : " +
           formatAMPM(value.startTime)
       );
+      setSeatCapacity(value.seatCapacity);
     }
   };
 
@@ -72,7 +74,7 @@ const BusChart = props => {
     formik.setFieldValue("journeyDate", date);
   };
 
-  let getLabels = option => {
+  let getLabels = (option) => {
     return (
       option.fromCity +
       "-" +
@@ -84,14 +86,41 @@ const BusChart = props => {
 
   let generateTableData = function(data) {
     let tableData = [];
+    let seatsOccupied = [];
+    let blankFieldDummy = {
+      passengerList: [{ passengerName: "", seatNumber: "" }],
+      boardingPoint: "",
+      mobile: "",
+      pnrNumber: "",
+      toCity: "",
+      userName: "",
+    };
     for (let i = 0; i < data.length; i++) {
       let eachBooking = data[i];
       let passengerList = [...eachBooking.passengerList];
       for (let j = 0; j < passengerList.length; j++) {
         let passengerDetails = passengerList[j];
+        seatsOccupied.push(passengerDetails.seatNumber);
         tableData.push({ ...eachBooking, passengerList: [passengerDetails] });
       }
     }
+    /**Fill the list with blank data */
+    for (let i = 1; i <= seatCapacity; i++) {
+      if (!seatsOccupied.includes(i)) {
+        tableData.push({
+          ...blankFieldDummy,
+          passengerList: [{ ...blankFieldDummy[0], seatNumber: i }],
+        });
+      }
+    }
+    // for (let i = 0; i < data.length; i++) {
+    //   let eachBooking = data[i];
+    //   let passengerList = [...eachBooking.passengerList];
+    //   for (let j = 0; j < passengerList.length; j++) {
+    //     let passengerDetails = passengerList[j];
+    //     tableData.push({ ...eachBooking, passengerList: [passengerDetails] });
+    //   }
+    // }
     tableData = tableData.sort(
       (a, b) => a.passengerList[0].seatNumber - b.passengerList[0].seatNumber
     );
@@ -107,23 +136,22 @@ const BusChart = props => {
   }, []);
 
   return (
-    <div className={classes.bg}>
+    <div id="busChart" className={classes.bg}>
       <Grid
         container
         spacing={4}
         direction="row"
         className={classes.gridstyle}
-        style={{ marginTop: 90 }}
         justify="center"
       >
-        <Grid item xs={10}>
+        <Grid item xs={10} className="pull">
           <Box display="none" displayPrint="block">
             <Typography varaint="h6" color="primary">
               {selectedRoute}
             </Typography>
           </Box>
 
-          <Box displayPrint="none">
+          <Box displayPrint="none" className={classes.marginTop88}>
             <Paper elevation={2} className={classes.formContainer}>
               <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={2} direction="row">
@@ -133,12 +161,12 @@ const BusChart = props => {
                     <Autocomplete
                       id="busId"
                       ListboxProps={{
-                        name: "busId"
+                        name: "busId",
                       }}
                       options={busRoute}
-                      getOptionLabel={option => getLabels(option)}
+                      getOptionLabel={(option) => getLabels(option)}
                       onChange={handleSourceChange}
-                      renderInput={params => (
+                      renderInput={(params) => (
                         <TextField
                           {...params}
                           placeholder="Select bus route"
@@ -160,18 +188,18 @@ const BusChart = props => {
                     <DatePicker
                       selected={formik.values.journeyDate}
                       name="journeyDate"
-                      onChange={date => setSelectedDate(date)}
+                      onChange={(date) => setSelectedDate(date)}
                       showMonthDropdown
                       dateFormat="MMM d, yyyy"
                       popperPlacement="bottom-start"
                       popperModifiers={{
                         flip: {
-                          enabled: false
+                          enabled: false,
                         },
                         preventOverflow: {
                           enabled: true,
-                          escapeWithReference: false
-                        }
+                          escapeWithReference: false,
+                        },
                       }}
                       className={classes.inputdate}
                     />
@@ -199,8 +227,10 @@ const BusChart = props => {
             </Paper>
           </Box>
         </Grid>
-        <Grid item xs={10}>
-          {showTable ? <PassengerTable list={passengerList} /> : null}
+        <Grid item xs={10} className="pull">
+          {showTable ? (
+            <PassengerTable list={passengerList} seatCapacity={seatCapacity} />
+          ) : null}
         </Grid>
       </Grid>
     </div>
