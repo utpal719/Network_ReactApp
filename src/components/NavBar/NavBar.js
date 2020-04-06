@@ -120,11 +120,6 @@ const NavBar = props => {
             </Button>
           </NavLink>
 
-          <NavLink to="/reports" style={{ textDecoration: "none" }}>
-            <Button color="inherit" className={classes.button}>
-              REPORTS
-            </Button>
-          </NavLink>
           {/** If user is logged in, hide Login button and show a menu item instead */}
           {!userInfo.loggedIn ? (
             <NavLink to="/login" style={{ textDecoration: "none" }}>
@@ -173,7 +168,9 @@ const NavBar = props => {
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleMyTrip}>My Trips</MenuItem>
-                          <MenuItem onClick={handleBusChart}>Bus Chart</MenuItem>
+                          <MenuItem onClick={handleBusChart}>
+                            Bus Chart
+                          </MenuItem>
                           <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </MenuList>
                       </ClickAwayListener>
