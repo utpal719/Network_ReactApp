@@ -19,6 +19,7 @@ import { busChart } from "./../../apis/buschart/index";
 import { getAllPassengersByBus } from "./../../apis/tickets/index";
 import PassengerTable from "./PassengerTable";
 import { Print } from "@material-ui/icons";
+import { formatAMPM } from "../../utilities/Functions";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
@@ -58,7 +59,11 @@ const BusChart = props => {
     if (value) {
       formik.setFieldValue("busId", value.busId);
       setSelectedBusRoute(
-        value.fromCity + "-" + value.toCity + " : " + value.startTime
+        value.fromCity +
+          "-" +
+          value.toCity +
+          " : " +
+          formatAMPM(value.startTime)
       );
     }
   };
@@ -68,7 +73,13 @@ const BusChart = props => {
   };
 
   let getLabels = option => {
-    return option.fromCity + "-" + option.toCity + " : " + option.startTime;
+    return (
+      option.fromCity +
+      "-" +
+      option.toCity +
+      " : " +
+      formatAMPM(option.startTime)
+    );
   };
 
   let generateTableData = function(data) {

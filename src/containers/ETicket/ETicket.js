@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, withStyles, Paper, Box } from "@material-ui/core";
+import { Typography, Grid, withStyles, Paper, Box } from "@material-ui/core";
 import { Styles } from "./Styles";
 import PassengerDetailContainer from "./PassengerDetailContainer/PassengerDetailContainer";
 import CancellationPolicy from "./CancellationPolicy/CancellationPolicy";
