@@ -18,10 +18,10 @@ import * as Yup from "yup";
 let validationSchema = Yup.object({
   fromCity: Yup.string().required("Please select a city"),
   toCity: Yup.string().required("Please select a city"),
-  journeyDate: Yup.date().required("Please select a date")
+  journeyDate: Yup.date().required("Please select a date"),
 });
 
-const Form = props => {
+const Form = (props) => {
   const [cityList, setCityList] = useState([]);
   const { classes } = props;
 
@@ -31,7 +31,7 @@ const Form = props => {
     initialValues: {
       fromCity: "",
       toCity: "",
-      journeyDate: new Date()
+      journeyDate: new Date(),
     },
     validationSchema,
     onSubmit: function(values) {
@@ -40,12 +40,12 @@ const Form = props => {
         payload: {
           from: values.fromCity,
           to: values.toCity,
-          date: formatDate(values.journeyDate)
-        }
+          date: formatDate(values.journeyDate),
+        },
       });
 
       history.push("/searchresult");
-    }
+    },
   });
 
   let dispatch = useDispatch();
@@ -62,9 +62,9 @@ const Form = props => {
   };
 
   useEffect(() => {
-    axios.get(`${config.API_URL}/getAllCity`).then(res => {
+    axios.get(`${config.API_URL}/getAllCity`).then((res) => {
       let city = res.data.data;
-      city = city.map(item => item.cityname);
+      city = city.map((item) => item.cityname);
       setCityList(city);
       props.stopLoading();
     });
@@ -100,12 +100,12 @@ const Form = props => {
                 <Autocomplete
                   id="fromCity"
                   ListboxProps={{
-                    name: "fromCity"
+                    name: "fromCity",
                   }}
                   options={cityList}
-                  getOptionLabel={option => option}
+                  getOptionLabel={(option) => option}
                   onChange={handleSourceChange}
-                  renderInput={params => (
+                  renderInput={(params) => (
                     <TextField
                       {...params}
                       placeholder="Select city name"
@@ -126,9 +126,9 @@ const Form = props => {
                 <p>To</p>
                 <Autocomplete
                   options={cityList}
-                  getOptionLabel={option => option}
+                  getOptionLabel={(option) => option}
                   onChange={handleDestinationChange}
-                  renderInput={params => (
+                  renderInput={(params) => (
                     <TextField
                       {...params}
                       placeholder="Select city name"
@@ -153,7 +153,7 @@ const Form = props => {
                 <DatePicker
                   selected={formik.values.journeyDate}
                   name="journeyDate"
-                  onChange={date => setSelectedDate(date)}
+                  onChange={(date) => setSelectedDate(date)}
                   showMonthDropdown
                   dateFormat="MMM d, yyyy"
                   minDate={new Date()}

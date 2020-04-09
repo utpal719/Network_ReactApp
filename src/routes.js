@@ -92,7 +92,7 @@ export default [
     component: SeatSelection,
     wrapPreloader: false,
   },
-  { path: "/booking", exact: true, component: Booking, wrapPreloader: false },
+  { path: "/booking", exact: true, component: Booking, wrapPreloader: true },
   { path: "/e-ticket", exact: true, component: ETicket, wrapPreloader: true },
   { path: "/mytrips", exact: true, component: MyTrips, wrapPreloader: true },
   { path: "/buschart", exact: true, component: BusChart, wrapPreloader: true },

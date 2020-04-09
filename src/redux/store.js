@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import config from "../config";
 
-export const decodeToken = token => {
+export const decodeToken = (token) => {
   let user = {
-    loggedIn: token ? true : false
+    loggedIn: token ? true : false,
   };
   if (token) {
     let decoded = jwt.decode(token, config.JWT_SECRET);
@@ -12,7 +12,7 @@ export const decodeToken = token => {
   return {
     get: function(field) {
       return user[field];
-    }
+    },
   };
 };
 
@@ -24,19 +24,19 @@ export const initialState = {
     loggedIn: decoded.get("loggedIn") ? true : false,
     role: decoded.get("role"),
     username: decoded.get("userName"),
-    token: decoded.get("token")
+    token: decoded.get("token"),
   },
   search: {
     to: "",
     from: "",
-    date: ""
+    date: "",
   },
   bus: {
     busId: "",
     midId: "",
     startTime: "",
     endTime: "",
-    seats: ""
+    seats: "",
   },
   bookingInfo: {
     fare: 0,
@@ -45,7 +45,7 @@ export const initialState = {
     mobile: "",
     totalPayable: 0,
     seats: [],
-    boardingPoint: ""
+    boardingPoint: "",
   },
-  busSearchData: []
+  busSearchData: [],
 };
