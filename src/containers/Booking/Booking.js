@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, withStyles, Typography, Button } from "@material-ui/core";
-import { useSelector, useStore } from "react-redux";
+import { useSelector } from "react-redux";
 import { Styles } from "./Styles";
 import { AccountCircle, PermContactCalendar } from "@material-ui/icons";
 import PassengerInfo from "./PassengerInfo/PassengerInfo";
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { book } from "../../apis/bookings";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+import Alert from "@material-ui/lab/Alert";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -22,34 +22,39 @@ const validationSchema = Yup.object({
     Yup.object({
       passengerName: Yup.string().required("Please enter a name"),
       gender: Yup.string().required("Please provide your gender"),
-      age: Yup.string().required("Please enter your age")
+      age: Yup.string().required("Please enter your age"),
     })
-  )
+  ),
 });
 /**
  * @method Booking
  * @description - This Component handles the collection of passenger details and the contact details.
  * @param {Object} props - props passed down the component tree
  */
-const Booking = ({ classes }) => {
+const Booking = ({ classes, startLoading, stopLoading }) => {
   /**get selected seats and total fare */
-  let { seats, fare, boardingPoint } = useSelector(state => state.bookingInfo);
+  let { seats, fare, boardingPoint } = useSelector(
+    (state) => state.bookingInfo
+  );
+  let [submitted, setSubmitted] = useState(false);
+  let [error, setError] = useState(false);
   /**get selected bus details */
-  let busDetails = useSelector(state => state.bus);
+  let busDetails = useSelector((state) => state.bus);
   /**get search details */
-  let searchInfo = useSelector(state => state.search);
+  let searchInfo = useSelector((state) => state.search);
 
   let history = useHistory();
   let [defaultPassenger, setDefaultPassenger] = useState({
     passengerName: "",
     gender: "",
-    age: ""
+    age: "",
   });
 
   useEffect(() => {
     if (history.action === "POP") {
       history.push("/");
     }
+    stopLoading();
   }, []);
 
   let passengerArr = [];
@@ -57,7 +62,7 @@ const Booking = ({ classes }) => {
     passengerArr.push({
       passengerName: "",
       gender: "",
-      age: ""
+      age: "",
     });
   }
 
@@ -65,12 +70,13 @@ const Booking = ({ classes }) => {
     initialValues: {
       email: "",
       phone: "",
-      passengers: passengerArr
+      passengers: passengerArr,
     },
     validationSchema,
     validateOnBlur: false,
     validateOnChange: true,
-    onSubmit: values => {
+    onSubmit: (values) => {
+      setSubmitted(true);
       let bookingDetails = {
         busId: busDetails.busId,
         midId: busDetails.midId || 0,
@@ -86,22 +92,30 @@ const Booking = ({ classes }) => {
         endTime: busDetails.endTime,
         boardingPoint: boardingPoint,
         passengerList: values.passengers,
-        selectedSeat: seats.join(",")
+        selectedSeat: seats.join(","),
       };
+      startLoading();
       (async () => {
-        let { data } = await book(bookingDetails);
-        console.log(data);
-        history.push("/e-ticket", {
-          pnrNumber: data.pnrNumber
-        });
+        let data = await book(bookingDetails);
+        if (data.success) {
+          history.push("/e-ticket", {
+            pnrNumber: data.pnrNumber,
+          });
+        } else {
+          setError(true);
+          stopLoading();
+          setTimeout((_) => {
+            history.push("/");
+          }, 3000);
+        }
       })();
-    }
+    },
   });
   /**
    * Fill all passenger detail based on the input of the 1st passenger.
    * If other passenger fields are filled, ignore changes
    **/
-  let prefiller = defaultPassenger => {
+  let prefiller = (defaultPassenger) => {
     setDefaultPassenger(defaultPassenger);
     for (let i = 1; i < seats.length; i++) {
       formik.setFieldValue(
@@ -159,6 +173,13 @@ const Booking = ({ classes }) => {
               </Grid>
             </Grid>
             <Grid container justify="center">
+              <Grid item xs={12} md={10} className={classes.alert}>
+                {error && (
+                  <Alert severity="error">
+                    Opps! Your booking was unsuccessful
+                  </Alert>
+                )}
+              </Grid>
               <Grid item xs={12} md={10}>
                 <Grid container>
                   <Grid item md={2} xs={4} className={classes.flexed}>
@@ -169,8 +190,14 @@ const Booking = ({ classes }) => {
                       Total fare : &#8377; {fare}
                     </Typography>
                   </Grid>
+
                   <Grid item md={6} xs={8}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      type="submit"
+                      disabled={submitted ? true : false}
+                      variant="contained"
+                      color="primary"
+                    >
                       Proceed to checkout
                     </Button>
                   </Grid>

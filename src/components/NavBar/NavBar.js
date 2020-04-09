@@ -11,7 +11,7 @@ import {
   Paper,
   MenuItem,
   ClickAwayListener,
-  Box
+  Box,
 } from "@material-ui/core";
 import { AccountCircle, ArrowDropDown } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
@@ -21,19 +21,19 @@ import { useSelector, useDispatch } from "react-redux";
 import logo from "./logo1.png";
 import actionConstants from "../../redux/actionConstants";
 
-const NavBar = props => {
+const NavBar = (props) => {
   const { classes } = props;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  let userInfo = useSelector(state => state.user);
+  let userInfo = useSelector((state) => state.user);
   let dispatch = useDispatch();
   let history = useHistory();
 
   const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -41,18 +41,18 @@ const NavBar = props => {
     setOpen(false);
   };
 
-  const handleLogout = event => {
+  const handleLogout = (event) => {
     handleClose(event);
     localStorage.removeItem("ntToken");
     dispatch({ type: actionConstants.SET_USER_INFO, payload: { token: null } });
     history.push("/");
   };
 
-  const handleMyTrip = e => {
+  const handleMyTrip = (e) => {
     handleClose(e);
     history.push("/mytrips");
   };
-  const handleBusChart = e => {
+  const handleBusChart = (e) => {
     handleClose(e);
     history.push("/buschart");
   };
@@ -157,7 +157,7 @@ const NavBar = props => {
                     {...TransitionProps}
                     style={{
                       transformOrigin:
-                        placement === "bottom" ? "center top" : "center bottom"
+                        placement === "bottom" ? "center top" : "center bottom",
                     }}
                   >
                     <Paper>
@@ -168,9 +168,12 @@ const NavBar = props => {
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleMyTrip}>My Trips</MenuItem>
-                          <MenuItem onClick={handleBusChart}>
-                            Bus Chart
-                          </MenuItem>
+
+                          {userInfo.role === 1 && (
+                            <MenuItem onClick={handleBusChart}>
+                              Bus Chart
+                            </MenuItem>
+                          )}
                           <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </MenuList>
                       </ClickAwayListener>

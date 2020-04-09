@@ -1,36 +1,39 @@
 export const Styles = () => ({
   gridstyle: {
-    marginTop: "88px"
+    marginTop: "88px",
   },
   section: {
-    margin: "100px 0px 50px 0px"
+    margin: "100px 0px 50px 0px",
   },
   sectionPadded: {
-    padding: "50px 0px"
+    padding: "50px 0px",
   },
   passengerDetails: {
     margin: "20px 0px",
     padding: "12px",
     lineHeight: "20px",
-    color: "#8D8D8D"
+    color: "#8D8D8D",
   },
   checkbox: {
-    fontSize: "12px"
+    fontSize: "12px",
   },
   flexed: {
-    display: "flex"
+    display: "flex",
   },
   marginAuto: {
-    margin: "auto"
+    margin: "auto",
   },
   seatDisplay: {
     textAlign: "center",
-    color: "yellowgreen"
+    color: "yellowgreen",
   },
   inputBox: {
-    fontSize: "12px"
+    fontSize: "12px",
   },
   inputLabel: {
-    lineHeight: "1.80"
-  }
+    lineHeight: "1.80",
+  },
+  alert: {
+    marginBottom: "20px",
+  },
 });
