@@ -99,7 +99,7 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
         let data = await book(bookingDetails);
         if (data.success) {
           history.push("/e-ticket", {
-            pnrNumber: data.pnrNumber,
+            pnrNumber: data.data.pnrNumber,
           });
         } else {
           setError(true);
