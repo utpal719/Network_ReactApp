@@ -6,14 +6,13 @@ import logo from "./../../../images/googleplay.png";
 import luxury from "./../../../images/70-1.png";
 import essence from "./../../../images/70-2.png";
 import trans from "./../../../images/70-3.png";
-const CarouselBanner = props => {
+const CarouselBanner = (props) => {
   const { classes } = props;
   let bg = useRef(null);
 
   useEffect(() => {
     window.addEventListener("scroll", function() {
       let pageY = window.scrollY;
-      console.log(pageY);
       if (bg.current) {
         bg.current.style.setProperty(
           "background-position-y",

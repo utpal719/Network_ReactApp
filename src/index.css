@@ -44,3 +44,17 @@ code {
     background-color: #fff;
   }
 }
+
+
+.mobileApp {
+  display: flex;
+  height: 100vh;
+}
+
+.mobileApp p {
+  margin: auto;
+}
+
+.mobileApp p img {
+  width: 100%;
+}

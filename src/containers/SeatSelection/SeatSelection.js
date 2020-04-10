@@ -9,9 +9,13 @@ import Preloader from "../../components/Preloader/Preloader";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const SeatSelection = ({ classes }) => {
-  let { fare } = useSelector(state => state.bus);
+  let { fare } = useSelector((state) => state.bus);
   let [selectedSeats, setSelected] = useState([]);
   let totalFare = selectedSeats.length * fare;
+  /**Get percentage of commission of agent*/
+  let { percentage } = useSelector((state) => state.user);
+  let agentFare = percentage ? totalFare - totalFare * (percentage / 100) : 0;
+
   let history = useHistory();
 
   useEffect(() => {
@@ -20,7 +24,7 @@ const SeatSelection = ({ classes }) => {
     }
   }, []);
 
-  let handleSelect = selected => {
+  let handleSelect = (selected) => {
     setSelected([...selected]);
   };
 
@@ -31,8 +35,8 @@ const SeatSelection = ({ classes }) => {
       <Preloader
         handleSelect={handleSelect}
         selectedSeats={selectedSeats}
-        // handleBoardingPoint={handleBoardingPoint}
         totalFare={totalFare}
+        agentFare={agentFare}
         Component={SelectionContainer}
       />
     </div>

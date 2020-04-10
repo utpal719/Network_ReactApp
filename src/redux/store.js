@@ -18,12 +18,14 @@ export const decodeToken = (token) => {
 
 let token = localStorage.getItem("ntToken");
 let decoded = decodeToken(token);
+console.log("percentage", decoded.get("percentage"));
 
 export const initialState = {
   user: {
     loggedIn: decoded.get("loggedIn") ? true : false,
     role: decoded.get("role"),
     username: decoded.get("userName"),
+    percentage: decoded.get("percentage"),
     token: decoded.get("token"),
   },
   search: {
@@ -46,6 +48,7 @@ export const initialState = {
     totalPayable: 0,
     seats: [],
     boardingPoint: "",
+    agentFare: 0,
   },
   busSearchData: [],
 };
