@@ -11,8 +11,8 @@ export default function(state = initialState, action) {
         search: {
           to: payload.to,
           from: payload.from,
-          date: payload.date
-        }
+          date: payload.date,
+        },
       };
     case Constants.RESET_SEARCH:
       return { ...initialState };
@@ -25,18 +25,22 @@ export default function(state = initialState, action) {
           startTime: payload.startTime,
           endTime: payload.endTime,
           seatCapacity: payload.seatCapacity,
-          fare: payload.fare
-        }
+          fare: payload.fare,
+        },
       };
     case Constants.SET_FARE:
       return {
         ...state,
-        bookingInfo: { ...state.bookingInfo, fare: payload.fare }
+        bookingInfo: {
+          ...state.bookingInfo,
+          fare: payload.fare,
+          agentFare: payload.agentFare,
+        },
       };
     case Constants.SET_SEATS:
       return {
         ...state,
-        bookingInfo: { ...state.bookingInfo, seats: payload.seats }
+        bookingInfo: { ...state.bookingInfo, seats: payload.seats },
       };
 
     case Constants.SET_PASSENGER_DETAILS: {
@@ -46,7 +50,7 @@ export default function(state = initialState, action) {
       bookingInfo = { ...bookingInfo, passengerDetails: passengerDetails };
       return {
         ...state,
-        bookingInfo
+        bookingInfo,
       };
     }
     case Constants.SET_BUS_SEARCH_DATA: {
@@ -60,8 +64,8 @@ export default function(state = initialState, action) {
           loggedIn: decoded.get("loggedIn") ? true : false,
           role: decoded.get("role"),
           username: decoded.get("userName"),
-          token: decoded.get("token")
-        }
+          token: decoded.get("token"),
+        },
       };
     }
     case Constants.SET_BOARDING_POINT: {
@@ -69,8 +73,8 @@ export default function(state = initialState, action) {
         ...state,
         bookingInfo: {
           ...state.bookingInfo,
-          boardingPoint: payload.boardingPoint
-        }
+          boardingPoint: payload.boardingPoint,
+        },
       };
     }
     default:

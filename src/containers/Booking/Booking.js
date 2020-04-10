@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Grid, withStyles, Typography, Button } from "@material-ui/core";
+import {
+  Grid,
+  withStyles,
+  Typography,
+  Button,
+  Divider,
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Styles } from "./Styles";
 import { AccountCircle, PermContactCalendar } from "@material-ui/icons";
@@ -32,8 +38,8 @@ const validationSchema = Yup.object({
  * @param {Object} props - props passed down the component tree
  */
 const Booking = ({ classes, startLoading, stopLoading }) => {
-  /**get selected seats and total fare */
-  let { seats, fare, boardingPoint } = useSelector(
+  /**get selected seats, total fare and agentFare */
+  let { seats, fare, agentFare, boardingPoint } = useSelector(
     (state) => state.bookingInfo
   );
   let [submitted, setSubmitted] = useState(false);
@@ -85,7 +91,7 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
         email: values.email,
         totalFare: fare,
         noOfSeat: seats.length,
-        agentFare: "",
+        agentFare: agentFare.toString(),
         toCity: searchInfo.to,
         fromCity: searchInfo.from,
         startTime: busDetails.startTime,
@@ -155,7 +161,6 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
                       defaultPassenger={defaultPassenger}
                       prefiller={prefiller}
                       formik={formik}
-                      //   handlePassenger={handlePassenger}
                     ></PassengerInfo>
                   );
                 })}
@@ -182,7 +187,13 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
               </Grid>
               <Grid item xs={12} md={10}>
                 <Grid container>
-                  <Grid item md={2} xs={4} className={classes.flexed}>
+                  <Grid item md={4} xs={6} className={classes.flexed}>
+                    <Typography
+                      variant="subtitle1"
+                      className={classes.marginAuto}
+                    >
+                      Agent fare : &#8377; {agentFare}
+                    </Typography>
                     <Typography
                       variant="subtitle1"
                       className={classes.marginAuto}
@@ -190,8 +201,7 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
                       Total fare : &#8377; {fare}
                     </Typography>
                   </Grid>
-
-                  <Grid item md={6} xs={8}>
+                  <Grid item md={8} xs={12} style={{ textAlign: "right" }}>
                     <Button
                       type="submit"
                       disabled={submitted ? true : false}

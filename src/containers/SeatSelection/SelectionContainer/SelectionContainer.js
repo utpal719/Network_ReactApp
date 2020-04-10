@@ -6,7 +6,7 @@ import {
   Typography,
   Button,
   Paper,
-  Select
+  Select,
 } from "@material-ui/core";
 import { Styles } from "../Styles";
 import { CalendarToday } from "@material-ui/icons";
@@ -21,17 +21,18 @@ const SelectionContainer = ({
   //   handleBoardingPoint,
   selectedSeats,
   totalFare,
-  stopLoading
+  agentFare,
+  stopLoading,
 }) => {
   let dispatch = useDispatch();
   let history = useHistory();
-  let searchData = useSelector(state => state.search);
+  let searchData = useSelector((state) => state.search);
   let [boardingPoints, setBoardingPoints] = useState([]);
   let [occupiedSeats, setOccupiedSeats] = useState([]);
   let [boardingPoint, setBoardingPoint] = useState(0);
 
   let { seatCapacity = 32, busId, midId: isMid } = useSelector(
-    state => state.bus
+    (state) => state.bus
   );
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const SelectionContainer = ({
       let data = await getBusDetailsById({
         journeyDate: searchData.date,
         busId,
-        isMid: isMid || 0
+        isMid: isMid || 0,
       });
       if (data) {
         let boardingPoints = data.bus.boardingPoints;
@@ -53,17 +54,20 @@ const SelectionContainer = ({
     })();
   }, []);
 
-  let handleBoardingSelect = e => {
+  let handleBoardingSelect = (e) => {
     let boardingPoint = e.target.value;
     setBoardingPoint(boardingPoint);
     dispatch({
       type: Actions.SET_BOARDING_POINT,
-      payload: { boardingPoint: boardingPoints[boardingPoint - 1] }
+      payload: { boardingPoint: boardingPoints[boardingPoint - 1] },
     });
   };
 
   let handleContinue = () => {
-    dispatch({ type: Actions.SET_FARE, payload: { fare: totalFare } });
+    dispatch({
+      type: Actions.SET_FARE,
+      payload: { fare: totalFare, agentFare: agentFare },
+    });
     dispatch({ type: Actions.SET_SEATS, payload: { seats: selectedSeats } });
     history.push("/booking");
   };
@@ -136,7 +140,10 @@ const SelectionContainer = ({
                         Seat (s) : {selectedSeats.length}
                       </Typography>
                       <Typography variant="subtitle1">
-                        Fare : &#8377;{totalFare}
+                        Agent Fare : &#8377;{agentFare}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        Total Fare : &#8377;{totalFare}
                       </Typography>
                     </Grid>
                   </Grid>
