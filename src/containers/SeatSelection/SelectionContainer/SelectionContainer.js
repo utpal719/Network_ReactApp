@@ -18,7 +18,6 @@ import { getBusDetailsById } from "../../../apis/buses";
 const SelectionContainer = ({
   classes,
   handleSelect,
-  //   handleBoardingPoint,
   selectedSeats,
   totalFare,
   agentFare,
@@ -139,9 +138,11 @@ const SelectionContainer = ({
                       <Typography variant="subtitle1">
                         Seat (s) : {selectedSeats.length}
                       </Typography>
-                      <Typography variant="subtitle1">
-                        Agent Fare : &#8377;{agentFare}
-                      </Typography>
+                      {agentFare ? (
+                        <Typography variant="subtitle1">
+                          Agent Fare : &#8377;{agentFare}
+                        </Typography>
+                      ) : null}
                       <Typography variant="subtitle1">
                         Total Fare : &#8377;{totalFare}
                       </Typography>
