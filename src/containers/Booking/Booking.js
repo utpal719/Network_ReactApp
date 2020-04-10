@@ -188,12 +188,14 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
               <Grid item xs={12} md={10}>
                 <Grid container>
                   <Grid item md={4} xs={6} className={classes.flexed}>
-                    <Typography
-                      variant="subtitle1"
-                      className={classes.marginAuto}
-                    >
-                      Agent fare : &#8377; {agentFare}
-                    </Typography>
+                    {agentFare ? (
+                      <Typography
+                        variant="subtitle1"
+                        className={classes.marginAuto}
+                      >
+                        Agent fare : &#8377; {agentFare}
+                      </Typography>
+                    ) : null}
                     <Typography
                       variant="subtitle1"
                       className={classes.marginAuto}

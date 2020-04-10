@@ -15,7 +15,7 @@ const SeatSelection = ({ classes }) => {
   /**Get percentage of commission of agent*/
   let { percentage } = useSelector((state) => state.user);
   let agentFare = percentage ? totalFare - totalFare * (percentage / 100) : 0;
-
+  console.log({ agentFare, percentage });
   let history = useHistory();
 
   useEffect(() => {

@@ -64,6 +64,7 @@ export default function(state = initialState, action) {
           loggedIn: decoded.get("loggedIn") ? true : false,
           role: decoded.get("role"),
           username: decoded.get("userName"),
+          percentage: decoded.get("percentage"),
           token: decoded.get("token"),
         },
       };

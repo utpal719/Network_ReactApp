@@ -18,7 +18,6 @@ export const decodeToken = (token) => {
 
 let token = localStorage.getItem("ntToken");
 let decoded = decodeToken(token);
-console.log("percentage", decoded.get("percentage"));
 
 export const initialState = {
   user: {
