@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  withStyles,
-  Typography,
-  Button,
-  Divider,
-} from "@material-ui/core";
+import { Grid, withStyles, Typography, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { Styles } from "./Styles";
 import { AccountCircle, PermContactCalendar } from "@material-ui/icons";
@@ -28,9 +22,9 @@ const validationSchema = Yup.object({
     Yup.object({
       passengerName: Yup.string().required("Please enter a name"),
       gender: Yup.string().required("Please provide your gender"),
-      age: Yup.string().required("Please enter your age"),
+      age: Yup.string().required("Please enter your age")
     })
-  ),
+  )
 });
 /**
  * @method Booking
@@ -40,20 +34,20 @@ const validationSchema = Yup.object({
 const Booking = ({ classes, startLoading, stopLoading }) => {
   /**get selected seats, total fare and agentFare */
   let { seats, fare, agentFare, boardingPoint } = useSelector(
-    (state) => state.bookingInfo
+    state => state.bookingInfo
   );
   let [submitted, setSubmitted] = useState(false);
   let [error, setError] = useState(false);
   /**get selected bus details */
-  let busDetails = useSelector((state) => state.bus);
+  let busDetails = useSelector(state => state.bus);
   /**get search details */
-  let searchInfo = useSelector((state) => state.search);
+  let searchInfo = useSelector(state => state.search);
 
   let history = useHistory();
   let [defaultPassenger, setDefaultPassenger] = useState({
     passengerName: "",
     gender: "",
-    age: "",
+    age: ""
   });
 
   useEffect(() => {
@@ -68,7 +62,7 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
     passengerArr.push({
       passengerName: "",
       gender: "",
-      age: "",
+      age: ""
     });
   }
 
@@ -76,12 +70,12 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
     initialValues: {
       email: "",
       phone: "",
-      passengers: passengerArr,
+      passengers: passengerArr
     },
     validationSchema,
     validateOnBlur: false,
     validateOnChange: true,
-    onSubmit: (values) => {
+    onSubmit: values => {
       setSubmitted(true);
       let bookingDetails = {
         busId: busDetails.busId,
@@ -98,30 +92,30 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
         endTime: busDetails.endTime,
         boardingPoint: boardingPoint,
         passengerList: values.passengers,
-        selectedSeat: seats.join(","),
+        selectedSeat: seats.join(",")
       };
       startLoading();
       (async () => {
         let data = await book(bookingDetails);
         if (data.success) {
           history.push("/e-ticket", {
-            pnrNumber: data.data.pnrNumber,
+            pnrNumber: data.data.pnrNumber
           });
         } else {
           setError(true);
           stopLoading();
-          setTimeout((_) => {
+          setTimeout(_ => {
             history.push("/");
           }, 3000);
         }
       })();
-    },
+    }
   });
   /**
    * Fill all passenger detail based on the input of the 1st passenger.
    * If other passenger fields are filled, ignore changes
    **/
-  let prefiller = (defaultPassenger) => {
+  let prefiller = defaultPassenger => {
     setDefaultPassenger(defaultPassenger);
     for (let i = 1; i < seats.length; i++) {
       formik.setFieldValue(

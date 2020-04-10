@@ -6,7 +6,6 @@ import ContentArea from "./ContentArea/ContentArea";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getBuses } from "../../apis/buses";
-import moment from "moment";
 import Constants from "../../redux/actionConstants";
 import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
@@ -57,10 +56,10 @@ function SearchResult(props) {
 
   return (
     <ErrorBoundary>
-    <div className={classes.gridstyle}>
-      <BookingTitle data={data} />
-      <ContentArea response={response} data={data} />
-    </div>
+      <div className={classes.gridstyle}>
+        <BookingTitle data={data} />
+        <ContentArea response={response} data={data} />
+      </div>
     </ErrorBoundary>
   );
 }
