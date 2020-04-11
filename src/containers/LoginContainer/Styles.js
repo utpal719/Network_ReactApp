@@ -25,11 +25,14 @@ export const Styles = () => ({
     elevation: 4
   },
   button: {
-    backgroundColor: "#28a745",
+    backgroundColor: "#edd31c",
     borderRadius: "0",
     borderStyle: "square",
     width: "100%",
-    color: "#eee"
+    color: "black",
+    "&:hover": {
+      backgroundColor: "#edd31c"
+    }
   },
   textfield: {
     width: "100%",

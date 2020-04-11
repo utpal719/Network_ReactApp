@@ -6,14 +6,13 @@ import SelectionHeader from "./SelectionHeader/SelectionHeader";
 import SelectionContainer from "./SelectionContainer/SelectionContainer";
 import { useHistory } from "react-router-dom";
 import Preloader from "../../components/Preloader/Preloader";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const SeatSelection = ({ classes }) => {
-  let { fare } = useSelector((state) => state.bus);
+  let { fare } = useSelector(state => state.bus);
   let [selectedSeats, setSelected] = useState([]);
   let totalFare = selectedSeats.length * fare;
   /**Get percentage of commission of agent*/
-  let { percentage } = useSelector((state) => state.user);
+  let { percentage } = useSelector(state => state.user);
   let agentFare = percentage ? totalFare - totalFare * (percentage / 100) : 0;
 
   let history = useHistory();
@@ -24,7 +23,7 @@ const SeatSelection = ({ classes }) => {
     }
   }, []);
 
-  let handleSelect = (selected) => {
+  let handleSelect = selected => {
     setSelected([...selected]);
   };
 

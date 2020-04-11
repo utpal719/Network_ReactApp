@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { Styles } from "./Styles";
 import CaraouselBanner from "./CarouselBanner/CaraouselBanner";
 import Preloader from "../../components/Preloader/Preloader";
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
 
 const HomePage = props => {
   const { classes } = props;
@@ -18,7 +17,6 @@ const HomePage = props => {
       <TopDestinationBanner />
     </div>
   );
-
 };
 
 export default withStyles(Styles)(HomePage);

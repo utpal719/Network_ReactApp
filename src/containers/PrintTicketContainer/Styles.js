@@ -20,10 +20,13 @@ export const Styles = () => ({
     elevation: 4
   },
   button: {
-    backgroundColor: "#D9534F",
     borderRadius: "0",
     borderStyle: "square",
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#edd31c",
+    "&:hover": {
+      backgroundColor: "#edd31c"
+    }
   },
   textfield: {
     width: "100%",

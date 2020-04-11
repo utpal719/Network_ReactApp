@@ -91,7 +91,7 @@ const PrintTicketForm = props => {
               </Grid>
               <Grid item xs={12}>
                 <Button type="submit" label="Go" className={classes.button}>
-                  Go!!
+                  Submit
                 </Button>
               </Grid>
             </Grid>
