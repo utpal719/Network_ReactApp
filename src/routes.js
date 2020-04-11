@@ -16,6 +16,8 @@ import ETicket from "./containers/ETicket/ETicket";
 import MyTrips from "./containers/MyTrips/MyTrips";
 import Cancellation from "./containers/Cancellation/Cancellation";
 import BusChart from "./containers/BusChart/BusChart";
+import ChangePasswordPage from "./containers/ChangePasswordContainer/ChangePasswordPage";
+import ForgotPasswordPage from "./containers/ForgotPasswordContainer/ForgotPasswordPage";
 
 export default [
   { path: "/", exact: true, component: HomePage, wrapPreloader: false },
@@ -96,6 +98,20 @@ export default [
   { path: "/e-ticket", exact: true, component: ETicket, wrapPreloader: true },
   { path: "/mytrips", exact: true, component: MyTrips, wrapPreloader: true },
   { path: "/buschart", exact: true, component: BusChart, wrapPreloader: true },
+  {
+    path: "/change-password",
+    exact: true,
+    component: ChangePasswordPage,
+    wrapPreloader: true,
+    defaultLoading: false,
+  },
+  {
+    path: "/forgot-password",
+    exact: true,
+    component: ForgotPasswordPage,
+    wrapPreloader: true,
+    defaultLoading: false,
+  },
   {
     path: "/cancelbooking",
     exact: true,

@@ -7,29 +7,32 @@ import {
   Grid,
   Paper,
   Snackbar,
+  Typography,
 } from "@material-ui/core";
 import { Styles } from "./Styles";
 import MuiAlert from "@material-ui/lab/Alert";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import * as Yup from "yup";
-import { authenticate } from "../../apis/users";
-import { useDispatch } from "react-redux";
-import actionConstants from "../../redux/actionConstants";
+import { forgotPassword } from "../../apis/users";
 
 let validationSchema = Yup.object({
   userName: Yup.string().required("Please provide a username"),
-  password: Yup.string().required("Please provide your password"),
+  registeredMobile: Yup.string().required(
+    "Please enter your registered mobile number"
+  ),
 });
 
-const LoginForm = (props) => {
+const ForgotPasswordForm = (props) => {
   let history = useHistory();
   let [isOpen, setOpen] = useState(false);
-  let dispatch = useDispatch();
+  let [error, setError] = useState("");
+  let [success, setSuccess] = useState({ show: false, message: "" });
+
   let { values, errors, handleSubmit, handleChange } = useFormik({
     initialValues: {
       userName: "",
-      password: "",
+      registeredMobile: "",
     },
     validationSchema,
     validateOnChange: true,
@@ -37,20 +40,18 @@ const LoginForm = (props) => {
     onSubmit: function(values) {
       props.startLoading();
       (async () => {
-        let data = await authenticate(values);
-        if (data.status === 200) {
+        let { data } = await forgotPassword(values);
+        console.log(data);
+        props.stopLoading();
+
+        if (data.success) {
           /**Store the token in LocalStorage */
-          localStorage.setItem("ntToken", data.data.token);
-          dispatch({
-            type: actionConstants.SET_USER_INFO,
-            payload: { token: data.data.token },
-          });
-          props.stopLoading();
-          history.push("/");
+          setSuccess({ show: true, message: data.data });
         } else {
-          props.stopLoading();
+          setError(data.errorMessage);
           setOpen(true);
         }
+        setTimeout((_) => history.push("/"), 3000);
       })();
     },
   });
@@ -71,7 +72,22 @@ const LoginForm = (props) => {
             onClose={() => setOpen(!isOpen)}
             severity="error"
           >
-            The Username or password you've entered is incorrect
+            {error}
+          </MuiAlert>
+        </Snackbar>
+        <Snackbar
+          open={success.show}
+          autoHideDuration={6000}
+          onClose={() => setSuccess({ ...success, show: !success.show })}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={() => setSuccess({ ...success, show: !success.show })}
+            severity="success"
+          >
+            {success.message}
           </MuiAlert>
         </Snackbar>
         <Paper className={classes.paper}>
@@ -80,8 +96,7 @@ const LoginForm = (props) => {
               <Grid item xs={12}>
                 <TextField
                   size="small"
-                  type="text"
-                  label="User Name"
+                  label="Username"
                   variant="outlined"
                   name="userName"
                   value={values.userName}
@@ -99,11 +114,10 @@ const LoginForm = (props) => {
               <Grid item xs={12}>
                 <TextField
                   size="small"
-                  type="password"
-                  label="Password"
+                  label="Registered Mobile"
                   variant="outlined"
-                  name="password"
-                  value={values.password}
+                  name="registeredMobile"
+                  value={values.registeredMobile}
                   onChange={handleChange}
                   className={classes.textfield}
                   InputProps={{
@@ -113,24 +127,12 @@ const LoginForm = (props) => {
                   }}
                   required
                 ></TextField>
-                <div className="error">{errors.password}</div>
+                <div className="error">{errors.registeredMobile}</div>
               </Grid>
               <Grid item xs={12}>
-                <Button type="submit" label="Log In" className={classes.button}>
-                  LOG IN
+                <Button type="submit" label="Submit" className={classes.button}>
+                  Update
                 </Button>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <NavLink to="/register" className={classes.navlinked}>
-                  Not Registered? Create an Account
-                </NavLink>
-                <NavLink to="/forgot-password" className={classes.navlinked}>
-                  Forgot password?
-                </NavLink>
               </Grid>
             </Grid>
           </form>
@@ -139,4 +141,4 @@ const LoginForm = (props) => {
     </Grid>
   );
 };
-export default withStyles(Styles)(LoginForm);
+export default withStyles(Styles)(ForgotPasswordForm);

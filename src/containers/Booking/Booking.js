@@ -41,7 +41,10 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
   /**get selected bus details */
   let busDetails = useSelector(state => state.bus);
   /**get search details */
+
   let searchInfo = useSelector(state => state.search);
+  /**get logged in status */
+  let { loggedIn, role } = useSelector(state => state.user);
 
   let history = useHistory();
   let [defaultPassenger, setDefaultPassenger] = useState({
@@ -180,34 +183,40 @@ const Booking = ({ classes, startLoading, stopLoading }) => {
                 )}
               </Grid>
               <Grid item xs={12} md={10}>
-                <Grid container>
-                  <Grid item md={4} xs={6} className={classes.flexed}>
-                    {agentFare ? (
+                {loggedIn && (role != 3 || role != undefined || role != "") ? (
+                  <Grid container>
+                    <Grid item md={4} xs={6} className={classes.flexed}>
+                      {agentFare ? (
+                        <Typography
+                          variant="subtitle1"
+                          className={classes.marginAuto}
+                        >
+                          Agent fare : &#8377; {agentFare}
+                        </Typography>
+                      ) : null}
                       <Typography
                         variant="subtitle1"
                         className={classes.marginAuto}
                       >
-                        Agent fare : &#8377; {agentFare}
+                        Total fare : &#8377; {fare}
                       </Typography>
-                    ) : null}
-                    <Typography
-                      variant="subtitle1"
-                      className={classes.marginAuto}
-                    >
-                      Total fare : &#8377; {fare}
-                    </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12} style={{ textAlign: "right" }}>
+                      <Button
+                        type="submit"
+                        disabled={submitted ? true : false}
+                        variant="contained"
+                        color="primary"
+                      >
+                        Proceed to checkout
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item md={8} xs={12} style={{ textAlign: "right" }}>
-                    <Button
-                      type="submit"
-                      disabled={submitted ? true : false}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Proceed to checkout
-                    </Button>
-                  </Grid>
-                </Grid>
+                ) : (
+                  <Alert severity="warning">
+                    Please use our mobile app to book ticket
+                  </Alert>
+                )}
               </Grid>
             </Grid>
           </Grid>
