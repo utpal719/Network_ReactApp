@@ -1,13 +1,13 @@
 import image from "./networkbg.jpg";
 export const Styles = () => ({
   container: {
-    justifyContent: "center",
+    justifyContent: "center"
   },
   bg: {
     background: `linear-gradient(rgba(255,255,255,0.90),rgba(255,255,255,0.90)),url(${image})`,
     backgroundAttachment: "fixed",
     backgroundSize: "100%",
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "no-repeat"
   },
   gridstyle: {
     display: "flex",
@@ -17,34 +17,37 @@ export const Styles = () => ({
     borderStyle: "square",
     marginTop: "88px",
     border: "3px",
-    borderColor: "black",
+    borderColor: "black"
   },
   paper: {
     width: "100%",
     margin: "auto",
     padding: "30px",
-    elevation: 4,
+    elevation: 4
   },
   button: {
-    backgroundColor: "#28a745",
+    backgroundColor: "#edd31c",
     borderRadius: "0",
     borderStyle: "square",
     width: "100%",
-    color: "#eee",
+    color: "black",
+    "&:hover": {
+      backgroundColor: "#edd31c"
+    }
   },
   textfield: {
     width: "100%",
     backgroundColor: "rgba(241,243,242,1)",
-    border: "none",
+    border: "none"
   },
   formstyle: {
-    padding: "10px",
+    padding: "10px"
   },
   navlinked: {
     color: "#28a745",
-    font: "status-bar",
+    font: "status-bar"
   },
   inputBox: {
-    fontSize: "12px",
-  },
+    fontSize: "12px"
+  }
 });
