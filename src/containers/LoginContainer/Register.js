@@ -1,10 +1,18 @@
-import React from "react";
-import { TextField, Button, withStyles, Grid, Paper } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  withStyles,
+  Grid,
+  Paper,
+  Snackbar,
+} from "@material-ui/core";
 import { Styles } from "./Styles";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { register } from "../../apis/users";
 import { useHistory } from "react-router-dom";
+import MuiAlert from "@material-ui/lab/Alert";
 
 let validationSchema = Yup.object({
   userName: Yup.string().required("Please enter a username"),
@@ -17,29 +25,35 @@ let validationSchema = Yup.object({
     .required("Please enter a password"),
   mobile: Yup.string()
     .matches(/^([0]|\+91)?[789]\d{9}$/, "Please enter a valid phone number")
-    .required()
+    .required(),
 });
 
-const Register = props => {
+const Register = (props) => {
   let history = useHistory();
+
+  let [error, setError] = useState({ show: false, message: "" });
+
   let { values, errors, touched, handleSubmit, handleChange } = useFormik({
     initialValues: {
       userName: "",
       password: "",
       email: "",
       mobile: "",
-      name: ""
+      name: "",
     },
     validationSchema,
     onSubmit: function(values) {
       props.startLoading();
       (async () => {
-        let data = await register(values);
-        console.log(data);
+        let { data } = await register(values);
         props.stopLoading();
-        history.push("/login");
+        if (data.success) {
+          history.push("/login");
+        } else {
+          setError({ show: true, message: data.errorMessage });
+        }
       })();
-    }
+    },
   });
 
   const { classes } = props;
@@ -47,6 +61,21 @@ const Register = props => {
   return (
     <Grid container className={classes.container}>
       <Grid item xs={4} className={classes.gridstyle}>
+        <Snackbar
+          open={error.show}
+          autoHideDuration={6000}
+          onClose={() => setError({ ...error, show: !error.show })}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={() => setError({ ...error, show: !error.show })}
+            severity="error"
+          >
+            {error.message}
+          </MuiAlert>
+        </Snackbar>
         <Paper className={classes.paper}>
           <form onSubmit={handleSubmit} className={classes.formstyle}>
             <Grid container direction="row" spacing={2}>

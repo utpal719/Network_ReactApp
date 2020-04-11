@@ -52,6 +52,11 @@ const NavBar = (props) => {
     handleClose(e);
     history.push("/mytrips");
   };
+
+  const changePassword = (e) => {
+    handleClose(e);
+    history.push("/change-password");
+  };
   const handleBusChart = (e) => {
     handleClose(e);
     history.push("/buschart");
@@ -168,7 +173,9 @@ const NavBar = (props) => {
                           onKeyDown={handleListKeyDown}
                         >
                           <MenuItem onClick={handleMyTrip}>My Trips</MenuItem>
-
+                          <MenuItem onClick={changePassword}>
+                            Change Password
+                          </MenuItem>
                           {userInfo.role === 1 && (
                             <MenuItem onClick={handleBusChart}>
                               Bus Chart
