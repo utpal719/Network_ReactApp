@@ -1,21 +1,31 @@
 export const Config = {
   32: {
+    totalSeats: 32,
     seatPerRow: 3,
     pavementStart: 2,
     pavementSpan: 2,
-    seatsLastRow: 5
+    seatsLastRow: 5,
   },
   31: {
+    totalSeats: 31,
     seatPerRow: 3,
     pavementStart: 2,
     pavementSpan: 1,
-    seatsLastRow: 4
+    seatsLastRow: 4,
   },
   34: {
+    totalSeats: 34,
     seatPerRow: 3,
     pavementStart: 2,
     pavementSpan: 1,
-    seatsLastRow: 4
+    seatsLastRow: 4,
+  },
+  351: {
+    totalSeats: 35,
+    seatPerRow: 3,
+    pavementStart: 2,
+    pavementSpan: 2,
+    seatsLastRow: 5,
   },
   /**Hard layout */
   39: [
@@ -28,7 +38,7 @@ export const Config = {
     [26, 25, "pavement", 24, 23],
     [30, 29, "pavement", 28, 27],
     [34, 33, "pavement", 32, 31],
-    [39, 38, 37, 36, 35]
+    [39, 38, 37, 36, 35],
   ],
   45: [
     [2, 1, "pavement", 4, 3],
@@ -41,7 +51,7 @@ export const Config = {
     [30, 29, "pavement", 32, 31],
     [34, 33, "pavement", 36, 35],
     [38, 37, "pavement", 40, 39],
-    [45, 44, 43, 42, 41]
+    [45, 44, 43, 42, 41],
   ],
   35: [
     [1, 2, "pavement", "", ""],
@@ -52,7 +62,7 @@ export const Config = {
     [22, 21, "pavement", 20, 19],
     [26, 25, "pavement", 24, 23],
     [30, 29, "pavement", 28, 27],
-    [35, 34, 33, 32, 31]
+    [35, 34, 33, 32, 31],
   ],
   60: [
     [
@@ -65,14 +75,14 @@ export const Config = {
       [26, 25, "pavement", 24, 23],
       [30, 29, "pavement", 28, 27],
       [34, 33, "pavement", 32, 31],
-      [39, 38, 37, 36, 35]
+      [39, 38, 37, 36, 35],
     ],
     [
       ["S4", "S3", "pavement", "S2", "S1"],
       ["S8", "S7", "pavement", "S6", "S5"],
       ["S12", "S11", "pavement", "S10", "S9"],
       ["S16", "S15", "pavement", "S14", "S13"],
-      ["S20", "S19", "pavement", "S18", "s17"]
-    ]
-  ]
+      ["S20", "S19", "pavement", "S18", "s17"],
+    ],
+  ],
 };
