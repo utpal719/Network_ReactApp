@@ -10,7 +10,7 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
 
   let dummyBookedSeats = occupied;
 
-  let logicalArrangement = [31, 32, 34];
+  let logicalArrangement = [31, 32, 34, 351];
   let sleeperBusArrangement = [60];
 
   useEffect(() => {
@@ -20,9 +20,9 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
         seatPerRow,
         pavementStart,
         pavementSpan,
-        seatsLastRow
+        seatsLastRow,
+        totalSeats,
       } = LayoutConfig[seatCapacity];
-      let totalSeats = seatCapacity;
       let totalColumn = Math.floor(totalSeats / seatPerRow);
       let seatRows = [];
       for (let i = 1; i <= totalColumn; i++) {
@@ -56,7 +56,7 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
     }
   }, []);
 
-  let handleSelection = seatNo => {
+  let handleSelection = (seatNo) => {
     let seatIndex = selectedSeats.indexOf(seatNo);
     if (dummyBookedSeats.includes(seatNo)) {
       return;
@@ -73,12 +73,12 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
     handleSelect(selectedSeats);
   };
 
-  let onSeatSelect = e => {
+  let onSeatSelect = (e) => {
     let seatNo = Number(e.target.innerText);
     handleSelection(seatNo);
   };
 
-  let onSleeperSeatSelect = e => {
+  let onSleeperSeatSelect = (e) => {
     let seatNo = e.target.innerText;
     handleSelection(seatNo);
   };
@@ -95,7 +95,7 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
         {seatArragement.map((rows, index) => {
           return (
             <li key={index} className={classes.seatRows}>
-              {rows.map(seat => {
+              {rows.map((seat) => {
                 let className = classes.unoccupiedSeat;
                 if (seat === "pavement") className = classes.pavement;
                 if (seat === "") className = classes.blank;
@@ -130,7 +130,7 @@ const LogicalLayout = ({ classes, handleSelect, seatCapacity, occupied }) => {
           {sleeperSeats.map((rows, index) => {
             return (
               <li key={index} className={classes.seatRows}>
-                {rows.map(seat => {
+                {rows.map((seat) => {
                   let className = classes.sleeperUnoccupied;
                   if (seat === "pavement") className = classes.pavement;
                   if (seat === "") className = classes.blank;
