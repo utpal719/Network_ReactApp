@@ -105,7 +105,8 @@ const BusChart = (props) => {
       }
     }
     /**Fill the list with blank data */
-    for (let i = 1; i <= seatCapacity; i++) {
+    let availabeSeat = seatCapacity === 351 ? 35 : seatCapacity;
+    for (let i = 1; i <= availabeSeat; i++) {
       if (!seatsOccupied.includes(i)) {
         tableData.push({
           ...blankFieldDummy,
