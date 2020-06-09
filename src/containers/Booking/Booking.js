@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
     .email("Please enter a valid email")
     .required("Required"),
   phone: Yup.string()
-    .matches(/^([0]|\+91)?[789]\d{9}$/, "Please enter a valid phone number")
+    .matches(/^([0]|\+91)?[7896]\d{9}$/, "Please enter a valid phone number")
     .required(),
   passengers: Yup.array().of(
     Yup.object({

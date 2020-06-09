@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Typography, Grid, withStyles, Paper, Box } from "@material-ui/core";
+import {
+  Typography,
+  Grid,
+  withStyles,
+  Paper,
+  Box,
+  Table,
+  TableHead,
+  TableCell,
+  TableBody,
+  TableRow,
+} from "@material-ui/core";
 import { Styles } from "./Styles";
 import PassengerDetailContainer from "./PassengerDetailContainer/PassengerDetailContainer";
 import CancellationPolicy from "./CancellationPolicy/CancellationPolicy";
@@ -12,8 +23,10 @@ import AppLink from "./AppLink/AppLink";
 import TimeCard from "./TimeCard/TimeCard";
 import GeneralInfo from "./GeneralInfo/GeneralInfo";
 import ETicketHeader from "./ETicketHeader/ETicketHeader";
+import { ArrowForwardRounded } from "@material-ui/icons";
+import logo from "./logo1.png";
 
-const ETicket = props => {
+const ETicket = (props) => {
   let history = useHistory();
   let [ticket, setTicket] = useState({});
   let [error, setError] = useState(false);
@@ -33,7 +46,7 @@ const ETicket = props => {
     })();
   }, []);
 
-  let handlePrint = _ => window.print();
+  let handlePrint = (_) => window.print();
   return (
     <>
       <Box displayPrint="none">
@@ -60,7 +73,7 @@ const ETicket = props => {
         />
       ) : (
         <>
-          <Box displayPrint="block">
+          <Box displayPrint="none">
             <Grid container justify="center">
               <Grid item xs={12} md={8}>
                 {/**Top booking header */}
@@ -73,7 +86,7 @@ const ETicket = props => {
                   <ETicketHeader
                     ticket={{
                       pnrNumber: ticket.pnrNumber,
-                      totalFare: ticket.totalFare
+                      totalFare: ticket.totalFare,
                     }}
                     handlePrint={handlePrint}
                   />
@@ -92,7 +105,7 @@ const ETicket = props => {
                             email: ticket.email,
                             mobile: ticket.mobile,
                             bookingId: ticket.bookingId,
-                            journeyDate: ticket.journeyDate
+                            journeyDate: ticket.journeyDate,
                           }}
                         />
                         {/**Time card */}
@@ -109,6 +122,90 @@ const ETicket = props => {
                     </Paper>
                   </Grid>
                 </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+          {/**Printable ticket */}
+          <Box display="none" displayPrint="block" mb={8}>
+            <Grid container>
+              <Grid item xs={4} className={classes.centered}>
+                <Typography variant="subtitle2">
+                  {ticket.fromCity} - {ticket.toCity}
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <img src={logo} alt="logo"></img>
+              </Grid>
+              <Grid item xs={3} className={classes.spaceBetween}>
+                <Typography variant="subtitle2">
+                  {ticket.journeyDate}
+                </Typography>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Typography variant="subtitle2">{ticket.pnrNumber}</Typography>
+              </Grid>
+              <Grid item xs={3} className={classes.centered}>
+                <div>
+                  <Typography variant="subtitle2">
+                    {ticket.reportingTime}
+                  </Typography>
+                  <Typography variant="caption">Reporting Time</Typography>
+                </div>
+              </Grid>
+              <Grid item xs={3} className={classes.centered}>
+                <div>
+                  <Typography variant="subtitle2">
+                    {ticket.startTime}
+                  </Typography>
+                  <Typography variant="caption">Departure Time</Typography>
+                </div>
+              </Grid>
+              <Grid item xs={3} className={classes.centered}>
+                <div>
+                  <Typography variant="subtitle2">
+                    {(ticket.passengerList || []).length}
+                  </Typography>
+                  <Typography variant="caption">Number of seat</Typography>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Seat Number</TableCell>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Gender</TableCell>
+                      <TableCell>Age</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {(ticket.passengerList || []).map((passenger) => (
+                      <TableRow>
+                        <TableCell>{passenger.seatNumber}</TableCell>
+                        <TableCell>{passenger.passengerName}</TableCell>
+                        <TableCell>{passenger.gender}</TableCell>
+                        <TableCell>{passenger.age}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Grid>
+              <Grid item xs={6}>
+                Total Fare: <strong>&#8377; {ticket.totalFare}</strong>
+                <br></br>
+                (Inclusive of all taxes)
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="caption">
+                  <p>
+                    <strong>PH : 8811079999, 7086093241</strong>
+                  </p>
+                  <p>
+                    <strong>ISBT Guwahati : 7086018977</strong>
+                  </p>
+                  <p>
+                    <strong>Barak Valley : 9854037111, 7086054040</strong>
+                  </p>
+                </Typography>
               </Grid>
             </Grid>
           </Box>

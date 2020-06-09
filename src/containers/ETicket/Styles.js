@@ -46,5 +46,13 @@ export const Styles = () => ({
   },
   selectAll: {
     margin: "0px 0px -15px 20px"
+  },
+  centered : {
+      display : "flex",
+      alignItems : "center"
+  },
+  spaceBetween : {
+    display : "flex",
+    alignItems : "center"
   }
 });

@@ -148,7 +148,10 @@ const BusChart = (props) => {
         <Grid item xs={10} className="pull">
           <Box display="none" displayPrint="block">
             <Typography varaint="h6" color="primary">
-              {selectedRoute}
+              {selectedRoute} | Journey Date :{" "}
+              {formik.values.journeyDate
+                ? formik.values.journeyDate.toDateString()
+                : ""}
             </Typography>
           </Box>
 

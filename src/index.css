@@ -23,6 +23,10 @@ code {
     margin: 0% !important;
   }
 
+  #busChart .displayOnPrint {
+    visibility: visible ;
+  }
+
   div {
     background: #fff !important;
     padding-left: 0px !important;
@@ -57,4 +61,8 @@ code {
 
 .mobileApp p img {
   width: 100%;
+}
+
+.displayOnPrint {
+  visibility: hidden;;
 }
