@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Button, Grid, Typography } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Styles } from "./Styles";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Constants from "../../redux/actionConstants";
 import { useHistory } from "react-router-dom";
 import config from "../../config";
 import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import googlePlayBadge from "./google-play-badge.png";
 
 let validationSchema = Yup.object({
   fromCity: Yup.string().required("Please select a city"),
@@ -24,6 +25,7 @@ let validationSchema = Yup.object({
 const Form = (props) => {
   const [cityList, setCityList] = useState([]);
   const { classes } = props;
+  const { loggedIn } = useSelector((state) => state.user);
 
   let formBg = useRef(null);
 
@@ -84,92 +86,117 @@ const Form = (props) => {
 
   return (
     <div className={classes.bg} ref={formBg}>
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        className={classes.gridstyle}
-        style={{ marginTop: 10 }}
-      >
-        <Grid item xs={10}>
-          <h3>Online Bus Ticket Booking</h3>
-          <form onSubmit={formik.handleSubmit}>
-            <Grid container spacing={2} direction="row">
-              <Grid item xs={6}>
-                <p>From</p>
-                <Autocomplete
-                  id="fromCity"
-                  ListboxProps={{
-                    name: "fromCity",
-                  }}
-                  options={cityList}
-                  getOptionLabel={(option) => option}
-                  onChange={handleSourceChange}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      placeholder="Select city name"
-                      variant="outlined"
-                      size="small"
-                      className={classes.inputbox}
-                    />
-                  )}
-                />
-                <br />
-                <div class="error form-error">
-                  {formik.errors.fromCity &&
-                    formik.touched.fromCity &&
-                    formik.errors.fromCity}
-                </div>
+      {loggedIn ? (
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          className={classes.gridstyle}
+          style={{ marginTop: 10 }}
+        >
+          <Grid item xs={10}>
+            <h3>Online Bus Ticket Booking</h3>
+            <form onSubmit={formik.handleSubmit}>
+              <Grid container spacing={2} direction="row">
+                <Grid item xs={6}>
+                  <p>From</p>
+                  <Autocomplete
+                    id="fromCity"
+                    ListboxProps={{
+                      name: "fromCity",
+                    }}
+                    options={cityList}
+                    getOptionLabel={(option) => option}
+                    onChange={handleSourceChange}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        placeholder="Select city name"
+                        variant="outlined"
+                        size="small"
+                        className={classes.inputbox}
+                      />
+                    )}
+                  />
+                  <br />
+                  <div class="error form-error">
+                    {formik.errors.fromCity &&
+                      formik.touched.fromCity &&
+                      formik.errors.fromCity}
+                  </div>
+                </Grid>
+                <Grid item xs={6}>
+                  <p>To</p>
+                  <Autocomplete
+                    options={cityList}
+                    getOptionLabel={(option) => option}
+                    onChange={handleDestinationChange}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        placeholder="Select city name"
+                        name="toCity"
+                        variant="outlined"
+                        size="small"
+                        className={classes.inputbox}
+                      />
+                    )}
+                  />
+                  <br />
+                  <div class="error form-error">
+                    {formik.errors.toCity &&
+                      formik.touched.toCity &&
+                      formik.errors.toCity}
+                  </div>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <p>To</p>
-                <Autocomplete
-                  options={cityList}
-                  getOptionLabel={(option) => option}
-                  onChange={handleDestinationChange}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      placeholder="Select city name"
-                      name="toCity"
-                      variant="outlined"
-                      size="small"
-                      className={classes.inputbox}
-                    />
-                  )}
-                />
-                <br />
-                <div class="error form-error">
-                  {formik.errors.toCity &&
-                    formik.touched.toCity &&
-                    formik.errors.toCity}
-                </div>
+              <Grid container spacing={4} direction="row">
+                <Grid item xs={6}>
+                  <p>Departing</p>
+                  <DatePicker
+                    selected={formik.values.journeyDate}
+                    name="journeyDate"
+                    onChange={(date) => setSelectedDate(date)}
+                    showMonthDropdown
+                    dateFormat="MMM d, yyyy"
+                    minDate={new Date()}
+                    className={classes.inputdate}
+                  />
+                  <br />
+                  <div class="error form-error">
+                    {formik.errors.journeyDate}
+                  </div>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid container spacing={4} direction="row">
-              <Grid item xs={6}>
-                <p>Departing</p>
-                <DatePicker
-                  selected={formik.values.journeyDate}
-                  name="journeyDate"
-                  onChange={(date) => setSelectedDate(date)}
-                  showMonthDropdown
-                  dateFormat="MMM d, yyyy"
-                  minDate={new Date()}
-                  className={classes.inputdate}
-                />
-                <br />
-                <div class="error form-error">{formik.errors.journeyDate}</div>
-              </Grid>
-            </Grid>
-            <br />
-            <Button type="submit" className={classes.button}>
-              Search Buses
-            </Button>
-          </form>
+              <br />
+              <Button type="submit" className={classes.button}>
+                Search Buses
+              </Button>
+            </form>
+          </Grid>
         </Grid>
-      </Grid>
+      ) : (
+        <Grid container justify="center" direction="column">
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            <Typography variant="h3" className={classes.tagline}>
+              <strong>
+                Book your bus with{" "}
+                <span className={classes.subtagline}>US</span>
+              </strong>
+            </Typography>
+          </Grid>
+          <Grid item xs={12} style={{ textAlign: "center" }}>
+            <br />
+            <a target="__blank" href="https://play.google.com/store/apps/details?id=com.techvariable.networktravels&hl=en_IN">
+              <img
+                src={googlePlayBadge}
+                alt="google play"
+                style={{ width: "15%" }}
+              />
+            </a>
+          </Grid>
+        </Grid>
+      )}
     </div>
   );
 };

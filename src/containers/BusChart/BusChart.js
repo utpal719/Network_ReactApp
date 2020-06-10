@@ -6,6 +6,7 @@ import {
   Paper,
   Box,
   Typography,
+  Snackbar,
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import { withStyles } from "@material-ui/core/styles";
@@ -16,10 +17,11 @@ import { formatDate } from "../../utilities/Functions";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { busChart } from "./../../apis/buschart/index";
-import { getAllPassengersByBus } from "./../../apis/tickets/index";
+import { getAllPassengersByBus, sendBusNo } from "./../../apis/tickets/index";
 import PassengerTable from "./PassengerTable";
 import { Print } from "@material-ui/icons";
 import { formatAMPM } from "../../utilities/Functions";
+import Alert from "@material-ui/lab/Alert";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
@@ -32,6 +34,14 @@ const BusChart = (props) => {
   const [passengerList, setPassengerList] = useState([]);
   const [seatCapacity, setSeatCapacity] = useState(0);
   const [showTable, setShowTable] = useState(false);
+  const [canSendBusNo, setCanSend] = useState(false);
+  const [busNo, setBusNo] = useState("");
+  let [status, setStatus] = useState({
+    show: false,
+    severity: "",
+    message: "",
+  });
+
   const { classes } = props;
 
   let formik = useFormik({
@@ -48,6 +58,11 @@ const BusChart = (props) => {
       props.startLoading();
       (async () => {
         let data = await getAllPassengersByBus(payload);
+        if (data.length) {
+          setCanSend(true);
+        } else {
+          setCanSend(false);
+        }
         data = generateTableData(data);
         setPassengerList(data);
         setShowTable(true);
@@ -136,8 +151,46 @@ const BusChart = (props) => {
     })();
   }, []);
 
+  let handleBusSend = () => {
+    if (!canSendBusNo) {
+      setStatus({
+        show: true,
+        severity: "error",
+        message: !busNo ? "Enter a bus no" : "Select a route",
+      });
+    } else {
+      sendBusNo({
+        busId: formik.values.busId,
+        journeyDate: formik.values.journeyDate,
+        busNumber: busNo,
+      }).then((data) => {});
+    }
+  };
+
+  let onClose = () =>
+    setStatus({
+      show: false,
+      severity: "",
+      message: "",
+    });
+
   return (
     <div id="busChart" className={classes.bg}>
+      <Snackbar
+        open={status.show}
+        autoHideDuration={3000}
+        onClose={onClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          elevation={6}
+          variant="filled"
+          onClose={onClose}
+          severity={status.severity}
+        >
+          {status.message}
+        </Alert>
+      </Snackbar>
       <Grid
         container
         spacing={4}
@@ -211,6 +264,17 @@ const BusChart = (props) => {
                     <div class="error form-error">
                       {formik.errors.journeyDate}
                     </div>
+                  </Grid>
+                  <Grid item xs={4} className={classes.centered}>
+                    <p>Send Bus No.</p>
+                    <TextField
+                      label="Bus no."
+                      variant="outlined"
+                      size="small"
+                      onChange={(e) => setBusNo(e.target.value)}
+                      className={classes.busnofield}
+                    />
+                    <Button onClick={handleBusSend}>Send</Button>
                   </Grid>
                   <Grid item xs={12}>
                     <Button type="submit" className={classes.button}>

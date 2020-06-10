@@ -57,5 +57,11 @@ export const Styles = () => ({
   imgstyle: {
     width: "10%",
     height: "10%"
+  },
+  tagline : {
+      color : "#E1E1E1"
+  },
+  subtagline : {
+      color : "#edd31c"
   }
 });
