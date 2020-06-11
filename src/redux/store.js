@@ -21,6 +21,7 @@ let decoded = decodeToken(token);
 
 export const initialState = {
   user: {
+    userId: decoded.get("userId"),
     loggedIn: decoded.get("loggedIn") ? true : false,
     role: decoded.get("role"),
     username: decoded.get("userName"),

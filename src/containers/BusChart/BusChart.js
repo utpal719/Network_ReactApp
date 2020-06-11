@@ -22,6 +22,7 @@ import PassengerTable from "./PassengerTable";
 import { Print } from "@material-ui/icons";
 import { formatAMPM } from "../../utilities/Functions";
 import Alert from "@material-ui/lab/Alert";
+import { useSelector } from "react-redux";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
@@ -35,6 +36,7 @@ const BusChart = (props) => {
   const [seatCapacity, setSeatCapacity] = useState(0);
   const [showTable, setShowTable] = useState(false);
   const [canSendBusNo, setCanSend] = useState(false);
+
   const [busNo, setBusNo] = useState("");
   let [status, setStatus] = useState({
     show: false,
@@ -42,6 +44,8 @@ const BusChart = (props) => {
     message: "",
   });
 
+  /**if user is logged in and user has id 124 */
+  let { loggedIn, userId } = useSelector((state) => state.user);
   const { classes } = props;
 
   let formik = useFormik({
@@ -265,17 +269,21 @@ const BusChart = (props) => {
                       {formik.errors.journeyDate}
                     </div>
                   </Grid>
-                  <Grid item xs={4} className={classes.centered}>
-                    <p>Send Bus No.</p>
-                    <TextField
-                      label="Bus no."
-                      variant="outlined"
-                      size="small"
-                      onChange={(e) => setBusNo(e.target.value)}
-                      className={classes.busnofield}
-                    />
-                    <Button onClick={handleBusSend}>Send</Button>
-                  </Grid>
+                  {loggedIn && (userId === 124 || userId==="124")? (
+                    <Grid item xs={4} className={classes.centered}>
+                      <p>Send Bus No.</p>
+                      <TextField
+                        label="Bus no."
+                        variant="outlined"
+                        size="small"
+                        onChange={(e) => setBusNo(e.target.value)}
+                        className={classes.busnofield}
+                      />
+                      <Button onClick={handleBusSend}>Send</Button>
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
                   <Grid item xs={12}>
                     <Button type="submit" className={classes.button}>
                       View Tickets
