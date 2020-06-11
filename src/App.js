@@ -11,13 +11,13 @@ import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 let store = createStore(rootReducer);
 
 function App() {
-  useEffect(() => {
-    /**If user is on a mobile device, redirect to the playstore */
-    if (window.innerWidth <= 800) {
-      window.location =
-        "https://play.google.com/store/apps/details?id=com.techvariable.networktravels&hl=en_IN";
-    }
-  }, []);
+//   useEffect(() => {
+//     /**If user is on a mobile device, redirect to the playstore */
+//     if (window.innerWidth <= 800) {
+//       window.location =
+//         "https://play.google.com/store/apps/details?id=com.techvariable.networktravels&hl=en_IN";
+//     }
+//   }, []);
 
   return (
     <ErrorBoundary>

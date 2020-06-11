@@ -74,4 +74,7 @@ export const Styles = () => ({
     boxShadow:
       "inset 0 0 15px rgba(66, 66, 66, 0), inset 0 0 20px rgba(255, 255, 255, 0), 7px 7px 15px rgba(58, 58, 58, 0.15), -7px -7px 20px white, inset 0px 0px 4px rgba(255, 255, 255, 0.2)",
   },
+  busnofield: {
+    background: "white",
+  },
 });

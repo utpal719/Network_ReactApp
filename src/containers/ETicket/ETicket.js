@@ -126,7 +126,7 @@ const ETicket = (props) => {
             </Grid>
           </Box>
           {/**Printable ticket */}
-          <Box display="none" displayPrint="block" mb={8}>
+          <Box display="none" displayPrint="block" mb={8} style={{marginTop : "-20px"}}>
             <Grid container>
               <Grid item xs={4} className={classes.centered}>
                 <Typography variant="subtitle2">
@@ -178,14 +178,22 @@ const ETicket = (props) => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {(ticket.passengerList || []).map((passenger) => (
+                    {ticket.passengerList && ticket.passengerList.length ? (
                       <TableRow>
-                        <TableCell>{passenger.seatNumber}</TableCell>
-                        <TableCell>{passenger.passengerName}</TableCell>
-                        <TableCell>{passenger.gender}</TableCell>
-                        <TableCell>{passenger.age}</TableCell>
+                        <TableCell>
+                          {ticket.passengerList
+                            .map((passenger) => passenger.seatNumber)
+                            .join(",")}
+                        </TableCell>
+                        <TableCell>
+                          {ticket.passengerList[0].passengerName}
+                        </TableCell>
+                        <TableCell>{ticket.passengerList[0].gender}</TableCell>
+                        <TableCell>{ticket.passengerList[0].age}</TableCell>
                       </TableRow>
-                    ))}
+                    ) : (
+                      ""
+                    )}
                   </TableBody>
                 </Table>
               </Grid>
@@ -196,15 +204,11 @@ const ETicket = (props) => {
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="caption">
-                  <p>
-                    <strong>PH : 8811079999, 7086093241</strong>
-                  </p>
-                  <p>
-                    <strong>ISBT Guwahati : 7086018977</strong>
-                  </p>
-                  <p>
-                    <strong>Barak Valley : 9854037111, 7086054040</strong>
-                  </p>
+                  <strong>PH : 8811079999, 7086093241</strong>
+                  <br />
+                  <strong>ISBT Guwahati : 7086018977</strong>
+                  <br />
+                  <strong>Barak Valley : 9854037111, 7086054040</strong>
                 </Typography>
               </Grid>
             </Grid>

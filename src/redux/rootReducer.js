@@ -61,6 +61,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: {
+          userId: decoded.get("userId"),
           loggedIn: decoded.get("loggedIn") ? true : false,
           role: decoded.get("role"),
           username: decoded.get("userName"),

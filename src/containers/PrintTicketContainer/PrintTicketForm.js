@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   TextField,
   Button,
@@ -7,41 +7,89 @@ import {
   Paper,
   RadioGroup,
   FormControlLabel,
-  Radio
+  Radio,
+  Snackbar,
 } from "@material-ui/core";
 import { Styles } from "./Styles";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { sendTicketBySms } from "../../apis/tickets";
+import Alert from "@material-ui/lab/Alert";
 
 const validationSchema = Yup.object({
   action: Yup.string().required("Please select an action"),
   pnrNumber: Yup.string()
     .matches(new RegExp("pnr-", "gi"), "Please enter a valid PNR (e.g : PNR-4)")
-    .required("Please enter your PNR")
+    .required("Please enter your PNR"),
 });
 
-const PrintTicketForm = props => {
+const PrintTicketForm = (props) => {
   const history = useHistory();
+  let [status, setStatus] = useState({
+    show: false,
+    severity: "",
+    message: "",
+  });
 
   let { values, handleChange, errors, touched, handleSubmit } = useFormik({
     initialValues: {
       action: "view",
-      pnrNumber: ""
+      pnrNumber: "PNR-",
     },
     validationSchema,
-    onSubmit: function() {
+    onSubmit: function(values) {
       if (values.action === "view") {
         history.push("/e-ticket", {
-          pnrNumber: values.pnrNumber
+          pnrNumber: values.pnrNumber,
+        });
+      } else {
+          props.startLoading();
+        sendTicketBySms(values.pnrNumber).then((data) => {
+          if (data.success === true) {
+            setStatus({
+              show: true,
+              message: `Ticket has been sent to ${data.data.mobile}`,
+              severity: "success",
+            });
+          } else {
+            setStatus({
+              show: true,
+              message: `Sorry, we were unable to send the ticket`,
+              severity: "error",
+            });
+          }
+          props.stopLoading();
         });
       }
-    }
+    },
   });
+
+  let onClose = () =>
+    setStatus({
+      show: false,
+      severity: "",
+      message: "",
+    });
 
   const { classes } = props;
   return (
     <Grid container className={classes.container}>
+      <Snackbar
+        open={status.show}
+        autoHideDuration={3000}
+        onClose={onClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          elevation={6}
+          variant="filled"
+          onClose={onClose}
+          severity={status.severity}
+        >
+          {status.message}
+        </Alert>
+      </Snackbar>
       <Grid item xs={4} className={classes.gridstyle}>
         <Paper className={classes.paper}>
           <form onSubmit={handleSubmit} className={classes.formstyle}>
@@ -74,11 +122,11 @@ const PrintTicketForm = props => {
                     control={<Radio />}
                     label="View ticket"
                   />
-                  <FormControlLabel
+                  {/* <FormControlLabel
                     value="mail"
                     control={<Radio />}
                     label="Get Ticket by Email"
-                  />
+                  /> */}
                   <FormControlLabel
                     value="sms"
                     control={<Radio />}
