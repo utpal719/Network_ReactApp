@@ -126,7 +126,7 @@ const ETicket = (props) => {
             </Grid>
           </Box>
           {/**Printable ticket */}
-          <Box display="none" displayPrint="block" mb={8}>
+          <Box display="none" displayPrint="block" mb={8} style={{marginTop : "-20px"}}>
             <Grid container>
               <Grid item xs={4} className={classes.centered}>
                 <Typography variant="subtitle2">
