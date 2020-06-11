@@ -40,6 +40,18 @@ export const Config = {
     [34, 33, "pavement", 32, 31],
     [39, 38, 37, 36, 35],
   ],
+  40 : [
+    [2, 1, "pavement", 40, ""],
+    [6, 5, "pavement", 4, 3],
+    [10, 9, "pavement", 8, 7],
+    [14, 13, "pavement", 12, 11],
+    [18, 17, "pavement", 16, 15],
+    [22, 21, "pavement", 20, 19],
+    [26, 25, "pavement", 24, 23],
+    [30, 29, "pavement", 28, 27],
+    [34, 33, "pavement", 32, 31],
+    [39, 38, 37, 36, 35],
+  ],
   45: [
     [2, 1, "pavement", 4, 3],
     [6, 5, "pavement", 8, 7],
