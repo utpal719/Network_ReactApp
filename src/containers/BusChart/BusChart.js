@@ -23,6 +23,7 @@ import { Print } from "@material-ui/icons";
 import { formatAMPM } from "../../utilities/Functions";
 import Alert from "@material-ui/lab/Alert";
 import { useSelector } from "react-redux";
+import logo from "../../images/logo.jpg";
 
 let validationSchema = Yup.object({
   busId: Yup.string().required("Please select a city"),
@@ -202,6 +203,15 @@ const BusChart = (props) => {
         className={classes.gridstyle}
         justify="center"
       >
+        <Grid item xs={12}>
+          <Box
+            display="none"
+            displayPrint="block"
+            className={classes.textCenter}
+          >
+            <img src={logo} alt="logo"></img>
+          </Box>
+        </Grid>
         <Grid item xs={10} className="pull">
           <Box display="none" displayPrint="block">
             <Typography varaint="h6" color="primary">
@@ -269,7 +279,7 @@ const BusChart = (props) => {
                       {formik.errors.journeyDate}
                     </div>
                   </Grid>
-                  {loggedIn && (userId === 124 || userId==="124")? (
+                  {loggedIn && (userId === 124 || userId === "124") ? (
                     <Grid item xs={4} className={classes.centered}>
                       <p>Send Bus No.</p>
                       <TextField

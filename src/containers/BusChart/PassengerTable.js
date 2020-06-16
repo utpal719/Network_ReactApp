@@ -39,7 +39,6 @@ const PassengerTable = props => {
             })}
           </TableRow>
           {/* </TableHead> */}
-          <TableBody>
             {list.length ? (
               list.map(item => {
                 return item.passengerList.map(header => {
@@ -62,7 +61,6 @@ const PassengerTable = props => {
                 </TableCell>
               </TableRow>
             )}
-          </TableBody>
         </Table>
       </Card>
     </Box>

@@ -126,7 +126,12 @@ const ETicket = (props) => {
             </Grid>
           </Box>
           {/**Printable ticket */}
-          <Box display="none" displayPrint="block" mb={8} style={{marginTop : "-20px"}}>
+          <Box
+            display="none"
+            displayPrint="block"
+            mb={8}
+            style={{ marginTop: "-20px" }}
+          >
             <Grid container>
               <Grid item xs={4} className={classes.centered}>
                 <Typography variant="subtitle2">
@@ -169,32 +174,28 @@ const ETicket = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Table size="small">
-                  <TableHead>
+                  <TableRow>
+                    <TableCell>Seat Number</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Gender</TableCell>
+                    <TableCell>Boarding Point</TableCell>
+                  </TableRow>
+                  {ticket.passengerList && ticket.passengerList.length ? (
                     <TableRow>
-                      <TableCell>Seat Number</TableCell>
-                      <TableCell>Name</TableCell>
-                      <TableCell>Gender</TableCell>
-                      <TableCell>Age</TableCell>
+                      <TableCell>
+                        {ticket.passengerList
+                          .map((passenger) => passenger.seatNumber)
+                          .join(",")}
+                      </TableCell>
+                      <TableCell>
+                        {ticket.passengerList[0].passengerName}
+                      </TableCell>
+                      <TableCell>{ticket.passengerList[0].gender}</TableCell>
+                      <TableCell>{ticket.boardingPoint}</TableCell>
                     </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {ticket.passengerList && ticket.passengerList.length ? (
-                      <TableRow>
-                        <TableCell>
-                          {ticket.passengerList
-                            .map((passenger) => passenger.seatNumber)
-                            .join(",")}
-                        </TableCell>
-                        <TableCell>
-                          {ticket.passengerList[0].passengerName}
-                        </TableCell>
-                        <TableCell>{ticket.passengerList[0].gender}</TableCell>
-                        <TableCell>{ticket.passengerList[0].age}</TableCell>
-                      </TableRow>
-                    ) : (
-                      ""
-                    )}
-                  </TableBody>
+                  ) : (
+                    ""
+                  )}
                 </Table>
               </Grid>
               <Grid item xs={6}>

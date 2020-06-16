@@ -77,4 +77,7 @@ export const Styles = () => ({
   busnofield: {
     background: "white",
   },
+  textCenter:{
+      textAlign : "center"
+  }
 });
