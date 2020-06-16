@@ -40,7 +40,6 @@ const ChangePassword = (props) => {
       props.startLoading();
       (async () => {
         let { data } = await changePassword(values);
-        console.log(data);
         if (data.success) {
           /**Store the token in LocalStorage */
           localStorage.setItem("ntToken", data.data.token);

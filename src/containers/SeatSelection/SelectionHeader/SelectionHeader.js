@@ -12,8 +12,6 @@ const SelectionHeader = ({ classes }) => {
     state => state.bus
   );
 
-  console.log({ startTime, endTime, seatCapacity, fare });
-
   return (
     <div>
       <Grid container spacing={2} justify="center">

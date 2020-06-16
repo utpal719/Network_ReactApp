@@ -41,7 +41,6 @@ const ForgotPasswordForm = (props) => {
       props.startLoading();
       (async () => {
         let { data } = await forgotPassword(values);
-        console.log(data);
         props.stopLoading();
 
         if (data.success) {
