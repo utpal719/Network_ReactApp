@@ -10,7 +10,6 @@ const SearchModal = ({ classes }) => {
     let [trip, setTrip] = useState(0);
 
     let changeTrip = (e, newValue) => setTrip(newValue);
-    console.log({ trip })
     return (
         <ErrorBoundary>
         <div className={classes.modalLinkContainer}>

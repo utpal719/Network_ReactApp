@@ -126,7 +126,12 @@ const ETicket = (props) => {
             </Grid>
           </Box>
           {/**Printable ticket */}
-          <Box display="none" displayPrint="block" mb={8} style={{marginTop : "-20px"}}>
+          <Box
+            display="none"
+            displayPrint="block"
+            mb={8}
+            style={{ marginTop: "-20px" }}
+          >
             <Grid container>
               <Grid item xs={4} className={classes.centered}>
                 <Typography variant="subtitle2">
@@ -136,7 +141,7 @@ const ETicket = (props) => {
               <Grid item xs={8}>
                 <img src={logo} alt="logo"></img>
               </Grid>
-              <Grid item xs={3} className={classes.spaceBetween}>
+              <Grid item xs={4} className={classes.spaceBetween}>
                 <Typography variant="subtitle2">
                   {ticket.journeyDate}
                 </Typography>
@@ -151,7 +156,7 @@ const ETicket = (props) => {
                   <Typography variant="caption">Reporting Time</Typography>
                 </div>
               </Grid>
-              <Grid item xs={3} className={classes.centered}>
+              <Grid item xs={2} className={classes.centered}>
                 <div>
                   <Typography variant="subtitle2">
                     {ticket.startTime}
@@ -167,36 +172,40 @@ const ETicket = (props) => {
                   <Typography variant="caption">Number of seat</Typography>
                 </div>
               </Grid>
+              <Box mt={2}></Box>
+              <Grid item xs={12}>
+                <Typography variant="subtitle2">Passenger Details : </Typography>
+              </Grid>
               <Grid item xs={12}>
                 <Table size="small">
-                  <TableHead>
+                  {ticket.passengerList && ticket.passengerList.length ? (
                     <TableRow>
-                      <TableCell>Seat Number</TableCell>
-                      <TableCell>Name</TableCell>
-                      <TableCell>Gender</TableCell>
-                      <TableCell>Age</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {ticket.passengerList && ticket.passengerList.length ? (
-                      <TableRow>
-                        <TableCell>
+                      <TableCell>
+                        <strong>{ticket.passengerList[0].passengerName}</strong>
+                        <br />
+                        {ticket.passengerList[0].gender}
+                      </TableCell>
+                      <TableCell>
+                        <strong>{ticket.boardingPoint}</strong>
+                        <br />
+                        Boarding Point
+                      </TableCell>
+                      <TableCell>
+                        <strong>
                           {ticket.passengerList
                             .map((passenger) => passenger.seatNumber)
                             .join(",")}
-                        </TableCell>
-                        <TableCell>
-                          {ticket.passengerList[0].passengerName}
-                        </TableCell>
-                        <TableCell>{ticket.passengerList[0].gender}</TableCell>
-                        <TableCell>{ticket.passengerList[0].age}</TableCell>
-                      </TableRow>
-                    ) : (
-                      ""
-                    )}
-                  </TableBody>
+                        </strong>
+                        <br />
+                        Seat Number
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    ""
+                  )}
                 </Table>
               </Grid>
+              <Box mt={2}></Box>
               <Grid item xs={6}>
                 Total Fare: <strong>&#8377; {ticket.totalFare}</strong>
                 <br></br>
