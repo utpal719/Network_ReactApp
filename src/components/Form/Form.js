@@ -25,7 +25,8 @@ let validationSchema = Yup.object({
 const Form = (props) => {
   const [cityList, setCityList] = useState([]);
   const { classes } = props;
-  const { loggedIn } = useSelector((state) => state.user);
+
+  const { loggedIn, role } = useSelector((state) => state.user);
 
   let formBg = useRef(null);
 
@@ -86,7 +87,7 @@ const Form = (props) => {
 
   return (
     <div className={classes.bg} ref={formBg}>
-      {loggedIn ? (
+      {loggedIn && role !== 3 ? (
         <Grid
           container
           spacing={1}
@@ -187,7 +188,10 @@ const Form = (props) => {
           </Grid>
           <Grid item xs={12} style={{ textAlign: "center" }}>
             <br />
-            <a target="__blank" href="https://play.google.com/store/apps/details?id=com.techvariable.networktravels&hl=en_IN">
+            <a
+              target="__blank"
+              href="https://play.google.com/store/apps/details?id=com.techvariable.networktravels&hl=en_IN"
+            >
               <img
                 src={googlePlayBadge}
                 alt="google play"
